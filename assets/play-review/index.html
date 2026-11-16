@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Smart Detector — foreground service demonstration</title>
+  <style>
+    body { margin: 0; background: #f5f7fb; color: #172334; font: 16px/1.65 system-ui, sans-serif; }
+    main { max-width: 800px; margin: auto; padding: 32px 20px 64px; }
+    h1 { font-size: 28px; line-height: 1.25; }
+    video { display: block; width: min(100%, 360px); max-height: 80vh; margin: 24px auto; background: #000; border-radius: 16px; }
+    a { color: #174db8; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Smart Detector: foreground service demonstration</h1>
+  <p>Release 0.11 (version code 2), <code>ai.fwth.smartdetector</code>. Recorded on an Android 15 emulator using the signed release APK.</p>
+  <video controls playsinline preload="metadata" aria-label="Smart Detector permission, reception, notification, stop and resume demonstration">
+    <source src="foreground-service-0.11.mp4" type="video/mp4">
+    <a href="foreground-service-0.11.mp4">Download the demonstration video</a>
+  </video>
+  <p><a href="foreground-service-0.11.mp4">Open or download the video directly</a></p>
+  <ol>
+    <li>Grant location, nearby-device and notification permissions from the app.</li>
+    <li>Observe the reception screen, then return to the Android home screen.</li>
+    <li>Open the notification shade: the ongoing “수신 중” (receiving) notification remains visible.</li>
+    <li>Tap “수신 멈춤” (stop receiving). Return to the app and observe that it stays paused.</li>
+    <li>Tap “다시 수신” (resume receiving) to start again.</li>
+  </ol>
+  <p>The service supports ongoing Bluetooth/BLE and Wi-Fi signal reception for exam supervision. The location service type supports Android scan-result access; the app does not read GPS coordinates or track movement. This emulator recording shows the service lifecycle and virtual Wi-Fi signal, not a physical-device radio range test.</p>
+  <p lang="ko">권한 허용 → 수신 → 홈 화면 이동 → 수신 중 알림 → 알림에서 중지 → 앱에서 중지 상태 확인 → 다시 수신 순서로 실제 APK 동작을 녹화했습니다.</p>
+  <p><a href="../../">Smart Detector website</a> · <a href="https://cjyh37.github.io/privacy-policy/smart-detector/">Privacy policy</a></p>
+</main>
+</body>
+</html>
