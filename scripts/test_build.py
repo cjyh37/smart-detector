@@ -44,6 +44,19 @@ class DeploymentTest(unittest.TestCase):
         self.assertEqual(result['channel'], 'beta')
         self.assertEqual(result['version'], '')
 
+    def test_google_play_stays_selected_when_apks_are_uploaded_or_released(self):
+        store = {'available': True, 'channel': 'google-play',
+                 'url': 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector'}
+        (self.root / 'download.json').write_text(json.dumps(store), encoding='utf-8')
+        (self.root / 'new-release.apk').write_bytes(b'new APK upload')
+        releases = [{'draft': False, 'tag_name': 'v2', 'assets': [
+            {'name': 'app.apk', 'size': 1024, 'state': 'uploaded',
+             'browser_download_url': 'https://github.com/cjyh37/smart-detector/releases/download/v2/app.apk'}]}]
+
+        self.assertEqual(builder.build(self.root, self.output, releases), store)
+        self.assertEqual(json.loads((self.output / 'download.json').read_text()), store)
+        self.assertFalse((self.output / 'downloads').exists())
+
     def test_published_beta_release_is_supported_and_draft_is_excluded(self):
         asset = {'name': 'app.apk', 'size': 1024, 'state': 'uploaded',
                  'browser_download_url': 'https://github.com/cjyh37/smart-detector/releases/download/v1/app.apk'}

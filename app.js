@@ -8,12 +8,9 @@
       signalWaiting: '새로 수신된 신호를 기다리고 있습니다',
       demoReset: '예시 처음으로 되돌리기',
       demoStart: '예시 신호 켜 보기',
-      download: 'APK 무료 다운로드',
-      beta: '무료 베타',
-      publicRelease: '공개 버전',
-      install: 'Android 휴대폰에서 내려받은 파일을 열어 설치하세요.',
-      downloadError: '다운로드 정보를 불러오지 못했습니다.',
-      downloadRetry: '아래 ‘배포 내역 보기’에서 파일을 확인하거나 페이지를 새로고침해 주세요.',
+      download: 'Google Play에서 다운로드',
+      storeStatus: 'Google Play · 무료',
+      install: 'Google Play에서 앱을 설치하고 업데이트할 수 있습니다.',
       shareTitle: '스마트 디텍터',
       shareText: '시험 중 새로 수신된 무선 신호를 알려주는 무료 Android 감독 보조 앱',
       copied: '소개 페이지 링크를 복사했습니다.',
@@ -24,12 +21,9 @@
       signalWaiting: 'Waiting for newly received signals',
       demoReset: 'Reset the example',
       demoStart: 'Try an example signal',
-      download: 'Download APK for free',
-      beta: 'Free beta',
-      publicRelease: 'Public release',
-      install: 'Open the downloaded file on your Android phone to install it.',
-      downloadError: 'Download details could not be loaded.',
-      downloadRetry: 'Check “View releases” below for the file, or refresh this page.',
+      download: 'Get it on Google Play',
+      storeStatus: 'Google Play · Free',
+      install: 'Install and update the app through Google Play.',
       shareTitle: 'Smart Detector',
       shareText: 'A free Android app that helps exam proctors notice newly received wireless signals',
       copied: 'Page link copied.',
@@ -102,7 +96,7 @@
 
   const status = document.getElementById('download-status');
   const detail = document.getElementById('download-detail');
-  const button = document.getElementById('apk-download');
+  const button = document.getElementById('store-download');
   async function loadDownload() {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
@@ -110,24 +104,15 @@
       const response = await fetch(new URL('download.json', siteRoot), { cache: 'no-cache', signal: controller.signal });
       if (!response.ok) throw new Error('Download information unavailable');
       const info = await response.json();
-      if (!info.available) return;
+      if (!info.available || info.channel !== 'google-play') return;
       const url = new URL(info.url, siteRoot);
-      const localDirectory = new URL('downloads/', siteRoot);
-      const isLocal = url.origin === location.origin && url.pathname.startsWith(localDirectory.pathname);
-      const isRelease = url.origin === 'https://github.com' && url.pathname.startsWith('/cjyh37/smart-detector/releases/download/');
-      if ((!isLocal && !isRelease) || !url.pathname.toLowerCase().endsWith('.apk')) throw new Error('Invalid download location');
+      if (url.href !== 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector') throw new Error('Invalid store destination');
       button.href = url.href;
-      button.removeAttribute('aria-disabled');
-      button.removeAttribute('tabindex');
-      if (isLocal) button.setAttribute('download', info.filename || 'smart-detector.apk');
       document.getElementById('download-label').textContent = copy.download;
-      const size = Number.isFinite(info.size) && info.size > 0 ? `${new Intl.NumberFormat(language, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(info.size / 1048576)} MB` : '';
-      const version = info.channel === 'beta' || info.version === '무료 베타' ? copy.beta : (info.version || copy.publicRelease);
-      status.textContent = [version, size].filter(Boolean).join(' · ');
+      status.textContent = copy.storeStatus;
       detail.textContent = copy.install;
     } catch (_) {
-      status.textContent = copy.downloadError;
-      detail.textContent = copy.downloadRetry;
+      // Keep the working Google Play link in the HTML if the feed is unavailable.
     } finally {
       clearTimeout(timer);
     }

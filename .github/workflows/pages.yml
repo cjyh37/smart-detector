@@ -24,9 +24,9 @@ jobs:
         with:
           ref: main
       - uses: actions/configure-pages@v5
-      - name: Check upload handling
+      - name: Check site build
         run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
-      - name: Prepare public files and APK download
+      - name: Prepare public files and download destination
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 scripts/build.py --github-repository "$GITHUB_REPOSITORY"

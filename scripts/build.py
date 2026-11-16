@@ -1,4 +1,4 @@
-"""Build only public site assets and resolve an uploaded APK at deploy time."""
+"""Build public site assets, preferring the configured Google Play destination."""
 import argparse
 import hashlib
 import json
@@ -8,6 +8,18 @@ import subprocess
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def google_play_download(root):
+    config = root / 'download.json'
+    if not config.is_file():
+        return None
+    info = json.loads(config.read_text(encoding='utf-8'))
+    if info.get('channel') != 'google-play':
+        return None
+    if info.get('url') != 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector':
+        raise ValueError('Unexpected Google Play destination')
+    return info
 
 
 def release_download(releases, repository):
@@ -36,6 +48,10 @@ def build(root, output, releases=None, repository='cjyh37/smart-detector'):
     (output / 'en').mkdir(exist_ok=True)
     shutil.copy2(root / 'en' / 'index.html', output / 'en' / 'index.html')
     shutil.copytree(root / 'assets', output / 'assets', dirs_exist_ok=True)
+    store = google_play_download(root)
+    if store is not None:
+        (output / 'download.json').write_text(json.dumps(store, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+        return store
     local_apks = [p for folder in (root, root / 'downloads') if folder.is_dir()
                   for p in folder.iterdir() if p.is_file() and p.suffix.lower() == '.apk']
     if len(local_apks) > 1:
@@ -65,11 +81,11 @@ if __name__ == '__main__':
     parser.add_argument('--github-repository')
     args = parser.parse_args()
     releases = []
-    if args.github_repository:
+    if args.github_repository and google_play_download(ROOT) is None:
         # GH_TOKEN is supplied by Actions, never embedded in this repository or site.
         result = subprocess.run(['gh', 'api', f'repos/{args.github_repository}/releases?per_page=100'],
                                 capture_output=True, text=True, encoding='utf-8', check=True,
                                 creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
         releases = json.loads(result.stdout)
     info = build(ROOT, ROOT / 'dist', releases, args.github_repository or 'cjyh37/smart-detector')
-    print('Site built. APK: ' + (info['filename'] if info['available'] else 'not uploaded yet'))
+    print('Site built. Download: ' + (info['url'] if info['available'] else 'not available'))

@@ -20,18 +20,17 @@
   tag.setAttribute('data-smart-detector-analytics', '');
   document.head.appendChild(tag);
 
-  // Measure download intent; this does not claim the APK was installed.
+  // Measure store visits; this does not claim the app was installed.
   document.addEventListener('click', event => {
-    const link = event.target instanceof Element ? event.target.closest('#apk-download') : null;
+    const link = event.target instanceof Element ? event.target.closest('#store-download') : null;
     if (!link || !link.hasAttribute('href') || link.getAttribute('aria-disabled') === 'true') return;
     const url = new URL(link.href);
-    if (!url.pathname.toLowerCase().endsWith('.apk')) return;
+    if (url.href !== 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector') return;
 
-    window.gtag('event', 'apk_download', {
+    window.gtag('event', 'google_play_click', {
       send_to: measurementId,
-      file_name: url.pathname.split('/').pop(),
-      file_extension: 'apk',
-      link_url: url.origin + url.pathname,
+      app_id: 'ai.fwth.smartdetector',
+      link_url: url.href,
       page_language: document.documentElement.lang,
     });
   });
