@@ -68,7 +68,7 @@ if __name__ == '__main__':
     if args.github_repository:
         # GH_TOKEN is supplied by Actions, never embedded in this repository or site.
         result = subprocess.run(['gh', 'api', f'repos/{args.github_repository}/releases?per_page=100'],
-                                capture_output=True, text=True, check=True,
+                                capture_output=True, text=True, encoding='utf-8', check=True,
                                 creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
         releases = json.loads(result.stdout)
     info = build(ROOT, ROOT / 'dist', releases, args.github_repository or 'cjyh37/smart-detector')
