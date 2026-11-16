@@ -1,0 +1,21 @@
+name: 학교·학원 도입 문의
+description: 시험 운영 환경과 필요한 지원을 알려 주세요.
+title: '[기관 문의] '
+body:
+  - type: markdown
+    attributes:
+      value: '이 문의는 공개됩니다. 학생 정보, 전화번호, 이메일 등 개인정보를 적지 마세요. 기관용 통합 관리 기능은 현재 제공 기능이 아닌 향후 검토 대상입니다.'
+  - type: textarea
+    id: environment
+    attributes:
+      label: 사용 환경
+      description: 기관 유형, 시험실 수, 사용 예정 휴대폰 등 대략적인 환경을 알려 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: needs
+    attributes:
+      label: 필요한 기능 또는 지원
+      description: 여러 시험실 관리, 설치 지원 등 필요한 내용을 알려 주세요.
+    validations:
+      required: true

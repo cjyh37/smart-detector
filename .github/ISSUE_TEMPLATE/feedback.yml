@@ -1,0 +1,18 @@
+name: 사용 의견·문제 제보
+description: 스마트 디텍터를 사용하며 발견한 문제나 의견을 알려 주세요.
+title: '[사용 의견] '
+body:
+  - type: markdown
+    attributes:
+      value: '공개 문의입니다. 학생 정보나 무선 기기의 원시 식별자가 담긴 보고서는 첨부하지 마세요.'
+  - type: input
+    id: device
+    attributes:
+      label: 휴대폰 기종과 Android 버전
+  - type: textarea
+    id: feedback
+    attributes:
+      label: 사용 중 어떤 일이 있었나요?
+      description: 앱 버전과 재현 순서를 함께 알려 주시면 도움이 됩니다.
+    validations:
+      required: true

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b47b5">
+  <title>스마트 디텍터 — 시험 중 새 신호, 조용한 알림</title>
+  <meta name="description" content="시험 시작 후 새로 수신된 무선 신호를 알려주는 무료 Android 감독 보조 앱. 인터넷 없이 사용하고, 확인 결과를 보고서로 남기세요.">
+  <link rel="canonical" href="https://cjyh37.github.io/smart-detector/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="스마트 디텍터">
+  <meta property="og:title" content="시험 중 새 신호, 조용한 알림. 스마트 디텍터">
+  <meta property="og:description" content="감독관을 위한 무료 Android 앱. 새로운 무선 신호를 확인하고, 시험 후 기록을 남기세요.">
+  <meta property="og:url" content="https://cjyh37.github.io/smart-detector/">
+  <meta property="og:image" content="https://cjyh37.github.io/smart-detector/assets/social.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="download-icon" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="signal-icon" viewBox="0 0 24 24"><path d="M3 7a14 14 0 0 1 18 0M6 11a9 9 0 0 1 12 0m-9 4a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1"/></symbol>
+    <symbol id="plus-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="share-icon" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M5 13v8h14v-8"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#" aria-label="스마트 디텍터 처음으로"><img src="assets/icon.svg" width="34" height="34" alt=""><span>스마트 디텍터</span></a>
+      <nav aria-label="주요 메뉴"><a href="#how-it-works">사용 방법</a><a href="#questions">자주 묻는 질문</a><a class="nav-cta" href="#download">무료 다운로드 <svg class="icon"><use href="#arrow"/></svg></a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">시험 중 새 신호,<br><span>조용한 알림.</span></h1>
+        <p class="hero-description">시험 시작 후 새로 수신된 무선 신호를 알려주는<br class="desktop-break"> 감독 보조 앱, <strong>스마트 디텍터.</strong><br>Android 휴대폰 한 대로 시작하세요.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#download">무료 다운로드 <svg class="icon"><use href="#download-icon"/></svg></a><a class="text-link" href="#how-it-works">사용 방법 보기 <svg class="icon"><use href="#arrow"/></svg></a></div>
+        <p class="compatibility">Android 12 이상 <span aria-hidden="true">·</span> 무료 베타 <span aria-hidden="true">·</span> 인터넷 없이 사용</p>
+      </div>
+      <div class="demo-wrap">
+        <div class="demo-label"><span>감독관의 화면을 미리 만나보세요</span><span class="example-label">화면 예시</span></div>
+        <div class="app-preview" aria-label="스마트 디텍터 화면 예시">
+          <div class="app-panel">
+            <div class="app-room"><span>제1시험실</span><span aria-hidden="true" class="menu-dots"><i></i><i></i><i></i></span></div>
+            <p class="app-listening"><span class="status-dot"></span>수신 중 <span class="app-time">· 12분째</span></p>
+            <div class="number-plate" id="number-plate"><span>시작 후 새 신호</span><strong id="signal-count">0</strong><span class="plate-message" id="plate-message">새로 수신된 신호를 기다리고 있습니다</span></div>
+            <p class="app-source">Bluetooth LE · 마지막 수신 방금</p>
+          </div>
+          <div class="app-bottom" aria-live="polite" aria-atomic="true"><div id="demo-empty"><svg class="icon"><use href="#signal-icon"/></svg><span>새 신호가 수신되면 여기에 표시됩니다.</span></div><div id="demo-signal" hidden><div><strong>새로 수신된 신호</strong><span>방금 · Bluetooth LE · 예시</span></div><span class="decision">확인 대기</span></div></div>
+        </div>
+        <button class="demo-toggle" id="demo-toggle" type="button" aria-pressed="false"><svg class="icon"><use href="#plus-icon"/></svg><span id="demo-toggle-text">예시 신호 켜 보기</span></button>
+        <p class="demo-disclaimer">설명용 예시입니다. 이 웹페이지는 무선 신호를 수신하지 않습니다.</p>
+      </div>
+    </section>
+
+    <section class="benefit-band" aria-label="주요 기능"><div class="shell benefits"><div><svg class="icon"><use href="#signal-icon"/></svg><p><strong>시작 전과 비교</strong><span>시험 중 새로 들린 신호 확인</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M8 5h8v14H8zM4 8v8M20 8v8"/></svg><p><strong>소리 없이 진동으로</strong><span>조용한 시험실에 맞춘 알림</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg><p><strong>종료 후 한 장의 보고서</strong><span>관측 내용과 확인 결과 기록</span></p></div></div></section>
+
+    <section id="how-it-works" class="section shell how-section" aria-labelledby="how-title">
+      <div class="section-heading"><h2 id="how-title">준비는 간단하게.<br>감독은 평소처럼.</h2><p>앱은 신호를 듣고,<br>감독관은 현장을 확인합니다.</p></div>
+      <ol class="steps">
+        <li><span class="step-number">01</span><h3>빈 시험실에서 시작하세요.</h3><p>앱을 열고 <strong>‘방이 비어 있습니다’</strong>를 누릅니다. 90초 동안 수신해 기존 신호를 기준으로 삼습니다.</p><span class="step-note">이미 입실했다면 ‘이미 사람이 있습니다’ 선택</span></li>
+        <li><span class="step-number">02</span><h3>입실이 끝나면 시험 시작.</h3><p>남아 있는 신호를 확인하고 <strong>‘시험 시작’</strong>을 누릅니다. 이후 새로 수신된 신호를 확인할 수 있습니다.</p><span class="step-note">시험 중에는 앱 화면을 열어 두세요.</span></li>
+        <li><span class="step-number">03</span><h3>확인하고, 기록으로 남기세요.</h3><p>알림이 오면 현장을 확인하고 결과를 선택합니다. 시험 종료 후 보고서를 저장하거나 공유하세요.</p><span class="step-note">수신하지 못한 시간도 보고서에 기록</span></li>
+      </ol>
+    </section>
+
+    <section class="understanding-section" aria-labelledby="understanding-title"><div class="shell understanding-grid">
+      <div><h2 id="understanding-title">신호를 알려주고,<br>판단은 사람이 합니다.</h2><p>스마트 디텍터는 현장 확인을 돕는 도구입니다.<br>무선 신호만으로 부정행위를 판정하지 않습니다.</p></div>
+      <dl class="boundaries"><div><dt>무엇을 관측하나요?</dt><dd>BLE 광고, 검색 가능한 Bluetooth 기기, Wi-Fi 액세스 포인트 등 휴대폰이 수신할 수 있는 무선 신호를 관측합니다.</dd></div><div><dt>무엇까지 알 수 있나요?</dt><dd>수신된 신호와 변화를 확인할 수 있습니다. 소유자, 좌석, 촬영 여부나 부정행위 여부는 확정할 수 없습니다.</dd></div><div><dt>숫자가 0이면 어떤 뜻인가요?</dt><dd>새로 수신한 신호가 없다는 뜻입니다. 기기가 없다는 보장은 아닙니다. 신호를 내지 않는 기기는 관측되지 않을 수 있습니다.</dd></div></dl>
+    </div></section>
+
+    <section id="download" class="download-section shell" aria-labelledby="download-title">
+      <div class="download-panel">
+        <div class="download-copy"><h2 id="download-title">다음 모의시험에서<br>직접 확인해 보세요.</h2><p>감독관을 위한 기본 기능은 무료로 제공합니다.<br>Android 12 이상 휴대폰에서 사용할 수 있습니다.</p><div class="download-facts"><span>무료 베타</span><span>Android 전용</span><span>오프라인 사용</span></div></div>
+        <div class="download-box"><p class="download-product">스마트 디텍터 <span>Android APK</span></p><p id="download-status" class="download-status" role="status">첫 공개 버전을 준비하고 있습니다.</p><a id="apk-download" class="button download-action" aria-disabled="true" tabindex="-1"><span id="download-label">APK 준비 중</span><svg class="icon"><use href="#download-icon"/></svg></a><p id="download-detail" class="download-detail">파일이 등록되면 이곳에서 내려받을 수 있습니다.</p><a class="release-link" href="https://github.com/cjyh37/smart-detector/releases" target="_blank" rel="noopener noreferrer">배포 내역 보기 <svg class="icon"><use href="#arrow"/></svg></a><noscript><p>다운로드는 위 ‘배포 내역 보기’에서도 확인할 수 있습니다.</p></noscript></div>
+      </div>
+      <p class="beta-note">현재 현장 검증 중인 베타입니다. 기기·환경별 탐지율은 아직 검증되지 않았으며, 공식 시험의 감독 절차를 대체하지 않습니다.</p>
+    </section>
+
+    <section id="questions" class="section shell questions-section" aria-labelledby="questions-title">
+      <h2 id="questions-title">사용 전에<br> 궁금한 점.</h2>
+      <div class="questions">
+        <details><summary>스마트안경이나 모든 전자기기를 찾을 수 있나요?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>모든 기기를 발견할 수는 없습니다. 기기가 보내는 신호가 휴대폰에서 수신 가능한 상태여야 합니다. 연결 후 광고를 멈춘 기기, 전원이 꺼진 기기, 셀룰러만 사용하는 기기 등은 관측을 보장할 수 없습니다. 스마트안경 모델별 탐지 성능도 별도 실측이 필요합니다.</p></details>
+        <details><summary>iPhone에서도 사용할 수 있나요?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>현재는 Android 12 이상만 지원합니다. iPhone용 앱은 제공하지 않습니다. 휴대폰 제조사와 운영체제에 따라 수신 가능한 신호와 권한 설정이 달라질 수 있습니다.</p></details>
+        <details><summary>APK는 어떻게 설치하나요?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>이 페이지의 다운로드 버튼으로 APK를 받은 뒤 Android 휴대폰에서 파일을 엽니다. 출처를 확인하고 기기에 표시되는 설치 안내를 따라 주세요. 기기의 보안 설정이나 기관 관리 정책으로 설치가 제한될 수 있습니다.</p></details>
+        <details><summary>인터넷이 필요하나요? 기록은 어디에 남나요?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>앱을 내려받은 뒤에는 인터넷 연결 없이 단독으로 사용할 수 있습니다. 무선 관측 기록은 기기에 저장됩니다. 시험 종료 후 보고서를 직접 저장하거나 공유할 수 있고, 앱의 본부 메뉴에서 기록을 삭제할 수 있습니다.</p></details>
+        <details><summary>시험 중 화면을 꺼도 되나요?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>앱 화면을 열어 둔 상태로 사용해 주세요. 화면을 벗어나면 수신이 중단됩니다. 시험 중 다시 돌아왔을 때는 ‘다시 수신’을 누르고 수신 상태를 확인하세요. 수신하지 못한 시간은 보고서에 남습니다.</p></details>
+      </div>
+    </section>
+
+    <section class="institution-section shell" aria-labelledby="institution-title"><div><h2 id="institution-title">학교·학원에서 함께 사용하고 싶다면.</h2><p>여러 시험실의 운영이나 설치 지원이 필요한가요?<br>현장의 사용 환경과 필요한 기능을 알려 주세요.</p></div><div class="institution-action"><a class="button button-outline" href="https://github.com/cjyh37/smart-detector/issues/new?template=institution.yml">기관 도입 문의 <svg class="icon"><use href="#arrow"/></svg></a><span>GitHub 공개 문의 · 개인정보는 적지 마세요.</span></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#"><img src="assets/icon.svg" width="28" height="28" alt=""><span>스마트 디텍터</span></a><p>공정한 시험을 돕는 작은 도구.</p><div class="footer-links"><button id="share-button" type="button">페이지 공유 <svg class="icon"><use href="#share-icon"/></svg></button><a href="https://github.com/cjyh37/smart-detector" target="_blank" rel="noopener noreferrer">GitHub <svg class="icon"><use href="#arrow"/></svg></a></div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>
