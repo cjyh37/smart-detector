@@ -1,0 +1,21 @@
+name: School or exam center inquiry
+description: Tell us about your exam setting and the support you need.
+title: '[Institutional inquiry] '
+body:
+  - type: markdown
+    attributes:
+      value: 'This inquiry is public. Do not include student information, phone numbers, email addresses, or other personal information. Centralized institutional management is a potential future feature, not a feature currently provided.'
+  - type: textarea
+    id: environment
+    attributes:
+      label: Your setting
+      description: Describe the type of institution, approximate number of exam rooms, and phones you plan to use.
+    validations:
+      required: true
+  - type: textarea
+    id: needs
+    attributes:
+      label: Features or support needed
+      description: Tell us what would help, such as installation assistance or managing several exam rooms.
+    validations:
+      required: true

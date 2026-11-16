@@ -1,7 +1,17 @@
 """Optional: regenerate the sharing image on Windows (requires Pillow)."""
 from pathlib import Path
+import argparse
 from PIL import Image, ImageDraw, ImageFont
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--lang', choices=('ko', 'en'), default='ko')
+language = parser.parse_args().lang
+copy = {
+    'ko': ('스마트 디텍터', '시험 중 새 신호,', '조용한 알림.', '감독관을 위한 무료 Android 앱',
+           'Android 12 이상  ·  무료 베타  ·  인터넷 없이 사용', '제1시험실', '수신 중', '시작 후 새 신호', '설명용 화면 예시'),
+    'en': ('Smart Detector', 'New signals.', 'Quiet alerts.', 'A free Android app for exam proctors',
+           'Android 12+  ·  Free beta  ·  Works offline', 'Exam room 1', 'Listening', 'New signals since start', 'Illustrative screen'),
+}[language]
 root = Path(__file__).resolve().parents[1]
 image = Image.new('RGB', (1200, 630), '#ffffff')
 draw = ImageDraw.Draw(image)
@@ -17,17 +27,18 @@ draw.rounded_rectangle((64, 54, 112, 102), radius=10, fill=blue)
 draw.arc((74, 68, 102, 94), 220, 320, fill='white', width=3)
 draw.arc((80, 76, 96, 90), 220, 320, fill='white', width=3)
 draw.ellipse((86, 87, 90, 91), fill='white')
-text((127, 58), '스마트 디텍터', 28, bold=True)
-text((64, 195), '시험 중 새 신호,', 57, bold=True)
-text((64, 278), '조용한 알림.', 57, blue, bold=True)
-text((66, 390), '감독관을 위한 무료 Android 앱', 25, muted)
-text((66, 540), 'Android 12 이상  ·  무료 베타  ·  인터넷 없이 사용', 18, muted)
+text((127, 58), copy[0], 28, bold=True)
+text((64, 195), copy[1], 57, bold=True)
+text((64, 278), copy[2], 57, blue, bold=True)
+text((66, 390), copy[3], 25, muted)
+text((66, 540), copy[4], 18, muted)
 draw.rounded_rectangle((740, 100, 1136, 532), radius=16, fill=blue)
-text((770, 130), '제1시험실', 22, '#ffffff', True)
-text((770, 188), '수신 중', 28, '#ffffff', True)
+text((770, 130), copy[5], 22, '#ffffff', True)
+text((770, 188), copy[6], 28, '#ffffff', True)
 draw.rounded_rectangle((768, 248, 1108, 454), radius=12, fill='#ffc21a')
-text((850, 269), '시작 후 새 신호', 22, '#1e1600', True)
+text((815 if language == 'en' else 850, 269), copy[7], 22, '#1e1600', True)
 text((908, 302), '1', 93, '#1e1600', True)
-text((770, 480), '설명용 화면 예시', 18, '#d6e2fb')
-image.save(root / 'assets' / 'social.png', optimize=True)
-print('Created assets/social.png (1200 x 630)')
+text((770, 480), copy[8], 18, '#d6e2fb')
+filename = 'social-en.png' if language == 'en' else 'social.png'
+image.save(root / 'assets' / filename, optimize=True)
+print(f'Created assets/{filename} (1200 x 630)')

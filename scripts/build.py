@@ -33,6 +33,8 @@ def build(root, output, releases=None, repository='cjyh37/smart-detector'):
     output.mkdir(parents=True, exist_ok=True)
     for name in ('index.html', 'styles.css', 'app.js', '.nojekyll'):
         shutil.copy2(root / name, output / name)
+    (output / 'en').mkdir(exist_ok=True)
+    shutil.copy2(root / 'en' / 'index.html', output / 'en' / 'index.html')
     shutil.copytree(root / 'assets', output / 'assets', dirs_exist_ok=True)
     local_apks = [p for folder in (root, root / 'downloads') if folder.is_dir()
                   for p in folder.iterdir() if p.is_file() and p.suffix.lower() == '.apk']
@@ -50,7 +52,7 @@ def build(root, output, releases=None, repository='cjyh37/smart-detector'):
             for chunk in iter(lambda: stream.read(1024 * 1024), b''):
                 digest.update(chunk)
         info = {'available': True, 'url': 'downloads/' + quote(apk.name),
-                'filename': apk.name, 'version': '무료 베타', 'size': apk.stat().st_size,
+                'filename': apk.name, 'version': '', 'channel': 'beta', 'size': apk.stat().st_size,
                 'sha256': digest.hexdigest()}
     else:
         info = release_download(releases or [], repository)

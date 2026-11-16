@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b47b5">
+  <title>Smart Detector — New signals during exams. Quiet alerts.</title>
+  <meta name="description" content="A free Android app that helps exam proctors notice newly received wireless signals. Works offline and lets you save a report of observations and checks.">
+  <link rel="canonical" href="https://cjyh37.github.io/smart-detector/en/">
+  <link rel="alternate" hreflang="ko" href="https://cjyh37.github.io/smart-detector/">
+  <link rel="alternate" hreflang="en" href="https://cjyh37.github.io/smart-detector/en/">
+  <link rel="alternate" hreflang="x-default" href="https://cjyh37.github.io/smart-detector/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ko_KR">
+  <meta property="og:site_name" content="Smart Detector">
+  <meta property="og:title" content="New signals during exams. Quiet alerts. Smart Detector">
+  <meta property="og:description" content="A free Android app for exam proctors. Notice new wireless signals and keep a record after the exam.">
+  <meta property="og:url" content="https://cjyh37.github.io/smart-detector/en/">
+  <meta property="og:image" content="https://cjyh37.github.io/smart-detector/assets/social-en.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="../assets/icon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="../app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="download-icon" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol>
+    <symbol id="signal-icon" viewBox="0 0 24 24"><path d="M3 7a14 14 0 0 1 18 0M6 11a9 9 0 0 1 12 0m-9 4a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1"/></symbol>
+    <symbol id="plus-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="share-icon" viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5M5 13v8h14v-8"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#" aria-label="Smart Detector home"><img src="../assets/icon.svg" width="34" height="34" alt=""><span>Smart Detector</span></a>
+      <nav class="primary-nav" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#questions">FAQ</a><a class="nav-cta" href="#download">Free download <svg class="icon"><use href="#arrow"/></svg></a></nav>
+      <nav class="language-switch" aria-label="Language"><a class="language-link" href="../" lang="ko" hreflang="ko">한국어</a><a class="language-link" href="./" lang="en" hreflang="en" aria-current="page">English</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title">New signals.<br><span>Quiet alerts.</span></h1>
+        <p class="hero-description"><strong>Smart Detector</strong> helps exam proctors notice wireless signals first received after the exam begins.<br>Get started with one Android phone.</p>
+        <div class="hero-actions"><a class="button button-primary" href="#download">Free download <svg class="icon"><use href="#download-icon"/></svg></a><a class="text-link" href="#how-it-works">How it works <svg class="icon"><use href="#arrow"/></svg></a></div>
+        <p class="compatibility">Android 12+ <span aria-hidden="true">·</span> Free beta <span aria-hidden="true">·</span> Works offline</p>
+      </div>
+      <div class="demo-wrap">
+        <div class="demo-label"><span>A preview of the proctor’s screen</span><span class="example-label">Illustration</span></div>
+        <div class="app-preview" aria-label="Illustrative Smart Detector screen">
+          <div class="app-panel">
+            <div class="app-room"><span>Exam room 1</span><span aria-hidden="true" class="menu-dots"><i></i><i></i><i></i></span></div>
+            <p class="app-listening"><span class="status-dot"></span>Listening <span class="app-time">· 12 min</span></p>
+            <div class="number-plate" id="number-plate"><span>New signals since start</span><strong id="signal-count">0</strong><span class="plate-message" id="plate-message">Waiting for newly received signals</span></div>
+            <p class="app-source">Bluetooth LE · Last received just now</p>
+          </div>
+          <div class="app-bottom" aria-live="polite" aria-atomic="true"><div id="demo-empty"><svg class="icon"><use href="#signal-icon"/></svg><span>Newly received signals will appear here.</span></div><div id="demo-signal" hidden><div><strong>Newly received signal</strong><span>Just now · Bluetooth LE · Example</span></div><span class="decision">To check</span></div></div>
+        </div>
+        <button class="demo-toggle" id="demo-toggle" type="button" aria-pressed="false"><svg class="icon"><use href="#plus-icon"/></svg><span id="demo-toggle-text">Try an example signal</span></button>
+        <p class="demo-disclaimer">An illustration only. This webpage does not scan for wireless signals.</p>
+      </div>
+    </section>
+
+    <section class="benefit-band" aria-label="Key features"><div class="shell benefits"><div><svg class="icon"><use href="#signal-icon"/></svg><p><strong>Compare with the baseline</strong><span>Notice signals first heard during the exam</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M8 5h8v14H8zM4 8v8M20 8v8"/></svg><p><strong>Quiet vibration alerts</strong><span>Designed for a quiet exam room</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg><p><strong>A report after the exam</strong><span>Keep observations and check results</span></p></div></div></section>
+
+    <section id="how-it-works" class="section shell how-section" aria-labelledby="how-title">
+      <div class="section-heading"><h2 id="how-title">A simple setup.<br>Proctor as usual.</h2><p>The app listens for signals.<br>You check what’s happening in the room.</p></div>
+      <ol class="steps">
+        <li><span class="step-number">01</span><h3>Start in an empty room.</h3><p>Open the app and select <strong>“Room is empty” (<span lang="ko">방이 비어 있습니다</span>)</strong>. It listens for 90 seconds to establish a baseline of existing signals.</p><span class="step-note">If people are already present, select “People are already here” (<span lang="ko">이미 사람이 있습니다</span>).</span></li>
+        <li><span class="step-number">02</span><h3>Begin when everyone is seated.</h3><p>Review the remaining signals and select <strong>“Start exam” (<span lang="ko">시험 시작</span>)</strong>. You can then check signals first received after the start.</p><span class="step-note">Keep the app visible during the exam.</span></li>
+        <li><span class="step-number">03</span><h3>Check, then keep a record.</h3><p>When an alert arrives, check the room and record your assessment. Save or share the report after the exam.</p><span class="step-note">Periods without signal reception are recorded too.</span></li>
+      </ol>
+    </section>
+
+    <section class="understanding-section" aria-labelledby="understanding-title"><div class="shell understanding-grid">
+      <div><h2 id="understanding-title">The app flags signals.<br>People make the judgment.</h2><p>Smart Detector helps you decide what to check in person.<br>Wireless signals alone do not establish cheating.</p></div>
+      <dl class="boundaries"><div><dt>What does it observe?</dt><dd>Wireless signals your phone can receive, including BLE advertisements, discoverable Bluetooth devices, and Wi-Fi access points.</dd></div><div><dt>What can it tell you?</dt><dd>You can review received signals and changes over time. The app cannot determine an owner, a seat, whether a device is recording, or whether cheating has occurred.</dd></div><div><dt>What does a count of zero mean?</dt><dd>No new signals have been received. It does not guarantee that no devices are present. Devices that are not transmitting may go unobserved.</dd></div></dl>
+    </div></section>
+
+    <section id="download" class="download-section shell" aria-labelledby="download-title">
+      <div class="download-panel">
+        <div class="download-copy"><h2 id="download-title">Try it at your<br>next practice exam.</h2><p>Core features for exam proctors are free.<br>Available for phones running Android 12 or later.</p><div class="download-facts"><span>Free beta</span><span>Android only</span><span>Works offline</span></div></div>
+        <div class="download-box"><p class="download-product">Smart Detector <span>Android APK</span></p><p id="download-status" class="download-status" role="status">We’re preparing the first public release.</p><a id="apk-download" class="button download-action" aria-disabled="true" tabindex="-1"><span id="download-label">APK coming soon</span><svg class="icon"><use href="#download-icon"/></svg></a><p id="download-detail" class="download-detail">You’ll be able to download the APK here once it’s available.</p><a class="release-link" href="https://github.com/cjyh37/smart-detector/releases" target="_blank" rel="noopener noreferrer">View releases <svg class="icon"><use href="#arrow"/></svg></a><noscript><p>You can also check for downloads using “View releases” above.</p></noscript></div>
+      </div>
+      <p class="beta-note">This beta is undergoing field validation. Detection rates across devices and environments have not yet been validated. It does not replace official exam supervision procedures.</p>
+    </section>
+
+    <section id="questions" class="section shell questions-section" aria-labelledby="questions-title">
+      <h2 id="questions-title">Before<br>you begin.</h2>
+      <div class="questions">
+        <details><summary>Can it find smart glasses or every electronic device?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>No. A device must transmit a signal that your phone can receive. Detection is not guaranteed for devices that stop advertising after connecting, are powered off, or use only cellular connectivity. Detection performance for individual smart glasses models also needs separate testing.</p></details>
+        <details><summary>Does it work on iPhone?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>Currently, only Android 12 or later is supported. An iPhone app is not available. The signals your phone can receive and its permission settings may vary by manufacturer and operating system.</p></details>
+        <details><summary>How do I install the APK?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>Download the APK using this page, then open the file on your Android phone. Verify the source and follow the installation instructions shown on your device. Device security settings or an institution’s management policies may restrict installation.</p></details>
+        <details><summary>Does it need internet access? Where are records stored?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>After downloading the app, you can use it on its own without an internet connection. Wireless observations are stored on your device. You can save or share the report after an exam and delete records from the app’s headquarters menu.</p></details>
+        <details><summary>Can I turn off the screen during an exam?<svg class="icon"><use href="#plus-icon"/></svg></summary><p>Keep the app open and visible. Reception stops when you leave the app screen. If you return during an exam, select “Resume reception” (<span lang="ko">다시 수신</span>) and check the reception status. Periods without reception are recorded in the report.</p></details>
+      </div>
+    </section>
+
+    <section class="institution-section shell" aria-labelledby="institution-title"><div><h2 id="institution-title">For schools and exam centers.</h2><p>Need help with installation or using the app across several rooms?<br>Tell us about your setting and the support you need.</p></div><div class="institution-action"><a class="button button-outline" href="https://github.com/cjyh37/smart-detector/issues/new?template=institution-en.yml">Institutional inquiries <svg class="icon"><use href="#arrow"/></svg></a><span>Public GitHub inquiry · Do not include personal information.</span></div></section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-inner"><a class="brand" href="#"><img src="../assets/icon.svg" width="28" height="28" alt=""><span>Smart Detector</span></a><p>A small tool for fair exams.</p><div class="footer-links"><button id="share-button" type="button">Share this page <svg class="icon"><use href="#share-icon"/></svg></button><a href="https://github.com/cjyh37/smart-detector" target="_blank" rel="noopener noreferrer">GitHub <svg class="icon"><use href="#arrow"/></svg></a></div></div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

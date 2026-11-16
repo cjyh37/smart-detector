@@ -1,15 +1,59 @@
 (() => {
   'use strict';
+  const language = document.documentElement.lang === 'en' ? 'en' : 'ko';
+  const siteRoot = new URL('.', document.currentScript.src);
+  const copy = {
+    ko: {
+      signalActive: '확인이 필요한 새 신호가 있습니다',
+      signalWaiting: '새로 수신된 신호를 기다리고 있습니다',
+      demoReset: '예시 처음으로 되돌리기',
+      demoStart: '예시 신호 켜 보기',
+      download: 'APK 무료 다운로드',
+      beta: '무료 베타',
+      publicRelease: '공개 버전',
+      install: 'Android 휴대폰에서 내려받은 파일을 열어 설치하세요.',
+      downloadError: '다운로드 정보를 불러오지 못했습니다.',
+      downloadRetry: '아래 ‘배포 내역 보기’에서 파일을 확인하거나 페이지를 새로고침해 주세요.',
+      shareTitle: '스마트 디텍터',
+      shareText: '시험 중 새로 수신된 무선 신호를 알려주는 무료 Android 감독 보조 앱',
+      copied: '소개 페이지 링크를 복사했습니다.',
+      copyManually: '주소창의 링크를 복사해 공유해 주세요.',
+    },
+    en: {
+      signalActive: 'A new signal needs your attention',
+      signalWaiting: 'Waiting for newly received signals',
+      demoReset: 'Reset the example',
+      demoStart: 'Try an example signal',
+      download: 'Download APK for free',
+      beta: 'Free beta',
+      publicRelease: 'Public release',
+      install: 'Open the downloaded file on your Android phone to install it.',
+      downloadError: 'Download details could not be loaded.',
+      downloadRetry: 'Check “View releases” below for the file, or refresh this page.',
+      shareTitle: 'Smart Detector',
+      shareText: 'A free Android app that helps exam proctors notice newly received wireless signals',
+      copied: 'Page link copied.',
+      copyManually: 'Copy the link from your address bar to share this page.',
+    },
+  }[language];
+
+  document.querySelectorAll('.language-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const destination = new URL(link.href);
+      destination.hash = location.hash;
+      link.href = destination.href;
+    });
+  });
   const toggle = document.getElementById('demo-toggle');
   toggle.addEventListener('click', () => {
     const active = toggle.getAttribute('aria-pressed') !== 'true';
     toggle.setAttribute('aria-pressed', String(active));
     document.getElementById('signal-count').textContent = active ? '1' : '0';
     document.getElementById('number-plate').classList.toggle('is-alert', active);
-    document.getElementById('plate-message').textContent = active ? '확인이 필요한 새 신호가 있습니다' : '새로 수신된 신호를 기다리고 있습니다';
+    document.getElementById('plate-message').textContent = active ? copy.signalActive : copy.signalWaiting;
     document.getElementById('demo-empty').hidden = active;
     document.getElementById('demo-signal').hidden = !active;
-    document.getElementById('demo-toggle-text').textContent = active ? '예시 처음으로 되돌리기' : '예시 신호 켜 보기';
+    document.getElementById('demo-toggle-text').textContent = active ? copy.demoReset : copy.demoStart;
   });
 
   const status = document.getElementById('download-status');
@@ -19,12 +63,12 @@
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 8000);
     try {
-      const response = await fetch('download.json', { cache: 'no-cache', signal: controller.signal });
+      const response = await fetch(new URL('download.json', siteRoot), { cache: 'no-cache', signal: controller.signal });
       if (!response.ok) throw new Error('Download information unavailable');
       const info = await response.json();
       if (!info.available) return;
-      const url = new URL(info.url, location.href);
-      const localDirectory = new URL('downloads/', location.href);
+      const url = new URL(info.url, siteRoot);
+      const localDirectory = new URL('downloads/', siteRoot);
       const isLocal = url.origin === location.origin && url.pathname.startsWith(localDirectory.pathname);
       const isRelease = url.origin === 'https://github.com' && url.pathname.startsWith('/cjyh37/smart-detector/releases/download/');
       if ((!isLocal && !isRelease) || !url.pathname.toLowerCase().endsWith('.apk')) throw new Error('Invalid download location');
@@ -32,13 +76,14 @@
       button.removeAttribute('aria-disabled');
       button.removeAttribute('tabindex');
       if (isLocal) button.setAttribute('download', info.filename || 'smart-detector.apk');
-      document.getElementById('download-label').textContent = 'APK 무료 다운로드';
-      const size = Number.isFinite(info.size) && info.size > 0 ? `${(info.size / 1048576).toFixed(1)} MB` : '';
-      status.textContent = [info.version || '공개 버전', size].filter(Boolean).join(' · ');
-      detail.textContent = 'Android 휴대폰에서 내려받은 파일을 열어 설치하세요.';
+      document.getElementById('download-label').textContent = copy.download;
+      const size = Number.isFinite(info.size) && info.size > 0 ? `${new Intl.NumberFormat(language, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(info.size / 1048576)} MB` : '';
+      const version = info.channel === 'beta' || info.version === '무료 베타' ? copy.beta : (info.version || copy.publicRelease);
+      status.textContent = [version, size].filter(Boolean).join(' · ');
+      detail.textContent = copy.install;
     } catch (_) {
-      status.textContent = '다운로드 정보를 불러오지 못했습니다.';
-      detail.textContent = '아래 ‘배포 내역 보기’에서 파일을 확인하거나 페이지를 새로고침해 주세요.';
+      status.textContent = copy.downloadError;
+      detail.textContent = copy.downloadRetry;
     } finally {
       clearTimeout(timer);
     }
@@ -57,7 +102,7 @@
     const url = document.querySelector('link[rel="canonical"]').href;
     if (navigator.share) {
       try {
-        await navigator.share({ title: '스마트 디텍터', text: '시험 중 새로 수신된 무선 신호를 알려주는 무료 Android 감독 보조 앱', url });
+        await navigator.share({ title: copy.shareTitle, text: copy.shareText, url });
         return;
       } catch (error) {
         if (error.name === 'AbortError') return;
@@ -65,9 +110,9 @@
     }
     try {
       await navigator.clipboard.writeText(url);
-      toast('소개 페이지 링크를 복사했습니다.');
+      toast(copy.copied);
     } catch (_) {
-      toast('주소창의 링크를 복사해 공유해 주세요.');
+      toast(copy.copyManually);
     }
   });
 })();

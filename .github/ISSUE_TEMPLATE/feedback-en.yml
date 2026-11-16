@@ -1,0 +1,18 @@
+name: Feedback or issue report
+description: Share your experience with Smart Detector or report a problem.
+title: '[Feedback] '
+body:
+  - type: markdown
+    attributes:
+      value: 'This report is public. Do not attach reports containing student information or raw wireless device identifiers.'
+  - type: input
+    id: device
+    attributes:
+      label: Phone model and Android version
+  - type: textarea
+    id: feedback
+    attributes:
+      label: What happened?
+      description: Include the app version and steps to reproduce the issue if possible.
+    validations:
+      required: true
