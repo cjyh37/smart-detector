@@ -70,37 +70,35 @@
 
     <section class="benefit-band" aria-label="Key features"><div class="shell benefits"><div><svg class="icon"><use href="#signal-icon"/></svg><p><strong>Compare with the baseline</strong><span>Notice signals first heard during the exam</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M8 5h8v14H8zM4 8v8M20 8v8"/></svg><p><strong>Quiet vibration alerts</strong><span>Designed for a quiet exam room</span></p></div><div><svg class="icon" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></svg><p><strong>A report after the exam</strong><span>Keep observations and check results</span></p></div></div></section>
 
-    <section id="screenshots" class="section shell screenshots-section" aria-labelledby="screenshots-title">
-      <div class="section-heading"><h2 id="screenshots-title">Take a look<br>inside the app.</h2><p>From pre-exam checks to the final report.<br> Select a screen to view it full size in a new tab.</p></div>
-      <p class="screenshot-swipe-hint">Swipe to explore all four screens.</p>
-      <div class="screenshot-gallery">
-        <figure class="screenshot-item">
-          <a class="screenshot-link" href="../assets/screenshots/before-exam.png" target="_blank" rel="noopener noreferrer" aria-label="View the pre-exam check screen full size (new tab)"><img src="../assets/screenshots/before-exam.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Pre-exam screen showing two signals not heard in the empty room and a Start exam button"></a>
-          <figcaption><span class="screenshot-number" aria-hidden="true">01</span><h3>Before the exam</h3><p>Compare signals heard as people arrive with the empty-room baseline.</p></figcaption>
-        </figure>
-        <figure class="screenshot-item">
-          <a class="screenshot-link" href="../assets/screenshots/new-signal.png" target="_blank" rel="noopener noreferrer" aria-label="View the new-signal screen full size (new tab)"><img src="../assets/screenshots/new-signal.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Monitoring screen highlighting one new signal in yellow, awaiting an on-site check"></a>
-          <figcaption><span class="screenshot-number" aria-hidden="true">02</span><h3>New signals during the exam</h3><p>See a large count and a list of signals first received after the exam starts.</p></figcaption>
-        </figure>
-        <figure class="screenshot-item">
-          <a class="screenshot-link" href="../assets/screenshots/signal-strength.png" target="_blank" rel="noopener noreferrer" aria-label="View the signal-strength screen full size (new tab)"><img src="../assets/screenshots/signal-strength.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Signal-strength screen with a Strongest label and bars for the selected signal"></a>
-          <figcaption><span class="screenshot-number" aria-hidden="true">03</span><h3>Signal strength</h3><p>Watch how received signal strength changes as you move. It does not indicate distance or direction.</p></figcaption>
-        </figure>
-        <figure class="screenshot-item">
-          <a class="screenshot-link" href="../assets/screenshots/exam-report.png" target="_blank" rel="noopener noreferrer" aria-label="View the exam report full size (new tab)"><img src="../assets/screenshots/exam-report.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Exam report listing new signals, check results, notes, and time without reception"></a>
-          <figcaption><span class="screenshot-number" aria-hidden="true">04</span><h3>The final report</h3><p>Keep a record of observed signals and on-site checks, then save or share it.</p></figcaption>
-        </figure>
-      </div>
-      <p class="screenshot-note">App screenshots use example data and show the Korean interface.</p>
-    </section>
-
     <section id="how-it-works" class="section shell how-section" aria-labelledby="how-title">
-      <div class="section-heading"><h2 id="how-title">A simple setup.<br>Proctor as usual.</h2><p>The app listens for signals.<br>You check what’s happening in the room.</p></div>
-      <ol class="steps">
-        <li><span class="step-number">01</span><h3>Start in an empty room.</h3><p>Open the app and select <strong>“Room is empty” (<span lang="ko">방이 비어 있습니다</span>)</strong>. It listens for 90 seconds to establish a baseline of existing signals.</p><span class="step-note">If people are already present, select “People are already here” (<span lang="ko">이미 사람이 있습니다</span>).</span></li>
-        <li><span class="step-number">02</span><h3>Begin when everyone is seated.</h3><p>Review the remaining signals and select <strong>“Start exam” (<span lang="ko">시험 시작</span>)</strong>. You can then check signals first received after the start.</p><span class="step-note">Keep the app visible during the exam.</span></li>
-        <li><span class="step-number">03</span><h3>Check, then keep a record.</h3><p>When an alert arrives, check the room and record your assessment. Save or share the report after the exam.</p><span class="step-note">Periods without signal reception are recorded too.</span></li>
-      </ol>
+      <div class="section-heading"><h2 id="how-title">A simple setup.<br>Proctor as usual.</h2><p>Follow the steps<br> to see the app in use.</p></div>
+      <div id="screenshots" class="workflow" data-workflow>
+        <div class="workflow-tabs" aria-label="Steps for using the app">
+          <a class="workflow-tab" id="step-before" href="#screen-before" data-workflow-tab><span class="workflow-number" aria-hidden="true">01</span><span>Prepare</span></a>
+          <a class="workflow-tab" id="step-signal" href="#screen-signal" data-workflow-tab><span class="workflow-number" aria-hidden="true">02</span><span>Monitor</span></a>
+          <a class="workflow-tab" id="step-strength" href="#screen-strength" data-workflow-tab><span class="workflow-number" aria-hidden="true">03</span><span>Check</span></a>
+          <a class="workflow-tab" id="step-report" href="#screen-report" data-workflow-tab><span class="workflow-number" aria-hidden="true">04</span><span>Report</span></a>
+        </div>
+        <div class="workflow-panels">
+          <div id="screen-before" class="workflow-panel" data-workflow-panel>
+            <div class="workflow-copy"><h3>Check the signals<br>before the exam.</h3><p>In an empty room, select <strong>“Room is empty” (<span lang="ko">방이 비어 있습니다</span>)</strong> and listen for 90 seconds to establish a baseline. Once everyone is seated, review the remaining signals and select <strong>“Start exam” (<span lang="ko">시험 시작</span>)</strong>.</p><p class="workflow-note">If people are already present, select “People are already here” (<span lang="ko">이미 사람이 있습니다</span>).</p></div>
+            <figure class="workflow-screen"><a class="screenshot-link" href="../assets/screenshots/before-exam.png" target="_blank" rel="noopener noreferrer" aria-label="Prepare — View the original screen (new tab)"><img src="../assets/screenshots/before-exam.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Pre-exam screen showing two signals not heard in the empty room and a Start exam button"><span class="screenshot-open">View full size <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></figure>
+          </div>
+          <div id="screen-signal" class="workflow-panel" data-workflow-panel>
+            <div class="workflow-copy"><h3>Notice new signals<br>at a glance.</h3><p>A large count and a list show signals first received after the exam starts. When an alert arrives, select the signal and check what is happening in the room.</p><p class="workflow-note">Keep the app visible during the exam.</p></div>
+            <figure class="workflow-screen"><a class="screenshot-link" href="../assets/screenshots/new-signal.png" target="_blank" rel="noopener noreferrer" aria-label="Monitor — View the original screen (new tab)"><img src="../assets/screenshots/new-signal.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Monitoring screen highlighting one new signal in yellow, awaiting an on-site check"><span class="screenshot-open">View full size <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></figure>
+          </div>
+          <div id="screen-strength" class="workflow-panel" data-workflow-panel>
+            <div class="workflow-copy"><h3>Watch signal strength<br>as you check the room.</h3><p>See how the selected signal’s received strength changes as you move. Check the room and record your assessment.</p><p class="workflow-note">Signal strength does not indicate distance or direction.</p></div>
+            <figure class="workflow-screen"><a class="screenshot-link" href="../assets/screenshots/signal-strength.png" target="_blank" rel="noopener noreferrer" aria-label="Check — View the original screen (new tab)"><img src="../assets/screenshots/signal-strength.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Signal-strength screen with a Strongest label and bars for the selected signal"><span class="screenshot-open">View full size <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></figure>
+          </div>
+          <div id="screen-report" class="workflow-panel" data-workflow-panel>
+            <div class="workflow-copy"><h3>Keep the results<br>in one report.</h3><p>After the exam, review observed signals, on-site checks, and notes in a report. Save it as a file or share it.</p><p class="workflow-note">Periods without signal reception are recorded too.</p></div>
+            <figure class="workflow-screen"><a class="screenshot-link" href="../assets/screenshots/exam-report.png" target="_blank" rel="noopener noreferrer" aria-label="Report — View the original screen (new tab)"><img src="../assets/screenshots/exam-report.png" width="1080" height="2400" loading="lazy" decoding="async" alt="Exam report listing new signals, check results, notes, and time without reception"><span class="screenshot-open">View full size <svg class="icon" aria-hidden="true"><use href="#arrow"/></svg></span></a></figure>
+          </div>
+        </div>
+        <p class="screenshot-note">App screenshots use example data and show the Korean interface.</p>
+      </div>
     </section>
 
     <section class="understanding-section" aria-labelledby="understanding-title"><div class="shell understanding-grid">

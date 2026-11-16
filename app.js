@@ -44,6 +44,50 @@
       link.href = destination.href;
     });
   });
+
+  const workflow = document.querySelector('[data-workflow]');
+  if (workflow) {
+    const tabs = [...workflow.querySelectorAll('[data-workflow-tab]')];
+    const panels = [...workflow.querySelectorAll('[data-workflow-panel]')];
+    workflow.dataset.enhanced = '';
+    workflow.querySelector('.workflow-tabs').setAttribute('role', 'tablist');
+    tabs.forEach((tab, index) => {
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', panels[index].id);
+      panels[index].setAttribute('role', 'tabpanel');
+      panels[index].setAttribute('aria-labelledby', tab.id);
+      panels[index].tabIndex = 0;
+    });
+    function selectStep(index, focus = false) {
+      tabs.forEach((tab, position) => {
+        const selected = position === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[position].hidden = !selected;
+      });
+      if (focus) tabs[index].focus();
+    }
+    function selectFromHash() {
+      const index = panels.findIndex(panel => `#${panel.id}` === location.hash);
+      if (index >= 0) selectStep(index);
+    }
+    selectStep(0);
+    selectFromHash();
+    window.addEventListener('hashchange', selectFromHash);
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', event => {
+        event.preventDefault();
+        selectStep(index);
+      });
+      tab.addEventListener('keydown', event => {
+        const next = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1, ' ': index }[event.key];
+        if (next === undefined) return;
+        event.preventDefault();
+        selectStep(next, true);
+      });
+    });
+  }
+
   const toggle = document.getElementById('demo-toggle');
   toggle.addEventListener('click', () => {
     const active = toggle.getAttribute('aria-pressed') !== 'true';
