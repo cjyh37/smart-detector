@@ -86,6 +86,18 @@ h1 span{color:var(--blue)}
 .section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
 h2{font-size:38px;font-weight:730;letter-spacing:-.03em;line-height:1.35}
 .section-heading>p{color:var(--muted);font-size:16px;line-height:1.8}
+.screenshots-section{padding-bottom:0}
+.screenshot-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:40px}
+.screenshot-item{min-width:0;margin:0;scroll-snap-align:start}
+.screenshot-link{display:block;border:1px solid var(--line);border-radius:14px;cursor:zoom-in;transition:border-color .18s}
+.screenshot-link:hover{border-color:var(--blue)}
+.screenshot-link img{display:block;width:100%;height:auto;border-radius:13px;background:var(--ground)}
+.screenshot-item figcaption{margin-top:20px}
+.screenshot-number{display:block;color:var(--blue);font-size:13px;font-weight:650;font-variant-numeric:tabular-nums}
+.screenshot-item h3{margin-top:7px;font-size:19px;font-weight:680;line-height:1.4;letter-spacing:-.02em}
+.screenshot-item figcaption p{margin-top:10px;font-size:14px;line-height:1.8;color:var(--muted)}
+.screenshot-note{margin-top:24px;font-size:13px;color:var(--muted)}
+.screenshot-swipe-hint{display:none}
 .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:38px;padding:0;margin:48px 0 0}
 .steps li{border-top:1px solid var(--line);padding-top:20px}
 .step-number{color:var(--blue);font-size:16px;font-weight:650;font-variant-numeric:tabular-nums}
@@ -151,4 +163,10 @@ details p{font-size:14px;line-height:1.9;color:var(--muted);padding:0 30px 24px 
 @media(max-width:960px){.primary-nav>a:not(.nav-cta){display:none}}
 @media(max-width:760px){.header-inner{grid-template-columns:1fr auto;padding-block:12px;gap:4px 12px}.header-inner>.brand{grid-column:1;grid-row:1}.language-switch{grid-column:2;grid-row:1}.language-switch>a:not(.nav-cta){display:inline-flex}.language-switch a{min-height:38px;padding-inline:9px}.primary-nav{grid-column:1/-1;grid-row:2;min-height:32px}.primary-nav .nav-cta{min-height:32px}.footer-inner .brand{white-space:normal}html:lang(en) .institution-action{max-width:100%}}
 @media(max-width:360px){.language-switch{font-size:12px}.language-switch a{padding-inline:7px}.header-inner{column-gap:8px}}
+@media(max-width:1050px){
+  .screenshot-gallery{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:min(78vw,280px);gap:20px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scroll-padding-inline:6px;margin:12px -6px 0;padding:8px 6px 16px}
+  .screenshot-swipe-hint{display:block;margin-top:24px;font-size:13px;color:var(--muted)}
+  .screenshot-note{margin-top:16px}
+}
+@media(max-width:760px){.screenshots-section{padding-bottom:0}.screenshot-item figcaption{margin-top:16px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
