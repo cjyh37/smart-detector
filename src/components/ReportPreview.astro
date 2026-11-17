@@ -5,18 +5,18 @@ const { lang } = Astro.props as { lang: Lang };
 const ko = lang === 'ko';
 const src = '/assets/reports/exam-report-example.png';
 const notes = ko ? [
-  { title: '측정 기준과 확인 결과', body: '빈 강의실과 시험 시작 전의 신호를 기준으로 남깁니다. 시험 중 새 신호는 감독관이 확인했는지, 기기를 찾지 못했는지 구분해 기록합니다.' },
-  { title: '수신이 중단된 구간', body: '예시의 09:42:10~09:45:10은 시험을 멈춘 3분입니다. 이 시간은 ‘수신하지 않음’으로 표시됩니다.' },
-  { title: '신호별로 시간·세기·메모', body: '각 신호의 처음·마지막 수신 시각과 기기인식ID, 신호 방식, 세기 변화를 보여줍니다. 감독관이 남긴 메모도 함께 볼 수 있습니다.' },
+  { title: '기준과 확인 결과', body: '보고서는 빈 강의실과 시험 시작 전의 신호를 기준으로 적습니다. 시험 중 새 신호는 감독관이 확인했는지, 기기를 찾지 못했는지를 구분해 남깁니다.' },
+  { title: '수신하지 않은 시간', body: '시험을 멈춰 수신하지 않은 시간도 따로 적습니다. 예시에서는 09:42:10부터 3분을 ‘수신하지 않음’으로 표시했습니다.' },
+  { title: '신호별 시각·세기·메모', body: '신호마다 처음과 마지막으로 수신한 시각, 신호를 구분하는 기기인식ID, 신호 방식, 세기 변화를 적습니다. 감독관이 남긴 메모도 함께 싣습니다.' },
 ] : [
-  { title: 'Baselines and check results', body: 'The report keeps the empty-room and pre-exam baselines separate. Each new signal has a status showing whether the proctor checked it or could not find the device.' },
-  { title: 'Intervals without reception', body: 'In the example, the exam was paused from 09:42:10 to 09:45:10. Those three minutes are marked as having no reception.' },
-  { title: 'A record for each signal', body: 'First and last reception times, device identifier, signal type, strength history and on-site notes are organized together for review.' },
+  { title: 'Baselines and check results', body: 'The empty-room and pre-exam signals are listed as baselines. Each new signal during the exam shows whether the proctor checked it or could not find the device.' },
+  { title: 'Time without reception', body: 'Time when the exam was paused is listed separately. In the example, three minutes from 09:42:10 are marked as not received.' },
+  { title: 'A record for each signal', body: 'Each signal is listed with its first and last reception times, an identifier that tells signals apart, its signal type and strength history, along with the proctor’s notes.' },
 ];
 ---
 <section class="section report-section" id="report" aria-labelledby="report-title">
   <div class="container">
-    <div class="section-heading"><h2 id="report-title">{ko ? '시험 중 확인한 내용을\n보고서로 정리합니다.' : 'An exam report\nwith checks and signal records'}</h2><p>{ko ? '수신 시간과 신호의 변화, 감독관이 확인한 내용을 보여주는 보고서 예시입니다.' : 'This example shows reception times, changes in signals and the proctor’s recorded findings.'}</p></div>
+    <div class="section-heading"><h2 id="report-title">{ko ? '시험이 끝나면\n기록이 보고서로 남습니다.' : 'When the exam ends,\nthe record becomes a report'}</h2><p>{ko ? '‘시험 종료’를 누르면 시험 동안 수신한 신호와 감독관이 확인한 결과가 보고서로 정리됩니다. 아래는 준비 중인 PDF 보고서의 시안입니다.' : 'Ending the exam gathers the signals received and the proctor’s findings into a report. Below is the design of the PDF report we are preparing.'}</p></div>
     <div class="report-layout">
       <figure class="report-preview">
         <a class="report-sheet" href={src} target="_blank" rel="noopener" data-report-open aria-label={ko ? '시험 무선 신호 보고서 예시 확대 보기' : 'Enlarge the example exam signal report'}>
@@ -26,10 +26,10 @@ const notes = ko ? [
         <figcaption>{ko ? '보고서 시안 · 예시 데이터 · 3쪽 중 첫 쪽' : 'Report design · Example data · Page 1 of 3, in Korean'}</figcaption>
       </figure>
       <div class="report-explanation">
-        <h3>{ko ? '신호를 받은 시간과\n감독관의 확인 기록' : 'Reception times\nand proctor findings'}</h3>
-        <p class="report-lead">{ko ? '언제 신호를 받았고, 감독관이 무엇을 확인했는지 함께 볼 수 있습니다. 시험을 멈춰 신호를 받지 못한 시간도 기록에 남습니다.' : 'See when signals were received and what the proctor confirmed. The record also includes periods when the exam was paused and reception stopped.'}</p>
+        <h3>{ko ? '무엇을 수신했고\n무엇을 확인했는지' : 'What was received\nand what was checked'}</h3>
+        <p class="report-lead">{ko ? '시험이 끝난 뒤 시험 시간에 무슨 일이 있었는지 설명해야 할 때 꺼내 볼 수 있는 기록입니다. 보관하거나 시험 운영 담당자에게 전달할 수 있습니다.' : 'A record you can return to when you need to explain what happened during the exam. Keep it on file or pass it to the exam office.'}</p>
         <dl class="report-details">{notes.map(note => <div><dt>{note.title}</dt><dd>{note.body}</dd></div>)}</dl>
-        <p class="report-context">{ko ? '보고서는 신호 수신과 현장 확인을 기록한 자료이며, 부정행위 여부를 자동으로 판정하지 않습니다.' : 'This report records wireless observations and on-site checks. It does not automatically establish misconduct.'}</p>
+        <p class="report-context">{ko ? '보고서는 수신한 신호와 현장 확인을 적은 기록입니다. 부정행위 여부를 판정하지 않습니다.' : 'The report records received signals and on-site checks. It does not determine whether misconduct occurred.'}</p>
         <a class="text-link" href={src} download="smart-detector-report-example.png">{ko ? '보고서 예시 이미지 내려받기' : 'Download the example image'}<Icon name="down"/></a>
       </div>
     </div>

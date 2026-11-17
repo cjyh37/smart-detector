@@ -75,7 +75,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(player => {
   const cover = player.querySelector<HTMLAnchorElement>('[data-video-play]');
   if (!cover || !player.dataset.embedSrc) return;
   cover.setAttribute('role', 'button');
-  cover.setAttribute('aria-label', ko ? '이 페이지에서 튜토리얼 재생' : 'Play tutorial on this page');
+  cover.setAttribute('aria-label', ko ? '이 페이지에서 영상 재생' : 'Play tutorial on this page');
   const start = () => {
     const iframe = document.createElement('iframe');
     iframe.src = player.dataset.embedSrc!;
