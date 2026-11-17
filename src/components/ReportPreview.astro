@@ -20,11 +20,9 @@ const notes = ko ? [
     <div class="report-layout">
       <figure class="report-preview">
         <a class="report-sheet" href={src} target="_blank" rel="noopener" data-report-open aria-label={ko ? '시험 무선 신호 보고서 예시 확대 보기' : 'Enlarge the example exam signal report'}>
-          <img src={src} width="1588" height="2246" loading="lazy" alt={ko ? '제3시험실 보고서 시안. 새 신호 2개, 확인 안 함 0개, 수신하지 못한 시간 3분. 기준과 판단, 수신 구간, 신호별 기록을 정리한 첫 쪽.' : 'Report design for Exam Room 3: two new signals, zero unchecked, three minutes without reception. Page one shows baselines, reception intervals and signal records in Korean.'}/>
+          <img src={src} width="1588" height="2246" loading="lazy" alt={ko ? '제3시험실 보고서 예시. 새 신호 2개, 확인 안 함 0개, 수신하지 못한 시간 3분. 기준과 판단, 수신 구간, 신호별 기록을 정리한 첫 쪽.' : 'Example report for Exam Room 3: two new signals, zero unchecked, three minutes without reception. Page one shows baselines, reception intervals and signal records in Korean.'}/>
           <span class="report-enlarge"><Icon name="expand"/>{ko ? '보고서 확대 보기' : 'Enlarge report'}</span>
-        </a>
-        <figcaption>{ko ? '보고서 시안 · 예시 데이터 · 3쪽 중 첫 쪽' : 'Report design · Example data · Page 1 of 3, in Korean'}</figcaption>
-      </figure>
+        </a>      </figure>
       <div class="report-explanation">
         <h3>{ko ? '무엇을 수신했고\n무엇을 확인했는지' : 'What was received\nand what was checked'}</h3>
         <p class="report-lead">{ko ? '시험이 끝난 뒤 시험 시간에 무슨 일이 있었는지 설명해야 할 때 꺼내 볼 수 있는 기록입니다. PDF로 저장해 보관하거나 시험 본부에 보낼 수 있습니다.' : 'A record you can return to when you need to explain what happened during the exam. Save the PDF for your files or send it to the exam office.'}</p>

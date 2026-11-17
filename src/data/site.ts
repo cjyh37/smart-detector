@@ -21,7 +21,7 @@ export const labels = {
 export const metadata: Record<Lang, Record<PageKey, { title: string; description: string }>> = {
   ko: {
     home: { title: '스마트 디텍터 — 시험 부정행위 예방·무선신호 확인 앱', description: '시험 부정행위 예방을 돕는 무료 Android 감독 보조 앱. 스마트안경·이어폰·카메라의 수신 가능한 무선신호를 확인하고 현장 기록을 남깁니다. 사용법과 시험감독 가이드를 확인하세요.' },
-    app: { title: '시험 부정행위 탐지·무선신호 확인 보조 앱 — 스마트 디텍터', description: '스마트 글래스·이어폰·카메라의 수신 가능한 무선신호를 확인하는 무료 Android 시험감독 보조도구. 앱 화면 시안, 사용 방법과 관측 범위를 확인하세요.' },
+    app: { title: '시험 부정행위 탐지·무선신호 확인 보조 앱 — 스마트 디텍터', description: '스마트 글래스·이어폰·카메라의 수신 가능한 무선신호를 확인하는 무료 Android 시험감독 보조도구. 앱 화면, 사용 방법과 관측 범위를 확인하세요.' },
     research: { title: '전용 디바이스와 AI 학습 과정 평가 플랫폼 — 스마트 디텍터', description: '시험실 무선신호를 기록할 전용 디바이스와, 학생의 AI 활용 과정과 기여를 평가할 플랫폼을 준비합니다. 제품 콘셉트와 사용 방식, 개발 계획을 소개합니다.' },
     institutions: { title: '학교·자격시험 부정행위 예방과 감독 지원 — 스마트 디텍터', description: '학교 시험, 국가자격시험, 채용·면접 운영팀을 위한 무선신호 확인과 현장 기록 안내. 감독 절차에 맞는 무료 앱 활용과 기관 도입, 전용 디바이스 연구 협력을 상담합니다.' },
     journal: { title: '시험 부정행위 예방 가이드·연구노트 — 스마트 디텍터', description: '수능 전자기기 반입 유의사항, 세무사 시험 AI 부정행위 대응, 스마트안경·이어폰 무선신호 확인을 다룹니다. 공식 자료를 바탕으로 시험감독에 필요한 내용을 정리합니다.' },
@@ -30,7 +30,7 @@ export const metadata: Record<Lang, Record<PageKey, { title: string; description
   },
   en: {
     home: { title: 'Smart Detector — Free wireless signal app for exam proctors', description: 'Support exam integrity with a free Android app for checking receivable wireless signals and recording on-site findings. Explore the workflow and proctoring guides.' },
-    app: { title: 'Free exam proctoring & wireless signal app — Smart Detector', description: 'Explore the free Smart Detector Android app: interface designs, workflow and observation limits. A supporting tool for exam proctors, with a Korean-language interface.' },
+    app: { title: 'Free exam proctoring & wireless signal app — Smart Detector', description: 'Explore the free Smart Detector Android app: app screens, workflow and observation limits. A supporting tool for exam proctors, with a Korean-language interface.' },
     research: { title: 'Dedicated devices & AI learning assessment — Smart Detector', description: 'Plans for a dedicated exam-room receiver and a platform to record students’ work with AI, suggest scores and check understanding through short oral assessments.' },
     institutions: { title: 'Exam integrity support for schools & institutions — Smart Detector', description: 'Wireless signal checks and record keeping for school exams, qualification tests and interviews. Discuss institutional app use and dedicated hardware research.' },
     journal: { title: 'Exam cheating prevention guides & research — Smart Detector', description: 'Guides to Suneung device rules, Korea’s tax accountant exam response and wireless signal checks, with official sources and practical notes for exam teams.' },

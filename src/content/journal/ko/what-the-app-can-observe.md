@@ -38,4 +38,4 @@ Android의 일반적인 Wi-Fi 검색은 휴대폰에서 보이는 액세스 포�
 - 현재 배포된 앱의 안내와 화면에 표시되는 수신 상태를 확인합니다.
 - 수신한 신호와 감독관이 확인한 사실을 구분해 기록합니다.
 
-[앱 화면 시안과 사용 순서](/app/#how-it-works)에서 각 단계의 화면을 볼 수 있습니다. 시험별 안내는 [수능 전자기기 확인 가이드](/journal/suneung-device-checks-2027/)와 [세무사 시험 AI 부정행위 이후의 감독 점검](/journal/tax-accountant-exam-ai-cheating/)을 참고해 주세요.
+[앱 화면과 사용 순서](/app/#how-it-works)에서 각 단계의 화면을 볼 수 있습니다. 시험별 안내는 [수능 전자기기 확인 가이드](/journal/suneung-device-checks-2027/)와 [세무사 시험 AI 부정행위 이후의 감독 점검](/journal/tax-accountant-exam-ai-cheating/)을 참고해 주세요.

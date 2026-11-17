@@ -38,4 +38,4 @@ Standard Android Wi-Fi scanning returns information about access points visible 
 - Follow the instructions and reception status shown in the released app.
 - Record received signals separately from findings you confirmed yourself.
 
-See the [interface designs and usage steps](/en/app/#how-it-works) for a walkthrough. For exam-specific context, read the [Suneung device guide](/en/journal/suneung-device-checks-2027/) and [operational review following the tax accountant exam case](/en/journal/tax-accountant-exam-ai-cheating/).
+See the [app screens and usage steps](/en/app/#how-it-works) for a walkthrough. For exam-specific context, read the [Suneung device guide](/en/journal/suneung-device-checks-2027/) and [operational review following the tax accountant exam case](/en/journal/tax-accountant-exam-ai-cheating/).
