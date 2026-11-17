@@ -1,8 +1,26 @@
 ---
 import Icon from './Icon.astro';
+import { Image } from 'astro:assets';
 import { articlesFor, categoryLabels } from '../data/journal';
+import { journalThumbnails } from '../data/journal-thumbnails';
 import { path, type Lang } from '../data/site';
 const { lang, exclude = '', limit } = Astro.props as { lang: Lang; exclude?: string; limit?: number };
 const entries = articlesFor(lang).filter(article => article.frontmatter.slug !== exclude).slice(0, limit);
 ---
-<div class="journal-list">{entries.map(({ frontmatter: article }) => <article class={`journal-row journal-${article.category}`} data-article-category={article.category}><a href={path(lang, 'journal', article.slug)}><div class="journal-mark" aria-hidden="true">{article.category === 'product' ? <span class="mark-free">Free.</span> : article.category === 'guide' ? <span class="mark-question">?</span> : <span class="mark-research"><span></span><span></span><span></span></span>}</div><div class="journal-row-copy"><div class="article-meta"><span>{categoryLabels[lang][article.category]}</span><span>{article.readTime}</span></div><h3>{article.title}</h3><p>{article.description}</p></div><Icon name="arrow"/></a></article>)}</div>
+<div class="journal-list">{entries.map(({ frontmatter: article }) => {
+  const thumbnail = journalThumbnails[article.slug];
+  return <article class={`journal-row journal-${article.category}`} data-article-category={article.category}>
+    <a href={path(lang, 'journal', article.slug)}>
+      <div class:list={['journal-mark', thumbnail && 'journal-thumbnail']} aria-hidden="true">
+        {thumbnail ? <Image src={thumbnail} width={320} widths={[160, 320]} sizes="(max-width: 360px) 58px, (max-width: 680px) 72px, (max-width: 900px) 120px, 146px" format="webp" quality={80} alt="" loading="lazy" decoding="async"/> : article.category === 'product' ? <span class="mark-free">Free.</span> : article.category === 'guide' ? <Icon name="copy" class="journal-fallback-icon"/> : <span class="mark-research"><span></span><span></span><span></span></span>}
+      </div>
+      <div class="journal-row-copy"><div class="article-meta"><span>{categoryLabels[lang][article.category]}</span><span>{article.readTime}</span></div><h3>{article.title}</h3><p>{article.description}</p></div>
+      <Icon name="arrow"/>
+    </a>
+  </article>;
+})}</div>
+
+<style>
+  .journal-thumbnail :global(img){display:block;width:100%;height:100%;object-fit:cover}
+  :global(.journal-fallback-icon){width:38px;height:38px}
+</style>
