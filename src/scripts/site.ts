@@ -3,6 +3,40 @@ import { EMAIL, contactTypes, type Lang } from '../data/site';
 
 const lang: Lang = document.documentElement.lang === 'en' ? 'en' : 'ko';
 const ko = lang === 'ko';
+document.querySelectorAll<HTMLElement>('[data-assessment-demo]').forEach(demo => {
+  const tabs = [...demo.querySelectorAll<HTMLAnchorElement>('[data-assessment-tab]')];
+  const panels = [...demo.querySelectorAll<HTMLElement>('[data-assessment-panel]')];
+  if (!tabs.length || tabs.length !== panels.length) return;
+  demo.querySelector('.assessment-tabs')?.setAttribute('role', 'tablist');
+  function select(index: number, focus = false) {
+    tabs.forEach((tab, i) => {
+      tab.setAttribute('aria-selected', String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+      panels[i].hidden = i !== index;
+    });
+    if (focus) tabs[index].focus();
+  }
+  tabs.forEach((tab, index) => {
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-controls', panels[index].id);
+    panels[index].setAttribute('role', 'tabpanel');
+    panels[index].setAttribute('aria-labelledby', tab.id);
+    panels[index].tabIndex = 0;
+    tab.addEventListener('click', event => { event.preventDefault(); select(index); });
+    tab.addEventListener('keydown', event => {
+      const targets: Record<string, number> = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index + tabs.length - 1) % tabs.length, Home: 0, End: tabs.length - 1, ' ': index };
+      if (event.key in targets) { event.preventDefault(); select(targets[event.key], true); }
+    });
+  });
+  function selectHash() {
+    const index = panels.findIndex(panel => '#' + panel.id === location.hash);
+    if (index >= 0) select(index);
+  }
+  select(0);
+  selectHash();
+  window.addEventListener('hashchange', selectHash);
+});
+
 const reportDialog = document.querySelector<HTMLDialogElement>('[data-report-dialog]');
 if (reportDialog && typeof reportDialog.showModal === 'function') {
   const scroll = reportDialog.querySelector<HTMLElement>('[data-report-scroll]')!;

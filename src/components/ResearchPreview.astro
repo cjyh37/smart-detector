@@ -1,0 +1,15 @@
+---
+import Icon from './Icon.astro';
+import { path, type Lang } from '../data/site';
+const { lang } = Astro.props as { lang: Lang };
+const ko = lang === 'ko';
+---
+<section class="section research-preview" aria-labelledby="research-preview-title">
+  <div class="container">
+    <div class="section-heading"><h2 id="research-preview-title">{ko ? '시험을 지키고,\n배움을 증명하는 기술.' : 'Protecting assessment.\nMaking learning visible.'}</h2><p>{ko ? '무료 앱에서 시작한 다음 걸음.\n전용 디바이스와 새로운 평가 플랫폼을 준비합니다.' : 'The next step beyond the free app.\nDedicated devices and a new assessment platform.'}</p></div>
+    <div class="research-preview-layout">
+      <figure><a href={path(lang, 'research') + '#hardware'} aria-label={ko ? '전용 디바이스 제품 비전 보기' : 'Explore the dedicated device vision'}><img src="/assets/research/dedicated-device-concept.png" width="1536" height="1024" loading="lazy" alt={ko ? '시험실 책상에 놓인 파란색과 흰색 전용 무선 관측 디바이스 콘셉트' : 'A blue and white dedicated wireless observation device concept on an exam-room desk'}/></a><figcaption>{ko ? '전용 디바이스 콘셉트 이미지' : 'Dedicated device concept rendering'}</figcaption></figure>
+      <div class="research-preview-products"><article><h3>{ko ? '시험 공간을 살피는\n전용 디바이스' : 'Dedicated devices\nfor the assessment room'}</h3><p>{ko ? '수신부터 연속 관측, 현장 확인과 보고서까지. 학교와 기관의 시험 운영에 맞춘 관측 도구를 설계합니다.' : 'From signal reception to continuous observation, on-site checks and reporting. Purpose-built tools for schools and assessment teams.'}</p><a class="text-link" href={path(lang, 'research') + '#hardware'}>{ko ? '디바이스 비전 보기' : 'Explore the device vision'}<Icon name="arrow"/></a></article><article><h3>{ko ? 'AI와 함께한 생각을 평가하는\n학습 과정 플랫폼' : 'A platform for assessing\nlearning with AI'}</h3><p>{ko ? '학생의 질문·판단·개선을 자동으로 기록하고 점수의 근거로 연결합니다. 짧은 구술로 고유한 기여를 확인하는 평가를 만듭니다.' : 'Connect students’ questions, decisions and revisions to evidence-based scoring, with a brief oral check of their own contribution.'}</p><a class="text-link" href={path(lang, 'research') + '#learning-platform'}>{ko ? '플랫폼 설계 살펴보기' : 'Explore the platform concept'}<Icon name="arrow"/></a></article></div>
+    </div>
+  </div>
+</section>

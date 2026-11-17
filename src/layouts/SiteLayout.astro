@@ -4,6 +4,7 @@ import PlayButton from '../components/PlayButton.astro';
 import { SITE, EMAIL, PRIVACY, labels, path, type Lang, type PageKey } from '../data/site';
 import '../styles/global.css';
 import '../styles/media.css';
+import '../styles/research-vision.css';
 interface Props { lang: Lang; page: PageKey; title: string; description: string; slug?: string; article?: boolean; noindex?: boolean; }
 const { lang, page, title, description, slug = '', article = false, noindex = false } = Astro.props;
 const t = labels[lang];
