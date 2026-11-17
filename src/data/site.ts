@@ -7,8 +7,8 @@ export const PRIVACY = 'https://cjyh37.github.io/privacy-policy/smart-detector/'
 export const pageKeys: PageKey[] = ['home', 'app', 'research', 'institutions', 'journal', 'about', 'contact'];
 // Update only when the page's content, links or structured data materially change.
 export const pageUpdatedAt: Record<PageKey, string> = {
-  home: '2026-11-17', app: '2026-11-17', research: '2026-11-17',
-  institutions: '2026-11-17', journal: '2026-11-17', about: '2026-11-17', contact: '2026-11-17',
+  home: '2026-11-18', app: '2026-11-17', research: '2026-11-18',
+  institutions: '2026-11-18', journal: '2026-11-17', about: '2026-11-17', contact: '2026-11-17',
 };
 export function path(lang: Lang, page = '', slug = '') {
   const parts = [lang === 'en' ? 'en' : '', page === 'home' ? '' : page, slug].filter(Boolean);

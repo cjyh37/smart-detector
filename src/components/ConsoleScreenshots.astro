@@ -1,0 +1,160 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { Lang } from '../data/site';
+import overview from '../assets/console/overview.png';
+import workspace from '../assets/console/workspace.png';
+import review from '../assets/console/room-review.png';
+import connection from '../assets/console/connection.png';
+
+const { lang, variant = 'gallery' } = Astro.props as { lang: Lang; variant?: 'overview' | 'gallery' };
+const ko = lang === 'ko';
+const compact = variant === 'overview';
+const prefix = `console-${variant}`;
+const screens = [
+  {
+    id: 'overview', image: compact ? workspace : overview,
+    title: ko ? '시험장 현황' : 'Venue overview',
+    description: ko ? '시험장별 연결 상태와 새 신호를 확인합니다' : 'Check connections and new signals by venue',
+    alt: ko ? '시험장 목록, 시험실별 수신 상태, 선택한 시험실의 무선신호를 함께 보여주는 스마트 디텍터 관제 화면' : 'Smart Detector console with venues, room connection status and wireless signals in the selected room. Korean interface.',
+  },
+  {
+    id: 'review', image: review,
+    title: ko ? '현장 확인 기록' : 'On-site records',
+    description: ko ? '확인한 기기와 조치 내용을 기록합니다' : 'Record device checks and actions taken',
+    alt: ko ? '스마트안경 신호의 확인 결과와 현장 조치 내용을 입력하는 관제 화면' : 'On-site record form for a smart-glasses signal, with a check result and proctor’s note. Korean interface.',
+  },
+  {
+    id: 'connection', image: connection,
+    title: ko ? '기기 연결 상태' : 'Device status',
+    description: ko ? '배터리와 마지막 수신 시각을 확인합니다' : 'Check battery level and last reception time',
+    alt: ko ? '연결이 끊긴 경기 제1시험장 제7시험실과 해당 기기의 배터리, 마지막 수신 시각을 표시한 관제 화면' : 'Connection status for Room 7 at Gyeonggi Venue 1, showing the disconnected device and its battery and last reception time. Korean interface.',
+  },
+];
+const visibleScreens = compact ? screens.slice(0, 1) : screens;
+---
+<div class:list={['console-showcase', compact && 'console-showcase-home']} data-console-showcase>
+  <div class="console-panels" role={compact ? undefined : 'group'} aria-label={compact ? undefined : ko ? '기관용 관제 화면 3장' : 'Three institution console screens'} tabindex={compact ? undefined : 0}>
+    {visibleScreens.map(screen => <figure id={`${prefix}-${screen.id}`} class="console-panel" data-console-panel>
+      <a class="console-image-link" href={screen.image.src} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대 보기' : 'Enlarge screen'}`}>
+        <Image src={screen.image} width={compact ? 800 : 400} widths={[400, 640, 960, 1440]} sizes={compact ? '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 58vw, 760px' : '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 30vw, 400px'} format="webp" quality={88} alt={screen.alt} loading="lazy" decoding="async"/>
+      </a>
+      <figcaption class="console-caption">
+        <div class="console-caption-heading">
+          {compact ? <span>{ko ? '시험장 중앙 관제' : 'Central monitoring'}</span> : <h3>{screen.title}</h3>}
+          <a class="text-link console-enlarge" href={screen.image.src} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대' : 'Enlarge screen'}`}><Icon name="expand"/>{ko ? '확대' : 'Enlarge'}</a>
+        </div>
+        {!compact && <p>{screen.description}</p>}
+      </figcaption>
+    </figure>)}
+  </div>
+  {!compact && <p class="console-scroll-hint">{ko ? '화면 3장 · 옆으로 넘겨 보기' : '3 screens · Scroll to see more'}<Icon name="arrow"/></p>}
+
+  <dialog class="console-viewer" data-console-viewer aria-labelledby={`${prefix}-viewer-title`}>
+    <div class="console-viewer-toolbar">
+      <h2 id={`${prefix}-viewer-title`} data-console-viewer-title>{ko ? '기관용 관제 화면' : 'Institution console'}</h2>
+      <div class="console-viewer-actions">
+        <a data-console-original target="_blank" rel="noopener">{ko ? '원본 열기' : 'Open original'}<Icon name="external"/></a>
+        <button type="button" data-console-zoom data-zoom-label={ko ? '크게 보기' : 'Zoom in'} data-fit-label={ko ? '화면에 맞추기' : 'Fit to screen'} aria-pressed="false">{ko ? '크게 보기' : 'Zoom in'}</button>
+        <button class="console-close" type="button" data-console-close autofocus aria-label={ko ? '확대 화면 닫기' : 'Close enlarged screen'}><Icon name="close"/></button>
+      </div>
+    </div>
+    <div class="console-viewer-stage" data-console-stage tabindex="0" aria-label={ko ? '관제 화면. 크게 보기에서 스크롤해 내용을 살펴보세요.' : 'Console screenshot. Scroll to explore after zooming in.'}></div>
+  </dialog>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-console-showcase]').forEach(showcase => {
+    const dialog = showcase.querySelector<HTMLDialogElement>('[data-console-viewer]')!;
+    const stage = showcase.querySelector<HTMLElement>('[data-console-stage]')!;
+    const title = showcase.querySelector<HTMLElement>('[data-console-viewer-title]')!;
+    const original = showcase.querySelector<HTMLAnchorElement>('[data-console-original]')!;
+    const zoom = showcase.querySelector<HTMLButtonElement>('[data-console-zoom]')!;
+    const close = showcase.querySelector<HTMLButtonElement>('[data-console-close]')!;
+    let opener: HTMLAnchorElement | null = null;
+    let previousOverflow = '';
+    const setZoom = (enlarged: boolean) => {
+      stage.classList.toggle('is-zoomed', enlarged);
+      zoom.setAttribute('aria-pressed', String(enlarged));
+      zoom.textContent = enlarged ? zoom.dataset.fitLabel! : zoom.dataset.zoomLabel!;
+      stage.scrollTop = stage.scrollLeft = 0;
+    };
+    showcase.querySelectorAll<HTMLAnchorElement>('[data-console-open]').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || !dialog.showModal) return;
+        event.preventDefault();
+        opener = link;
+        title.textContent = link.dataset.title!;
+        original.href = link.href;
+        const screenshot = new window.Image(Number(link.dataset.width), Number(link.dataset.height));
+        screenshot.alt = link.dataset.alt!;
+        screenshot.decoding = 'async';
+        screenshot.src = link.href;
+        stage.replaceChildren(screenshot);
+        setZoom(false);
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        dialog.showModal();
+      });
+    });
+    zoom.addEventListener('click', () => setZoom(zoom.getAttribute('aria-pressed') !== 'true'));
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => {
+      if (event.target !== dialog) return;
+      const bounds = dialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.style.overflow = previousOverflow;
+      opener?.focus({ preventScroll: true });
+    });
+  });
+</script>
+
+<style>
+  .console-showcase { min-width: 0; }
+  .console-panels { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .console-showcase-home .console-panels { display: block; }
+  .console-panel { min-width: 0; }
+  .console-panels a:focus-visible { outline-offset: -3px; }
+  .console-image-link { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--soft); cursor: zoom-in; }
+  .console-image-link:hover { border-color: #94add1; }
+  .console-image-link :global(img) { display: block; width: 100%; height: auto; }
+  .console-caption { padding-top: 10px; }
+  .console-caption-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .console-caption h3 { font-size: 18px; }
+  .console-caption-heading > span { font-size: 15px; color: var(--muted); }
+  .console-caption p { font-size: 15px; line-height: 1.65; }
+  .console-enlarge { flex-shrink: 0; white-space: nowrap; gap: 6px; font-size: 14px; }
+  .console-enlarge :global(.icon) { width: 16px; height: 16px; }
+  .console-scroll-hint { display: none; }
+  .console-viewer { width: min(96vw, 1600px); height: min(92dvh, 1100px); max-width: none; max-height: none; margin: auto; padding: 0; border: 1px solid var(--line); border-radius: var(--radius); color: var(--ink); background: var(--white); }
+  .console-viewer[open] { display: flex; flex-direction: column; }
+  .console-viewer::backdrop { background: rgb(15 28 47 / .72); }
+  .console-viewer-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 12px 16px 12px 24px; border-bottom: 1px solid var(--line); }
+  .console-viewer-toolbar h2 { font-size: 17px; letter-spacing: -.02em; }
+  .console-viewer-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
+  .console-viewer-actions a, .console-viewer-actions button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 12px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+  .console-viewer-actions a:hover, .console-viewer-actions button:hover { background: var(--soft); }
+  .console-viewer-actions :global(.icon) { width: 18px; height: 18px; }
+  .console-viewer-actions .console-close { width: 44px; padding: 8px; }
+  .console-viewer-stage { flex: 1; min-height: 0; padding: 16px; overflow: auto; background: var(--soft); overscroll-behavior: contain; scrollbar-color: #98aac5 var(--soft); }
+  .console-viewer-stage :global(img) { display: block; width: 100%; height: 100%; max-width: none; object-fit: contain; }
+  .console-viewer-stage.is-zoomed :global(img) { width: auto; height: auto; }
+  @media (max-width: 680px) {
+    .console-panels { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 100%; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; padding-bottom: 8px; scrollbar-width: thin; scrollbar-color: #98aac5 var(--soft); }
+    .console-panel { scroll-snap-align: start; }
+    .console-showcase-home .console-panels { overflow: visible; padding-bottom: 0; }
+    .console-caption { padding-top: 6px; }
+    .console-caption h3 { font-size: 17px; }
+    .console-scroll-hint { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 14px; }
+    .console-scroll-hint :global(.icon) { width: 17px; height: 17px; }
+    .console-image-link { border-radius: 8px; }
+    .console-viewer { width: calc(100vw - 16px); height: 92dvh; }
+    .console-viewer-toolbar { flex-wrap: wrap; gap: 4px; padding: 12px; }
+    .console-viewer-toolbar h2 { font-size: 16px; }
+    .console-viewer-actions { width: 100%; }
+    .console-viewer-actions .console-close { margin-left: auto; }
+    .console-viewer-stage { padding: 8px; }
+  }
+</style>
