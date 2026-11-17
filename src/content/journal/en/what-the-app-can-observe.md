@@ -1,39 +1,35 @@
 ---
 lang: en
 slug: what-the-app-can-observe
-title: "What Smart Detector can and cannot observe"
-description: "A wireless signal is a clue for an on-site check. Here is how to understand the scope of the app’s observations."
+title: "How to read wireless signals in the app"
+description: "What to check when a new signal appears, and what a signal alone cannot tell you."
 category: guide
 date: "2026-11-17"
 readTime: "4 min read"
 order: 2
 ---
 
-Smart Detector is a proctoring support app that checks wireless signals a phone can receive. Before using it, it helps to distinguish “finding a device” from “observing a signal.”
+A signal on the Smart Detector screen means your phone received that signal. It does not mean the app has identified the device’s location or owner.
 
-## What the app helps you do
+The app separates signals received before an exam from those first received after it starts. You can check a selected signal’s strength and record your own findings and notes.
 
-You can check baseline signals while preparing an exam, then look at signals newly received after the start. You can refer to a selected signal’s received strength and keep records of on-site checks and notes.
+## When a new signal appears
 
-This information helps a proctor examine situations that may need attention. Changes in signals should be considered in the context of the actual setting, rather than treated as an immediate conclusion.
+Check it in the context of the room and your institution’s proctoring procedures. Signal strength alone cannot tell you an exact distance or seat. A signal also cannot establish who owns a device, whether it is recording audio or video, or whether cheating has occurred.
 
-## When an observation is not guaranteed
+Keep the received signal separate from what you confirmed yourself. For example, if a signal appears but you cannot find the device, record that outcome so it is clear to anyone reviewing the report later.
 
-A powered-on device may not emit a signal that the phone can observe. Results depend on communication methods, connection states, the phone’s wireless capabilities and operating system conditions. What matters is whether an observable signal is present, rather than the device’s power status alone. The app cannot establish the presence of a device that emits no wireless signal the phone can observe.
+## When no signal appears
 
-Standard Android Wi-Fi scanning provides information about access points visible to the phone. Requests are subject to permission and frequency restrictions; scans may fail or return results that are not current. It should not be interpreted as visibility into all nearby wireless communication. See the [official Android Wi-Fi scanning documentation](https://developer.android.com/develop/connectivity/wifi/wifi-scan) for details.
+A device can be powered on without sending a signal your phone can receive. Results depend on its communication method and connection state, as well as the phone’s wireless capabilities and operating system. No visible signal does not necessarily mean no device is present.
 
-## What a visible signal does not establish
+Standard Android Wi-Fi scanning returns information about access points visible to the phone. Permission and scan frequency restrictions apply. A scan may fail or return older results, so it does not show every nearby wireless communication. See the [official Android Wi-Fi scanning documentation](https://developer.android.com/develop/connectivity/wifi/wifi-scan) for the conditions that apply.
 
-Signal strength alone cannot establish an exact distance or seat. An observed signal also does not establish who owns the device, whether video or audio recording is taking place, or whether misconduct has occurred.
+## Before the exam
 
-Rather than making these conclusions automatically, the app helps keep observed signals distinct from facts confirmed on site. When a new signal appears, consider the assessment setting and your operating procedures together.
+- Follow the app’s permission instructions and check that signals are received.
+- Try the steps from measuring an empty room to checking new signals and recording notes.
+- Follow the instructions and reception status shown in the released app.
+- Record received signals separately from findings you confirmed yourself.
 
-## Before your first use
-
-- Check the relevant permissions and reception status before a real assessment.
-- Familiarize yourself with preparation, new-signal review, on-site checks and records.
-- Follow the reception status and instructions in the currently distributed app.
-- Keep observations distinct from facts you have confirmed.
-
-Smart Detector aims to communicate what was observed and what could not be established, rather than promise to find every device. Explore the [actual app screens and workflow](/en/app/#how-it-works) alongside this guide.
+See the [interface designs and usage steps](/en/app/#how-it-works) for a walkthrough.

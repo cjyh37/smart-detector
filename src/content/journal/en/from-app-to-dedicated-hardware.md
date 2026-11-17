@@ -1,36 +1,32 @@
 ---
 lang: en
 slug: from-app-to-dedicated-hardware
-title: "From an app to dedicated hardware: the next questions"
-description: "The questions we want to explore as we prepare dedicated device research. Hardware is currently at the concept and preparation stage."
+title: "Planning a dedicated device for exam rooms"
+description: "We are planning hardware that records signal changes during exams and helps proctors carry out checks. Here is what we need to investigate."
 category: research
 date: "2026-11-17"
 readTime: "3 min read"
 order: 3
 ---
 
-Smart Detector started with a phone app. While helping people observe wireless signals a phone can receive, we have been thinking about the broader scope of observation tools needed in assessment environments.
+A phone app requires no separate equipment, but the signals it can receive depend on the phone and operating system. Our next hardware product is intended for schools and institutions to place in an exam room.
 
-The next step we are preparing is dedicated device research. The starting point is the problem in the field, before a chip name or a product shape. **Hardware is currently at the concept and research preparation stage. Prototype performance and release dates have not been established.**
+The goal is to record wireless signal changes throughout an exam and help proctors find the items that need checking. We are at the concept and research preparation stage, considering the receiver and how people would use the device.
 
-## How reliably can observation continue?
+## Reception throughout the exam
 
-If information stops arriving or is delayed during an assessment, the operator needs to understand that state. For dedicated devices, we want to examine the conditions for sustained observation and the intervals in which observations are missed, alongside moments of successful reception.
+We plan to record a pre-exam baseline and track changes during the session. If reception stops or is delayed, the operator needs to know. The record should show both the intervals with reception and the gaps.
 
-## Under which conditions do results change?
+Wireless chips and development boards, including the ESP32 family, are candidates for research. We will compare actual reception results before choosing components. Results can vary with a device’s communication method, connection state and surroundings, so we plan to repeat tests under different conditions and record both received and missed signals.
 
-Even for the same device, results can differ with communication methods, connection states and the surrounding environment. We plan to record both successful and missed observations, and to examine what changes when a test is repeated under the same conditions.
+Any improvement over the app needs to be measured under comparable conditions. We will describe detection range and accuracy once we have test results.
 
-Claiming an improvement over the app would require comparable conditions and actual results. Research plans and validated performance need to remain distinct.
+## A screen and report proctors can use
 
-## Which information helps the proctor?
+Proctors need to find signals that warrant a check and record what they confirmed. A long list of names and numbers is difficult to use if it leaves them unsure what to look at.
 
-Showing more information does not automatically make work easier. A useful tool should explain changes worth checking and let an operator record what they actually confirmed. We intend to consider clarity and operational workload alongside wireless capabilities.
+We plan to design the pre-exam baseline, new-signal checks, notes and report as one workflow. Alongside reception quality, we will examine whether the instructions are clear and how much time it takes to keep records while supervising an exam.
 
-Wireless chips and development boards, including the ESP32 family, are candidates for investigation. Using a particular chip does not, by itself, establish more precise detection. Capabilities and limits need evidence from actual observations.
+Release dates and pricing have not been set. When research starts, we will publish test conditions, results, missed signals and areas for improvement in the journal.
 
-## What remains open, and what we plan to record
-
-Release dates, detection distance, accuracy and pricing have not been established. As research progresses, we plan to explain what was tested, under which conditions, and with which results. Missed observations and remaining questions belong in that record too.
-
-We welcome questions from schools, exam and interview teams, and people with experience in wireless technology or device development. Read our [research direction](/en/research/) and tell us about a setting or topic we could explore together.
+We welcome input from schools, exam and interview teams, and people with wireless device development experience. See our [development plans](/en/research/) and tell us which features you need or how we could work together.

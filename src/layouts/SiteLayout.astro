@@ -63,13 +63,13 @@ const schema = { '@context': 'https://schema.org', '@graph': [
     <main id="main"><slot/></main>
     <footer class="site-footer">
       <div class="container footer-top">
-        <div class="footer-purpose"><a class="brand" href={path(lang)}><img src="/assets/icon.svg" alt="" width="32" height="32"/>{t.brand}</a><p>{lang === 'ko' ? '공정한 평가를 위한 기술.\n앱에서 시작해, 더 나은 관측으로.' : 'Technology for fairer assessments.\nStarting with an app. Looking further.'}</p></div>
+        <div class="footer-purpose"><a class="brand" href={path(lang)}><img src="/assets/icon.svg" alt="" width="32" height="32"/>{t.brand}</a><p>{lang === 'ko' ? '시험 감독과 학습 평가를 돕는 도구를 만듭니다.' : 'Tools for exam proctors and instructors.'}</p></div>
         <div class="footer-links"><div><strong>{lang === 'ko' ? '살펴보기' : 'Explore'}</strong>{(['app', 'research', 'institutions', 'journal'] as PageKey[]).map(key => <a href={path(lang, key)}>{t[key]}</a>)}</div><div><strong>{lang === 'ko' ? '함께하기' : 'Connect'}</strong><a href={path(lang, 'about')}>{t.about}</a><a href={path(lang, 'contact') + '?type=institution'}>{lang === 'ko' ? '기관 도입 문의' : 'Institutional inquiries'}</a><a href={path(lang, 'contact') + '?type=partnership'}>{lang === 'ko' ? '제휴 문의' : 'Partnerships'}</a><a href={path(lang, 'contact') + '?type=investment'}>{lang === 'ko' ? '투자 문의' : 'Investment'}</a></div></div>
-        <div class="footer-contact"><span>{lang === 'ko' ? '대화를 시작해 주세요.' : 'Start a conversation.'}</span><a href={`mailto:${EMAIL}`}>{EMAIL}<Icon name="arrow"/></a><button class="text-link" type="button" data-share><Icon name="share"/>{t.share}</button></div>
+        <div class="footer-contact"><span>{lang === 'ko' ? '기관 도입·제휴·투자 문의' : 'Institutional, partnership and investment inquiries'}</span><a href={`mailto:${EMAIL}`}>{EMAIL}<Icon name="arrow"/></a><button class="text-link" type="button" data-share><Icon name="share"/>{t.share}</button></div>
       </div>
       <div class="container footer-bottom"><span>© {new Date().getFullYear()} Smart Detector</span><a href={PRIVACY}>{t.privacy}</a><span>{lang === 'ko' ? 'Android 무료 제공 · iOS 개발 중' : 'Free on Android · iOS in development'}</span></div>
     </footer>
-    {(page === 'home' || page === 'app') && <div class="mobile-install"><span>{lang === 'ko' ? '다음 시험, 앱으로 시작하세요.' : 'Start with the free Android app.'}</span><PlayButton lang={lang} placement="mobile-bar" small/></div>}
+    {(page === 'home' || page === 'app') && <div class="mobile-install"><span>{lang === 'ko' ? 'Android에서 무료로 사용하세요.' : 'Free on Android'}</span><PlayButton lang={lang} placement="mobile-bar" small/></div>}
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
     <script>import '../scripts/site';</script>
   </body>

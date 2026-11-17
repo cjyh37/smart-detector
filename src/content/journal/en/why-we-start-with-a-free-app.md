@@ -1,34 +1,28 @@
 ---
 lang: en
 slug: why-we-start-with-a-free-app
-title: "Why we begin with a free app"
-description: "We started with a free Android app so more people can try a supporting tool for fairer assessments in their own setting."
+title: "Why Smart Detector is free"
+description: "Teachers and proctors can try the app without paying, then decide whether it helps with the exams they run."
 category: product
 date: "2026-11-17"
 readTime: "3 min read"
 order: 1
 ---
 
-Exams and interviews are opportunities to assess preparation and ability. The people running them oversee the process while also working to give participants consistent conditions.
+Our first product is an Android app that checks wireless signals a phone can receive. It uses pre-exam signals as a baseline, shows new signals during the exam and lets proctors record their findings.
 
-Smart Detector began with the aim of supporting that work. Our first product is a free Android app that checks wireless signals the phone can receive. It helps proctors establish a baseline, notice newly received signals after the start, and organize their on-site checks and notes.
+The app is free. We want teachers and proctors to try it in their own setting before deciding whether it is useful to them.
 
-## Making it easier to try
+## Feedback from people using the app
 
-We began with a free app so more people could experience it for themselves. A teacher or proctor considering installation can explore the workflow and decide whether it fits the environment they work in.
+Instructions that seem clear during development may be difficult to follow while supervising an exam. Using the app can reveal whether it is easy to find a signal that needs checking or whether an important detail is missing from the record.
 
-We want to understand whether our instructions are clear, where guidance is missing, and which information assessment operators actually need. The assumptions made while building a product can differ from the experience of using it.
+Please tell us about confusing steps or features you need. We use voluntary feedback to inform app improvements and plans for dedicated hardware. We do not currently provide a service that automatically collects signal or inspection records for research.
 
-## Keeping observations distinct from judgment
+The signals shown in the app are information for a proctor to check. A signal does not prove cheating, and an absence of signals does not prove that an exam room is free of problems. We explain the app’s limits so people can use it within their institution’s proctoring procedures and make their own decisions.
 
-The app supports a proctor’s judgment. A signal appearing does not establish misconduct, and the absence of a signal does not establish that the entire assessment environment is free of issues.
+## Our business plans beyond the app
 
-Explaining both what the app can observe and where its limits lie is part of the product. Information provides a starting point for a contextual check. The actual assessment and judgment remain with people working within their procedures.
+We plan to supply dedicated devices to schools and institutions. We are preparing a device that records wireless signals throughout an exam, alongside a platform for assessing students’ work with AI. Both are in concept and research preparation. We will explain their capabilities and scope once they have been tested.
 
-## Letting questions guide the next tool
-
-You can share feedback voluntarily after using the app. We do not currently provide a service that automatically collects signal observations or inspection records for research. We want to hear which situations the app helped with and which parts were difficult to understand.
-
-Our longer-term direction is to explore dedicated devices for schools and institutions. Hardware is currently at the concept and research preparation stage. Once evidence and products are ready, we will explain their capabilities and scope.
-
-What is available now is the free Android app, with a Korean-language interface. Start by exploring [what the app can do](/en/app/). Experiences and questions from the field can help us decide which problem to tackle next.
+For now, [see what the app can do](/en/app/) and try it before your next exam. The interface is in Korean. If you use it, we would like to hear which parts helped and what needs improving.

@@ -205,7 +205,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-share]').forEach(button => {
       catch (error) { if (error instanceof Error && error.name === 'AbortError') return; }
     }
     try { await copyText(url); toast(ko ? '공유할 링크를 복사했습니다.' : 'Link copied.'); document.dispatchEvent(new CustomEvent('smart-detector:share')); }
-    catch { toast(ko ? '자동 복사를 사용할 수 없습니다. 주소창의 링크를 복사해 주세요.' : 'Automatic copying is unavailable. Copy the link from your address bar.'); }
+    catch { toast(ko ? '링크를 복사하지 못했습니다. 주소창에서 직접 복사해 주세요.' : 'Could not copy the link. Copy it from your address bar.'); }
   });
 });
 
@@ -233,7 +233,7 @@ if (form) {
     if (!message.value.trim()) { message.setCustomValidity(ko ? '문의 내용을 입력해 주세요.' : 'Please enter your message.'); message.reportValidity(); return; }
     const inquiry = current();
     if (!inquiry.canOpen) {
-      status.textContent = ko ? '긴 문의는 ‘내용 복사’를 누른 뒤 위 이메일 주소로 보내주세요. 작성 내용은 그대로 유지됩니다.' : 'For a longer inquiry, copy the message and send it to the email address above. Your text is preserved here.';
+      status.textContent = ko ? '내용이 길어 메일 앱으로 바로 옮길 수 없습니다. ‘내용 복사’를 눌러 이메일에 붙여넣어 주세요. 작성한 내용은 이 화면에 남아 있습니다.' : 'This message is too long to open directly in an email app. Use Copy message, then paste it into an email. Your text is still here.';
       return;
     }
     status.textContent = ko ? '메일 앱이 열리면 내용을 확인한 뒤 직접 발송해 주세요. 열리지 않으면 ‘내용 복사’를 이용해 주세요.' : 'If your email app opens, review and send the message there. If it does not open, use Copy message.';
@@ -245,10 +245,10 @@ if (form) {
     if (!message.value.trim()) { message.focus(); status.textContent = ko ? '복사할 문의 내용을 먼저 입력해 주세요.' : 'Enter a message before copying it.'; return; }
     try {
       await copyText(`${inquiry.subject}\n\n${inquiry.body}`);
-      status.textContent = ko ? '제목과 내용을 복사했습니다. 이메일에 붙여넣고 직접 발송해 주세요.' : 'Subject and message copied. Paste them into an email and send it yourself.';
+      status.textContent = ko ? '제목과 내용을 복사했습니다. 이메일에 붙여넣은 뒤 보내주세요.' : 'Subject and message copied. Paste them into an email, then send it.';
     } catch {
       message.focus(); message.select();
-      status.textContent = ko ? '자동 복사를 사용할 수 없습니다. 선택된 내용을 직접 복사해 주세요.' : 'Automatic copying is unavailable. Copy the selected text manually.';
+      status.textContent = ko ? '복사하지 못했습니다. 선택된 내용을 직접 복사해 주세요.' : 'Could not copy the message. Copy the selected text manually.';
     }
   });
   form.hidden = false;

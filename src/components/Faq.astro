@@ -3,17 +3,17 @@ import Icon from './Icon.astro';
 import { path, PRIVACY, type Lang } from '../data/site';
 const { lang, full = false } = Astro.props as { lang: Lang; full?: boolean };
 const items = lang === 'ko' ? [
-  ['모든 스마트 글래스·이어폰·카메라를 찾을 수 있나요?', '아니요. 휴대폰이 수신할 수 있는 무선신호를 확인하는 도구입니다. 기기의 통신 방식과 연결 상태, 휴대폰과 운영체제 조건에 따라 관측 결과가 달라집니다. 신호를 보내지 않는 기기는 확인할 수 없습니다.'],
-  ['신호가 나타나면 부정행위가 있었다는 뜻인가요?', '아닙니다. 무선신호는 현장 확인을 돕는 단서입니다. 신호만으로 소유자, 좌석, 촬영·녹음 여부 또는 부정행위를 확정하지 않습니다. 아무 신호가 없다고 모든 기기가 없다고 판단할 수도 없습니다.'],
+  ['모든 스마트 글래스·이어폰·카메라를 찾을 수 있나요?', '모든 기기를 찾을 수 있는 것은 아닙니다. 휴대폰이 수신할 수 있는 무선신호만 표시하며, 기기의 통신 방식과 연결 상태, 휴대폰과 운영체제에 따라 결과가 달라집니다. 수신 가능한 신호를 보내지 않는 기기는 확인할 수 없습니다.'],
+  ['신호가 나타나면 부정행위가 있었다는 뜻인가요?', '아닙니다. 신호만으로는 기기의 소유자나 좌석, 촬영·녹음 여부를 알 수 없습니다. 부정행위 여부는 현장에서 확인해야 하며, 신호가 없다고 기기가 없다고 판단해서도 안 됩니다.'],
   ['무료인가요? iPhone에서도 쓸 수 있나요?', '현재 Android 앱은 Google Play에서 무료로 제공합니다. iOS는 개발 중이며, 아직 다운로드 가능한 iOS 앱은 없습니다.'],
-  ['권한은 어떻게 준비하나요?', '무선신호 검색에는 Android 버전에 따라 주변 기기·위치 등 관련 권한과 설정이 필요할 수 있습니다. 앱에 표시되는 권한 안내를 따라 설정한 뒤, 실제 평가 전에 사용 흐름과 수신 상태를 확인해 주세요.'],
-  ['전용 하드웨어를 지금 도입할 수 있나요?', '전용 하드웨어는 구상·연구 준비 단계입니다. 현재 판매하거나 성능·가격·출시일이 확정된 제품은 없습니다. 평가환경에 관한 의견과 연구 협력 문의를 받고 있습니다.'],
+  ['어떤 권한을 허용해야 하나요?', 'Android 버전에 따라 주변 기기나 위치 권한 등이 필요할 수 있습니다. 앱의 권한 안내에 따라 설정한 뒤, 시험 전에 신호가 수신되는지 확인해 주세요.'],
+  ['전용 하드웨어를 지금 도입할 수 있나요?', '아직 구상·연구 준비 단계로, 판매 중인 기기는 없습니다. 성능과 가격, 출시일은 정해지는 대로 안내하겠습니다. 필요한 기능이나 연구 협력 제안은 문의로 보내주세요.'],
 ] : [
-  ['Can it find every pair of smart glasses, earphone or camera?', 'No. It checks wireless signals the phone can receive. Results depend on the communication method, connection state, phone and operating system. It cannot identify the presence of a device that is not emitting an observable signal.'],
-  ['Does a signal mean cheating has occurred?', 'No. A wireless signal is a prompt to check the environment. It does not establish an owner, seat, recording activity or misconduct. The absence of a signal does not establish the absence of all devices.'],
+  ['Can it find all smart glasses, earphones and cameras?', 'No. It checks wireless signals the phone can receive. Results depend on the communication method, connection state, phone and operating system. It cannot identify the presence of a device that is not emitting an observable signal.'],
+  ['Does a signal mean someone is cheating?', 'No. A signal does not identify the owner or seat, show whether recording is taking place or prove cheating. It needs an on-site check. Seeing no signals does not necessarily mean no devices are present.'],
   ['Is it free? Does it work on iPhone?', 'The Android app is currently free on Google Play. iOS is in development and is not yet available. The Android app interface is currently in Korean; store availability can vary by region.'],
-  ['Which permissions should I prepare?', 'Depending on the Android version, wireless scanning may require nearby-device or location permissions and related settings. Follow the app’s permission instructions, and check the workflow and reception status before a real assessment.'],
-  ['Can we purchase dedicated hardware now?', 'Hardware is at the concept and research preparation stage. No device is currently available for purchase, and performance, pricing and release dates have not been established. We welcome conversations about assessment needs and research partnerships.'],
+  ['Which permissions does the app need?', 'Depending on your Android version, scanning may need nearby-device or location permissions. Follow the instructions in the app and check that it receives signals before an exam.'],
+  ['Can we purchase dedicated hardware now?', 'Hardware is still in concept and research preparation, so no device is on sale yet. We will publish performance, pricing and release details when they are set. You can contact us with feature requests or research proposals.'],
 ];
 ---
-<section class="section" id="questions"><div class="container faq-layout"><div><h2>{lang === 'ko' ? '사용 전에\n궁금한 점.' : 'Before you\nget started.'}</h2><a class="text-link" href={path(lang, 'contact') + '?type=support'}>{lang === 'ko' ? '다른 질문이 있나요?' : 'Have another question?'}<Icon name="arrow"/></a></div><div class="faq-list">{items.slice(0, full ? items.length : 3).map(([question, answer]) => <details><summary>{question}<Icon name="plus"/></summary><p>{answer}</p></details>)}<a class="text-link privacy-link" href={PRIVACY}>{lang === 'ko' ? '개인정보처리방침 확인' : 'Read our privacy policy'}<Icon name="external"/></a></div></div></section>
+<section class="section" id="questions"><div class="container faq-layout"><div><h2>{lang === 'ko' ? '자주 묻는 질문' : 'Frequently asked questions'}</h2><a class="text-link" href={path(lang, 'contact') + '?type=support'}>{lang === 'ko' ? '다른 질문이 있나요?' : 'Have another question?'}<Icon name="arrow"/></a></div><div class="faq-list">{items.slice(0, full ? items.length : 3).map(([question, answer]) => <details><summary>{question}<Icon name="plus"/></summary><p>{answer}</p></details>)}<a class="text-link privacy-link" href={PRIVACY}>{lang === 'ko' ? '개인정보처리방침 확인' : 'Read our privacy policy'}<Icon name="external"/></a></div></div></section>
