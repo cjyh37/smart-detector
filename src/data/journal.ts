@@ -8,6 +8,7 @@ export interface ArticleMeta {
   description: string;
   category: 'product' | 'guide' | 'research';
   date: string;
+  updated?: string;
   readTime: string;
   order: number;
 }

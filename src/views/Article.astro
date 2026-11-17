@@ -5,9 +5,24 @@ import { categoryLabels } from '../data/journal';
 import JournalList from '../components/JournalList.astro';
 import PlayButton from '../components/PlayButton.astro';
 import Icon from '../components/Icon.astro';
-import { path, type Lang } from '../data/site';
+import { labels, path, type Lang } from '../data/site';
 const { lang, article } = Astro.props as { lang: Lang; article: MarkdownInstance<ArticleMeta> };
 const { frontmatter: entry, Content } = article;
+const t = labels[lang];
 ---
-<article class="article-wrap container"><header class="article-header"><a class="article-back text-link" href={path(lang, 'journal')}><Icon name="arrow"/>{lang === 'ko' ? '연구노트' : 'Journal'}</a><h1>{entry.title}</h1><p class="article-summary">{entry.description}</p><div class="article-byline"><span>{categoryLabels[lang][entry.category]}</span><span>{lang === 'ko' ? '스마트 디텍터' : 'Smart Detector'}</span><time datetime={String(entry.date).slice(0, 10)}>{String(entry.date).slice(0, 10).replaceAll('-', '.')}</time><span>{entry.readTime}</span></div></header><div class="article-content"><Content/></div><div class="article-action"><h2>{entry.category === 'research' ? (lang === 'ko' ? '연구 협력을 제안해 주세요.' : 'Discuss a research partnership') : (lang === 'ko' ? '무료 앱을 사용해 보세요.' : 'Start with the free app.')}</h2>{entry.category === 'research' ? <a class="button button-blue" href={path(lang, 'contact') + '?type=partnership'}>{lang === 'ko' ? '연구·제휴 문의' : 'Discuss a partnership'}<Icon name="arrow"/></a> : <PlayButton lang={lang} placement="article-end"/>}<button class="text-link" type="button" data-share><Icon name="share"/>{lang === 'ko' ? '이 글 공유하기' : 'Share this article'}</button></div></article>
-<section class="section section-soft"><div class="container"><h2>{lang === 'ko' ? '관련 글' : 'Related articles'}</h2><JournalList lang={lang} exclude={entry.slug}/></div></section>
+<article class="article-wrap container">
+  <header class="article-header">
+    <nav class="article-breadcrumb" aria-label={lang === 'ko' ? '현재 위치' : 'Breadcrumb'}><a href={path(lang)}>{t.home}</a><span aria-hidden="true">/</span><a href={path(lang, 'journal')}>{t.journal}</a></nav>
+    <h1>{entry.title}</h1>
+    <p class="article-summary">{entry.description}</p>
+    <div class="article-byline"><span>{categoryLabels[lang][entry.category]}</span><a href={path(lang, 'about')}>{t.brand}</a><time datetime={entry.date}>{entry.date.replaceAll('-', '.')}</time><span>{entry.readTime}</span>{entry.updated && entry.updated !== entry.date && <span>{lang === 'ko' ? '수정 ' : 'Updated '}<time datetime={entry.updated}>{entry.updated.replaceAll('-', '.')}</time></span>}</div>
+  </header>
+  <div class="article-content"><Content/></div>
+  <div class="article-action"><h2>{entry.category === 'research' ? (lang === 'ko' ? '연구 협력을 제안해 주세요.' : 'Discuss a research partnership') : (lang === 'ko' ? '시험 운영을 위한 무료 앱' : 'A free app for exam teams')}</h2>{entry.category === 'research' ? <a class="button button-blue" href={path(lang, 'contact') + '?type=partnership'}>{lang === 'ko' ? '연구·제휴 문의' : 'Discuss a partnership'}<Icon name="arrow"/></a> : <PlayButton lang={lang} placement="article-end"/>}<button class="text-link" type="button" data-share><Icon name="share"/>{lang === 'ko' ? '이 글 공유하기' : 'Share this article'}</button></div>
+</article>
+<section class="section section-soft"><div class="container"><h2>{lang === 'ko' ? '관련 글' : 'Related articles'}</h2><JournalList lang={lang} exclude={entry.slug} limit={3}/><a class="text-link" href={path(lang, 'journal')}>{lang === 'ko' ? '연구노트 전체 보기' : 'View all articles'}<Icon name="arrow"/></a></div></section>
+
+<style>
+  .article-breadcrumb{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--muted)}
+  .article-breadcrumb a:hover,.article-byline a:hover{color:var(--blue);text-decoration:underline}
+</style>

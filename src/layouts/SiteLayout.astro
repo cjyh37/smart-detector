@@ -1,21 +1,30 @@
 ---
 import Icon from '../components/Icon.astro';
 import PlayButton from '../components/PlayButton.astro';
+import type { ArticleMeta } from '../data/journal';
 import { SITE, EMAIL, PRIVACY, labels, path, type Lang, type PageKey } from '../data/site';
 import '../styles/global.css';
 import '../styles/media.css';
 import '../styles/research-vision.css';
-interface Props { lang: Lang; page: PageKey; title: string; description: string; slug?: string; article?: boolean; noindex?: boolean; }
-const { lang, page, title, description, slug = '', article = false, noindex = false } = Astro.props;
+interface Props { lang: Lang; page: PageKey; title: string; description: string; slug?: string; article?: ArticleMeta; noindex?: boolean; }
+const { lang, page, title, description, slug = '', article, noindex = false } = Astro.props;
 const t = labels[lang];
 const koPath = path('ko', page, slug);
 const enPath = path('en', page, slug);
 const canonical = SITE + path(lang, page, slug);
 const ogImage = SITE + `/assets/social${lang === 'en' ? '-en' : ''}.png?v=20261116-exam-detection`;
 const nav: PageKey[] = ['app', 'research', 'institutions', 'journal', 'contact'];
+const breadcrumbs = [
+  { name: t.home, url: SITE + path(lang) },
+  ...(page !== 'home' ? [{ name: t[page], url: SITE + path(lang, page) }] : []),
+  ...(article ? [{ name: article.title, url: canonical }] : []),
+];
 const schema = { '@context': 'https://schema.org', '@graph': [
-  ...(page === 'home' && lang === 'ko' ? [{ '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: '스마트 디텍터', alternateName: 'Smart Detector', inLanguage: ['ko', 'en'] }] : []),
-  { '@type': article ? 'Article' : 'WebPage', '@id': canonical + '#page', url: canonical, name: title, ...(article ? { headline: title, author: { '@type': 'Organization', name: t.brand }, image: ogImage } : {}), description, inLanguage: lang, isPartOf: { '@id': SITE + '/#website' } },
+  { '@type': 'Organization', '@id': SITE + '/#organization', name: '스마트 디텍터', alternateName: 'Smart Detector', url: SITE + '/', email: EMAIL },
+  { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: '스마트 디텍터', alternateName: 'Smart Detector', inLanguage: ['ko', 'en'], publisher: { '@id': SITE + '/#organization' } },
+  { '@type': 'WebPage', '@id': canonical + '#page', url: canonical, name: title, description, inLanguage: lang, isPartOf: { '@id': SITE + '/#website' }, ...(page !== 'home' ? { breadcrumb: { '@id': canonical + '#breadcrumb' } } : {}), ...(article ? { mainEntity: { '@id': canonical + '#article' } } : {}) },
+  ...(page !== 'home' ? [{ '@type': 'BreadcrumbList', '@id': canonical + '#breadcrumb', itemListElement: breadcrumbs.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.url })) }] : []),
+  ...(article ? [{ '@type': 'BlogPosting', '@id': canonical + '#article', url: canonical, headline: article.title, description, inLanguage: lang, image: ogImage, datePublished: article.date, dateModified: article.updated || article.date, mainEntityOfPage: { '@id': canonical + '#page' }, author: { '@type': 'Organization', '@id': SITE + '/#organization', name: t.brand, url: SITE + path(lang, 'about') }, publisher: { '@id': SITE + '/#organization' } }] : []),
 ] };
 ---
 <!doctype html>
@@ -33,6 +42,7 @@ const schema = { '@context': 'https://schema.org', '@graph': [
     <link rel="icon" type="image/svg+xml" href="/assets/icon.svg"/>
     <link rel="preload" href="/assets/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin/>
     <meta property="og:type" content={article ? 'article' : 'website'}/>
+    {article && <><meta property="article:published_time" content={article.date}/><meta property="article:modified_time" content={article.updated || article.date}/></>}
     <meta property="og:site_name" content={t.brand}/>
     <meta property="og:title" content={title}/>
     <meta property="og:description" content={description}/>
@@ -47,7 +57,7 @@ const schema = { '@context': 'https://schema.org', '@graph': [
     <meta name="twitter:title" content={title}/>
     <meta name="twitter:description" content={description}/>
     <meta name="twitter:image" content={ogImage}/>
-    <script type="application/ld+json" set:html={JSON.stringify(schema)}/>
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')}/>}
     <script is:inline src="/assets/analytics.js?v=20261117-site" defer></script>
   </head>
   <body class:list={[`page-${page}`, article && 'page-article', (page === 'home' || page === 'app') && 'has-mobile-install']}>

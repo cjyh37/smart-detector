@@ -1,8 +1,8 @@
 ---
 lang: en
 slug: what-the-app-can-observe
-title: "How to read wireless signals in the app"
-description: "What to check when a new signal appears, and what a signal alone cannot tell you."
+title: "Smart glasses and earphones: how to read wireless signals"
+description: "What a phone app can observe when checking for smart glasses, Bluetooth earphones and miniature cameras. Learn how to read new signals, received strength and on-site findings."
 category: guide
 date: "2026-11-17"
 readTime: "4 min read"
@@ -12,6 +12,12 @@ order: 2
 A signal on the Smart Detector screen means your phone received that signal. It does not mean the app has identified the device’s location or owner.
 
 The app separates signals received before an exam from those first received after it starts. You can check a selected signal’s strength and record your own findings and notes.
+
+## Will all smart glasses, earphones and miniature cameras appear?
+
+A device category does not determine whether the app will observe it. Smart glasses, Bluetooth earphones and miniature cameras must transmit signals that the phone can observe to appear on screen. Treat a displayed name as a clue for an on-site check.
+
+Even when a signal is received, the device type, owner and purpose need separate confirmation. A name that looks like a pair of earphones does not establish that a candidate is receiving answers.
 
 ## When a new signal appears
 
@@ -32,4 +38,4 @@ Standard Android Wi-Fi scanning returns information about access points visible 
 - Follow the instructions and reception status shown in the released app.
 - Record received signals separately from findings you confirmed yourself.
 
-See the [interface designs and usage steps](/en/app/#how-it-works) for a walkthrough.
+See the [interface designs and usage steps](/en/app/#how-it-works) for a walkthrough. For exam-specific context, read the [Suneung device guide](/en/journal/suneung-device-checks-2027/) and [operational review following the tax accountant exam case](/en/journal/tax-accountant-exam-ai-cheating/).

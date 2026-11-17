@@ -6,7 +6,7 @@ description: "Teachers and proctors can try the app without paying, then decide 
 category: product
 date: "2026-11-17"
 readTime: "3 min read"
-order: 1
+order: 3
 ---
 
 Our first product is an Android app that checks wireless signals a phone can receive. It uses pre-exam signals as a baseline, shows new signals during the exam and lets proctors record their findings.

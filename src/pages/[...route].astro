@@ -21,6 +21,6 @@ const meta = article ? { title: `${article.frontmatter.title} — ${lang === 'ko
 const views = { home: Home, app: AppPage, research: Research, institutions: Institutions, about: About, contact: Contact, journal: Journal };
 const View = views[page];
 ---
-<SiteLayout lang={lang} page={page} slug={slug} title={meta.title} description={meta.description} article={!!article}>
+<SiteLayout lang={lang} page={page} slug={slug} title={meta.title} description={meta.description} article={article?.frontmatter}>
   {article ? <Article lang={lang} article={article}/> : <View lang={lang}/>}
 </SiteLayout>

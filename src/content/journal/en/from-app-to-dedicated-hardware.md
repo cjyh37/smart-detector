@@ -6,7 +6,7 @@ description: "We are planning hardware that records signal changes during exams 
 category: research
 date: "2026-11-17"
 readTime: "3 min read"
-order: 3
+order: 4
 ---
 
 A phone app requires no separate equipment, but the signals it can receive depend on the phone and operating system. Our next hardware product is intended for schools and institutions to place in an exam room.

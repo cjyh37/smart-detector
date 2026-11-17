@@ -2,7 +2,7 @@
 import Icon from './Icon.astro';
 import { articlesFor, categoryLabels } from '../data/journal';
 import { path, type Lang } from '../data/site';
-const { lang, exclude = '' } = Astro.props as { lang: Lang; exclude?: string };
-const entries = articlesFor(lang).filter(article => article.frontmatter.slug !== exclude);
+const { lang, exclude = '', limit } = Astro.props as { lang: Lang; exclude?: string; limit?: number };
+const entries = articlesFor(lang).filter(article => article.frontmatter.slug !== exclude).slice(0, limit);
 ---
 <div class="journal-list">{entries.map(({ frontmatter: article }) => <article class={`journal-row journal-${article.category}`} data-article-category={article.category}><a href={path(lang, 'journal', article.slug)}><div class="journal-mark" aria-hidden="true">{article.category === 'product' ? <span class="mark-free">Free.</span> : article.category === 'guide' ? <span class="mark-question">?</span> : <span class="mark-research"><span></span><span></span><span></span></span>}</div><div class="journal-row-copy"><div class="article-meta"><span>{categoryLabels[lang][article.category]}</span><span>{article.readTime}</span></div><h3>{article.title}</h3><p>{article.description}</p></div><Icon name="arrow"/></a></article>)}</div>
