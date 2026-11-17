@@ -19,7 +19,7 @@ This information helps a proctor examine situations that may need attention. Cha
 
 ## When an observation is not guaranteed
 
-A powered-on device may not emit a signal that the phone can observe. Results depend on communication methods, connection states, the phone’s wireless capabilities and operating system conditions. The app cannot establish the presence of a powered-off device or one that is not emitting an observable signal.
+A powered-on device may not emit a signal that the phone can observe. Results depend on communication methods, connection states, the phone’s wireless capabilities and operating system conditions. What matters is whether an observable signal is present, rather than the device’s power status alone. The app cannot establish the presence of a device that emits no wireless signal the phone can observe.
 
 Standard Android Wi-Fi scanning provides information about access points visible to the phone. Requests are subject to permission and frequency restrictions; scans may fail or return results that are not current. It should not be interpreted as visibility into all nearby wireless communication. See the [official Android Wi-Fi scanning documentation](https://developer.android.com/develop/connectivity/wifi/wifi-scan) for details.
 
