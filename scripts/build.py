@@ -1,4 +1,4 @@
-"""Build public site assets, preferring the configured Google Play destination."""
+"""Build the Astro site; retain the original asset-builder API for legacy checks."""
 import argparse
 import hashlib
 import json
@@ -77,6 +77,17 @@ def build(root, output, releases=None, repository='cjyh37/smart-detector'):
 
 
 if __name__ == '__main__':
+    if (ROOT / 'package.json').is_file():
+        import os
+        import sys
+        npm = shutil.which('npm.cmd' if os.name == 'nt' else 'npm')
+        if not npm:
+            raise SystemExit('Node.js and npm are required. Install dependencies with npm ci.')
+        command = [npm, 'run', 'build']
+        if os.name == 'nt':
+            command = [os.environ.get('COMSPEC', 'cmd.exe'), '/d', '/c', *command]
+        raise SystemExit(subprocess.call(command, cwd=ROOT,
+                                       creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0)))
     parser = argparse.ArgumentParser()
     parser.add_argument('--github-repository')
     args = parser.parse_args()

@@ -1,0 +1,13 @@
+---
+import type { MarkdownInstance } from 'astro';
+import type { ArticleMeta } from '../data/journal';
+import { categoryLabels } from '../data/journal';
+import JournalList from '../components/JournalList.astro';
+import PlayButton from '../components/PlayButton.astro';
+import Icon from '../components/Icon.astro';
+import { path, type Lang } from '../data/site';
+const { lang, article } = Astro.props as { lang: Lang; article: MarkdownInstance<ArticleMeta> };
+const { frontmatter: entry, Content } = article;
+---
+<article class="article-wrap container"><header class="article-header"><a class="article-back text-link" href={path(lang, 'journal')}><Icon name="arrow"/>{lang === 'ko' ? '연구노트' : 'Journal'}</a><h1>{entry.title}</h1><p class="article-summary">{entry.description}</p><div class="article-byline"><span>{categoryLabels[lang][entry.category]}</span><span>{lang === 'ko' ? '스마트 디텍터' : 'Smart Detector'}</span><time datetime={String(entry.date).slice(0, 10)}>{String(entry.date).slice(0, 10).replaceAll('-', '.')}</time><span>{entry.readTime}</span></div></header><div class="article-content"><Content/></div><div class="article-action"><h2>{entry.category === 'research' ? (lang === 'ko' ? '함께 검토할 질문이 있나요?' : 'Have a question to explore together?') : (lang === 'ko' ? '앱으로 첫걸음을 시작해 보세요.' : 'Start with the free app.')}</h2>{entry.category === 'research' ? <a class="button button-blue" href={path(lang, 'contact') + '?type=partnership'}>{lang === 'ko' ? '연구·제휴 문의' : 'Discuss a partnership'}<Icon name="arrow"/></a> : <PlayButton lang={lang} placement="article-end"/>}<button class="text-link" type="button" data-share><Icon name="share"/>{lang === 'ko' ? '이 글 공유하기' : 'Share this article'}</button></div></article>
+<section class="section section-soft"><div class="container"><h2>{lang === 'ko' ? '함께 읽어보세요.' : 'Keep reading.'}</h2><JournalList lang={lang} exclude={entry.slug}/></div></section>

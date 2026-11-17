@@ -24,12 +24,16 @@ jobs:
         with:
           ref: main
       - uses: actions/configure-pages@v5
-      - name: Check site build
-        run: python3 -m unittest discover -s scripts -p 'test_*.py' -v
-      - name: Prepare public files and download destination
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/build.py --github-repository "$GITHUB_REPOSITORY"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Build localized website
+        run: npm run build
+      - name: Verify public routes, metadata and download destination
+        run: npm test
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

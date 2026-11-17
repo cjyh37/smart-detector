@@ -2,3 +2,9 @@ dist/
 __pycache__/
 .preview/
 *.log
+node_modules/
+.astro/
+.site-public/
+.impeccable/
+PRODUCT.md
+DESIGN.md

@@ -1,0 +1,7 @@
+---
+import Icon from './Icon.astro';
+import { PLAY, labels, type Lang } from '../data/site';
+interface Props { lang: Lang; placement: string; light?: boolean; small?: boolean; }
+const { lang, placement, light = false, small = false } = Astro.props;
+---
+<a class:list={['button', light ? 'button-white' : 'button-blue', small && 'button-small']} href={PLAY} data-store-link data-placement={placement}><Icon name="play"/><span>{small ? labels[lang].installShort : labels[lang].install}</span><Icon name="arrow"/></a>

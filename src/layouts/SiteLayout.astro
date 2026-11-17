@@ -1,0 +1,75 @@
+---
+import Icon from '../components/Icon.astro';
+import PlayButton from '../components/PlayButton.astro';
+import { SITE, EMAIL, PRIVACY, labels, path, type Lang, type PageKey } from '../data/site';
+import '../styles/global.css';
+import '../styles/media.css';
+interface Props { lang: Lang; page: PageKey; title: string; description: string; slug?: string; article?: boolean; noindex?: boolean; }
+const { lang, page, title, description, slug = '', article = false, noindex = false } = Astro.props;
+const t = labels[lang];
+const koPath = path('ko', page, slug);
+const enPath = path('en', page, slug);
+const canonical = SITE + path(lang, page, slug);
+const ogImage = SITE + `/assets/social${lang === 'en' ? '-en' : ''}.png?v=20261116-exam-detection`;
+const nav: PageKey[] = ['app', 'research', 'institutions', 'journal', 'contact'];
+const schema = { '@context': 'https://schema.org', '@graph': [
+  ...(page === 'home' && lang === 'ko' ? [{ '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: '스마트 디텍터', alternateName: 'Smart Detector', inLanguage: ['ko', 'en'] }] : []),
+  { '@type': article ? 'Article' : 'WebPage', '@id': canonical + '#page', url: canonical, name: title, ...(article ? { headline: title, author: { '@type': 'Organization', name: t.brand }, image: ogImage } : {}), description, inLanguage: lang, isPartOf: { '@id': SITE + '/#website' } },
+] };
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{title}</title>
+    <meta name="description" content={description}/>
+    <meta name="theme-color" content="#0b47b5"/>
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}/>
+    <meta name="google-site-verification" content="ABUjBZu12KW5HPL2hmBqH1joQ2i3LJen_rjr-b9VvVk"/>
+    <link rel="canonical" href={canonical}/>
+    {!noindex && <><link rel="alternate" hreflang="ko" href={SITE + koPath}/><link rel="alternate" hreflang="en" href={SITE + enPath}/><link rel="alternate" hreflang="x-default" href={SITE + koPath}/></>}
+    <link rel="icon" type="image/svg+xml" href="/assets/icon.svg"/>
+    <link rel="preload" href="/assets/PretendardVariable.woff2" as="font" type="font/woff2" crossorigin/>
+    <meta property="og:type" content={article ? 'article' : 'website'}/>
+    <meta property="og:site_name" content={t.brand}/>
+    <meta property="og:title" content={title}/>
+    <meta property="og:description" content={description}/>
+    <meta property="og:url" content={canonical}/>
+    <meta property="og:image" content={ogImage}/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+    <meta property="og:image:alt" content={lang === 'ko' ? '스마트 디텍터 시험 부정행위 탐지 보조 앱' : 'Smart Detector exam proctoring app'}/>
+    <meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'}/>
+    <meta property="og:locale:alternate" content={lang === 'ko' ? 'en_US' : 'ko_KR'}/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:title" content={title}/>
+    <meta name="twitter:description" content={description}/>
+    <meta name="twitter:image" content={ogImage}/>
+    <script type="application/ld+json" set:html={JSON.stringify(schema)}/>
+    <script is:inline src="/assets/analytics.js?v=20261117-site" defer></script>
+  </head>
+  <body class:list={[`page-${page}`, article && 'page-article', (page === 'home' || page === 'app') && 'has-mobile-install']}>
+    <a class="skip-link" href="#main">{t.skip}</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href={path(lang)} aria-label={`${t.brand} ${t.home}`}><img src="/assets/icon.svg" alt="" width="32" height="32"/><span>{t.brand}</span></a>
+        <nav class="desktop-nav" aria-label={lang === 'ko' ? '주요 메뉴' : 'Main navigation'}>{nav.map(key => <a href={path(lang, key)} aria-current={page === key ? 'page' : undefined}>{t[key]}</a>)}</nav>
+        <div class="header-actions"><a class="language-link" href={lang === 'ko' ? enPath : koPath} lang={lang === 'ko' ? 'en' : 'ko'} hreflang={lang === 'ko' ? 'en' : 'ko'} aria-label={lang === 'ko' ? 'Read in English' : '한국어로 보기'}>{lang === 'ko' ? 'EN' : '한국어'}</a><a class="header-install" href="https://play.google.com/store/apps/details?id=ai.fwth.smartdetector" data-store-link data-placement="header">{t.installShort}<Icon name="arrow"/></a></div>
+        <details class="mobile-menu"><summary aria-label={t.menu}><Icon name="menu"/><span>{t.menu}</span></summary><nav aria-label={lang === 'ko' ? '모바일 메뉴' : 'Mobile navigation'}>{nav.map(key => <a href={path(lang, key)} aria-current={page === key ? 'page' : undefined}>{t[key]}<Icon name="arrow"/></a>)}<a href={path(lang, 'about')}>{t.about}<Icon name="arrow"/></a></nav></details>
+      </div>
+    </header>
+    <main id="main"><slot/></main>
+    <footer class="site-footer">
+      <div class="container footer-top">
+        <div class="footer-purpose"><a class="brand" href={path(lang)}><img src="/assets/icon.svg" alt="" width="32" height="32"/>{t.brand}</a><p>{lang === 'ko' ? '공정한 평가를 위한 기술.\n앱에서 시작해, 더 나은 관측으로.' : 'Technology for fairer assessments.\nStarting with an app. Looking further.'}</p></div>
+        <div class="footer-links"><div><strong>{lang === 'ko' ? '살펴보기' : 'Explore'}</strong>{(['app', 'research', 'institutions', 'journal'] as PageKey[]).map(key => <a href={path(lang, key)}>{t[key]}</a>)}</div><div><strong>{lang === 'ko' ? '함께하기' : 'Connect'}</strong><a href={path(lang, 'about')}>{t.about}</a><a href={path(lang, 'contact') + '?type=institution'}>{lang === 'ko' ? '기관 도입 문의' : 'Institutional inquiries'}</a><a href={path(lang, 'contact') + '?type=partnership'}>{lang === 'ko' ? '제휴 문의' : 'Partnerships'}</a><a href={path(lang, 'contact') + '?type=investment'}>{lang === 'ko' ? '투자 문의' : 'Investment'}</a></div></div>
+        <div class="footer-contact"><span>{lang === 'ko' ? '대화를 시작해 주세요.' : 'Start a conversation.'}</span><a href={`mailto:${EMAIL}`}>{EMAIL}<Icon name="arrow"/></a><button class="text-link" type="button" data-share><Icon name="share"/>{t.share}</button></div>
+      </div>
+      <div class="container footer-bottom"><span>© {new Date().getFullYear()} Smart Detector</span><a href={PRIVACY}>{t.privacy}</a><span>{lang === 'ko' ? 'Android 무료 제공 · iOS 개발 중' : 'Free on Android · iOS in development'}</span></div>
+    </footer>
+    {(page === 'home' || page === 'app') && <div class="mobile-install"><span>{lang === 'ko' ? '다음 시험, 앱으로 시작하세요.' : 'Start with the free Android app.'}</span><PlayButton lang={lang} placement="mobile-bar" small/></div>}
+    <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+    <script>import '../scripts/site';</script>
+  </body>
+</html>

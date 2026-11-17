@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://smartdetector.fwth.ai/sitemap.xml

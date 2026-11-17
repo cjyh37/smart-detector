@@ -22,7 +22,7 @@
 
   // Measure store visits; this does not claim the app was installed.
   document.addEventListener('click', event => {
-    const link = event.target instanceof Element ? event.target.closest('#store-download') : null;
+    const link = event.target instanceof Element ? event.target.closest('[data-store-link], #store-download') : null;
     if (!link || !link.hasAttribute('href') || link.getAttribute('aria-disabled') === 'true') return;
     const url = new URL(link.href);
     if (url.href !== 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector') return;
@@ -32,6 +32,20 @@
       app_id: 'ai.fwth.smartdetector',
       link_url: url.href,
       page_language: document.documentElement.lang,
+      placement: link.dataset.placement || 'download',
     });
+  });
+
+  document.addEventListener('click', event => {
+    const link = event.target instanceof Element ? event.target.closest('a[data-contact-type]') : null;
+    if (!link || !['institution', 'partnership', 'investment', 'support'].includes(link.dataset.contactType)) return;
+    window.gtag('event', 'contact_email_click', {
+      send_to: measurementId,
+      contact_type: link.dataset.contactType,
+      page_language: document.documentElement.lang,
+    });
+  });
+  document.addEventListener('smart-detector:share', () => {
+    window.gtag('event', 'share_click', { send_to: measurementId, page_language: document.documentElement.lang });
   });
 })();

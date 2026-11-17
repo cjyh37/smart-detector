@@ -1,0 +1,26 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Home from '../views/Home.astro';
+import AppPage from '../views/AppPage.astro';
+import Research from '../views/Research.astro';
+import Institutions from '../views/Institutions.astro';
+import About from '../views/About.astro';
+import Contact from '../views/Contact.astro';
+import Journal from '../views/Journal.astro';
+import Article from '../views/Article.astro';
+import { pageKeys, metadata, path, type Lang, type PageKey } from '../data/site';
+import { articles } from '../data/journal';
+
+export function getStaticPaths() {
+  const core = (['ko', 'en'] as Lang[]).flatMap(lang => pageKeys.map(page => ({ params: { route: path(lang, page).slice(1, -1) || undefined }, props: { lang, page, slug: '', article: undefined } })));
+  const posts = articles.map(article => ({ params: { route: path(article.frontmatter.lang, 'journal', article.frontmatter.slug).slice(1, -1) }, props: { lang: article.frontmatter.lang, page: 'journal' as PageKey, slug: article.frontmatter.slug, article } }));
+  return [...core, ...posts];
+}
+const { lang, page, slug, article } = Astro.props;
+const meta = article ? { title: `${article.frontmatter.title} — ${lang === 'ko' ? '스마트 디텍터' : 'Smart Detector'}`, description: article.frontmatter.description } : metadata[lang][page];
+const views = { home: Home, app: AppPage, research: Research, institutions: Institutions, about: About, contact: Contact, journal: Journal };
+const View = views[page];
+---
+<SiteLayout lang={lang} page={page} slug={slug} title={meta.title} description={meta.description} article={!!article}>
+  {article ? <Article lang={lang} article={article}/> : <View lang={lang}/>}
+</SiteLayout>
