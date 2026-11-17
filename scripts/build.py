@@ -43,7 +43,7 @@ def release_download(releases, repository):
 
 def build(root, output, releases=None, repository='cjyh37/smart-detector'):
     output.mkdir(parents=True, exist_ok=True)
-    for name in ('index.html', 'styles.css', 'app.js', '.nojekyll'):
+    for name in ('index.html', 'styles.css', 'app.js', '.nojekyll', 'robots.txt', 'sitemap.xml'):
         shutil.copy2(root / name, output / name)
     (output / 'en').mkdir(exist_ok=True)
     shutil.copy2(root / 'en' / 'index.html', output / 'en' / 'index.html')

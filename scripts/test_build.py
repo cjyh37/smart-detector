@@ -18,7 +18,7 @@ class DeploymentTest(unittest.TestCase):
         (self.root / 'assets').mkdir(parents=True)
         (self.root / 'en').mkdir()
         (self.root / 'en' / 'index.html').write_text('<html lang="en">English</html>', encoding='utf-8')
-        for name in ('index.html', 'styles.css', 'app.js', '.nojekyll'):
+        for name in ('index.html', 'styles.css', 'app.js', '.nojekyll', 'robots.txt', 'sitemap.xml'):
             (self.root / name).write_text('', encoding='utf-8')
 
     def test_no_upload_keeps_download_unavailable_and_excludes_private_files(self):
@@ -32,6 +32,27 @@ class DeploymentTest(unittest.TestCase):
         builder.build(self.root, self.output)
         self.assertEqual((self.output / 'en' / 'index.html').read_text(), '<html lang="en">English</html>')
         self.assertFalse((self.output / 'en' / 'private.txt').exists())
+
+    def test_search_discovery_files_are_published_with_google_play(self):
+        files = {
+            'robots.txt': 'User-agent: *\nAllow: /\nSitemap: https://smartdetector.fwth.ai/sitemap.xml\n',
+            'sitemap.xml': '<?xml version="1.0" encoding="UTF-8"?>\n'
+                           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+                           '<url><loc>https://smartdetector.fwth.ai/</loc></url></urlset>\n',
+        }
+        for name, content in files.items():
+            (self.root / name).write_text(content, encoding='utf-8')
+        (self.root / 'download.json').write_text(json.dumps({
+            'available': True, 'channel': 'google-play',
+            'url': 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector',
+        }), encoding='utf-8')
+
+        builder.build(self.root, self.output)
+
+        for name, content in files.items():
+            with self.subTest(file=name):
+                self.assertTrue((self.output / name).is_file(), name + ' missing from deployment')
+                self.assertEqual((self.output / name).read_text(encoding='utf-8'), content)
 
     def test_uploaded_apk_becomes_downloadable_without_page_changes(self):
         payload = b'test binary, not a real APK'
