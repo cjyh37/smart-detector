@@ -569,5 +569,22 @@
   "see what the app can do": "アプリで何ができるかを見る",
   "shows reception intervals, new signals and the proctor’s check status separately. It uses fictional example data, not records from the tax accountant examination.": "受信間隔、新着信号、試験官のチェック状況を個別に表示します。税理士試験の記録ではなく、架空の事例データを使用しています。",
   "wireless signal app — Smart Detector": "ワイヤレス信号アプリ — Smart Detector",
-  "© 2026 Smart Detector": "© 2026 スマートディテクタ"
+  "© 2026 Smart Detector": "© 2026 スマートディテクタ",
+  "Blue standby screen with the three-step assessment workflow": "青色のスタンバイ画面、3 段階の評価ワークフロー",
+  "Blue standby screen with the three-step assessment workflow, open full size (new tab)": "青いスタンバイ画面、3 段階の評価ワークフロー、フルサイズで開く (新しいタブ)",
+  "Connection status for Room 7 at Gyeonggi Venue 1, showing the disconnected device and its battery and last reception time.": "京畿会場 1 のルーム 7 の接続ステータス。切断されたデバイスとそのバッテリー、および最終受信時間を示します。",
+  "Empty-room measurement screen with received signals and remaining time": "受信信号と残り時間を表示する空室測定画面",
+  "Empty-room measurement screen with received signals and remaining time, open full size (new tab)": "受信信号と残り時間を含む空室測定画面、フルサイズで開きます（新しいタブ）",
+  "First page of the Room 3 report showing baselines, reception intervals and signal records.": "第3試験室の報告書。1ページ目に基準、受信区間、信号ごとの記録を表示。",
+  "Monitoring screen with two new signals and proctor check statuses": "2つの新しい信号と監督チェックステータスを備えた監視画面",
+  "Monitoring screen with two new signals and proctor check statuses, open full size (new tab)": "2つの新しい信号と監督チェックステータスを含む監視画面、フルサイズで開きます（新しいタブ）",
+  "On-site record form for a smart-glasses signal, with a check result and proctor’s note.": "スマートグラス信号のオンサイト記録フォーム、チェック結果と監督メモ。",
+  "First page of the exam signal report": "試験信号報告書の1ページ目",
+  "Paused exam screen showing no reception, with resume and end buttons": "一時停止された試験画面には受信状態が表示されず、再開ボタンと終了ボタンがあり、韓国語のインターフェイスが表示されます。",
+  "Paused exam screen showing no reception, with resume and end buttons, open full size (new tab)": "一時停止された試験画面で受信なし、再開ボタンと終了ボタンあり、フルサイズで開く (新しいタブ)",
+  "Pre-exam screen separating signals absent from the room baseline": "部屋のベースラインに存在しない信号を分離する試験前画面",
+  "Pre-exam screen separating signals absent from the room baseline, open full size (new tab)": "試験前画面、部屋のベースラインに存在しない信号を分離、フルサイズで開く (新しいタブ)",
+  "Smart Detector console with venues, room connection status and wireless signals in the selected room.": "Smart Detector コンソールには、選択した部屋の会場、部屋の接続ステータス、無線信号が表示されます。",
+  "Smart Detector monitoring screen with new signals and check statuses": "新しい信号とチェックステータスを備えたスマートディテクタ監視画面",
+  "Time when the exam was paused is listed separately.": "試験が一時停止された時間は別に記載されています。"
 }

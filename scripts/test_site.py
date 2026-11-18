@@ -155,13 +155,15 @@ class StaticSiteTest(unittest.TestCase):
         self.assertTrue((DIST / '.nojekyll').exists())
 
     def test_home_fragments_and_current_workflow_screens_resolve(self):
-        for locale in ['', '/en']:
+        for locale in ['', '/en', '/ja']:
             page = Page(path_for(locale + '/'))
             ids = {a.get('id') for _, a in page.tags}
             self.assertTrue({'download', 'how-it-works', 'questions', 'report', 'tutorial'} <= ids)
             sources = {a.get('src') for a in page.find('img')}
             for name in ['ready', 'empty-room', 'baseline-ready', 'monitoring', 'paused']:
-                self.assertIn('/assets/screenshots/' + name + '.png', sources)
+                image = f'/assets/localized{locale}/{name}.webp' if locale else f'/assets/screenshots/{name}.png'
+                self.assertIn(image, sources)
+                self.assertTrue((DIST / image.lstrip('/')).is_file(), image)
 
 
 if __name__ == '__main__':

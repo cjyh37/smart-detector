@@ -3,14 +3,14 @@ import Icon from './Icon.astro';
 import type { Lang } from '../data/site';
 const { lang } = Astro.props as { lang: Lang };
 const ko = lang === 'ko';
-const src = '/assets/reports/exam-report-example.png';
+const src = ko ? '/assets/reports/exam-report-example.png' : '/assets/localized/en/exam-report-example.webp';
 const notes = ko ? [
   { title: '기준과 확인 결과', body: '보고서는 빈 강의실과 시험 시작 전의 신호를 기준으로 적습니다. 시험 중 새 신호는 감독관이 확인했는지, 기기를 찾지 못했는지를 구분해 남깁니다.' },
   { title: '수신하지 않은 시간', body: '시험을 멈춰 수신하지 않은 시간도 따로 적습니다. 예시에서는 09:42:10부터 3분을 ‘수신하지 않음’으로 표시했습니다.' },
   { title: '신호별 시각·세기·메모', body: '신호마다 처음과 마지막으로 수신한 시각, 신호를 구분하는 기기인식ID, 신호 방식, 세기 변화를 적습니다. 감독관이 남긴 메모도 함께 싣습니다.' },
 ] : [
   { title: 'Baselines and check results', body: 'The empty-room and pre-exam signals are listed as baselines. Each new signal during the exam shows whether the proctor checked it or could not find the device.' },
-  { title: 'Time without reception', body: 'Time when the exam was paused is listed separately. In the example, three minutes from 09:42:10 are marked as not received.' },
+  { title: 'Time without reception', body: 'Time when the exam was paused is listed separately.' },
   { title: 'A record for each signal', body: 'Each signal is listed with its first and last reception times, an identifier that tells signals apart, its signal type and strength history, along with the proctor’s notes.' },
 ];
 ---
@@ -20,7 +20,7 @@ const notes = ko ? [
     <div class="report-layout">
       <figure class="report-preview">
         <a class="report-sheet" href={src} target="_blank" rel="noopener" data-report-open aria-label={ko ? '시험 무선 신호 보고서 예시 확대 보기' : 'Enlarge the example exam signal report'}>
-          <img src={src} width="1588" height="2246" loading="lazy" alt={ko ? '제3시험실 보고서 예시. 새 신호 2개, 확인 안 함 0개, 수신하지 못한 시간 3분. 기준과 판단, 수신 구간, 신호별 기록을 정리한 첫 쪽.' : 'Example report for Exam Room 3: two new signals, zero unchecked, three minutes without reception. Page one shows baselines, reception intervals and signal records in Korean.'}/>
+          <img src={src} width="1588" height="2246" loading="lazy" alt={ko ? '제3시험실 보고서 예시. 새 신호 2개, 확인 안 함 0개, 수신하지 못한 시간 3분. 기준과 판단, 수신 구간, 신호별 기록을 정리한 첫 쪽.' : 'First page of the Room 3 report showing baselines, reception intervals and signal records.'}/>
           <span class="report-enlarge"><Icon name="expand"/>{ko ? '보고서 확대 보기' : 'Enlarge report'}</span>
         </a>      </figure>
       <div class="report-explanation">
@@ -28,12 +28,12 @@ const notes = ko ? [
         <p class="report-lead">{ko ? '시험이 끝난 뒤 시험 시간에 무슨 일이 있었는지 설명해야 할 때 꺼내 볼 수 있는 기록입니다. PDF로 저장해 보관하거나 시험 본부에 보낼 수 있습니다.' : 'A record you can return to when you need to explain what happened during the exam. Save the PDF for your files or send it to the exam office.'}</p>
         <dl class="report-details">{notes.map(note => <div><dt>{note.title}</dt><dd>{note.body}</dd></div>)}</dl>
         <p class="report-context">{ko ? '보고서는 수신한 신호와 현장 확인을 적은 기록입니다. 부정행위 여부를 판정하지 않습니다.' : 'The report records received signals and on-site checks. It does not determine whether misconduct occurred.'}</p>
-        <a class="text-link" href={src} download="smart-detector-report-example.png">{ko ? '보고서 예시 이미지 내려받기' : 'Download the example image'}<Icon name="down"/></a>
+        <a class="text-link" href={src} download={ko ? "smart-detector-report-example.png" : "smart-detector-report-example.webp"}>{ko ? '보고서 예시 이미지 내려받기' : 'Download the example image'}<Icon name="down"/></a>
       </div>
     </div>
   </div>
 </section>
 <dialog class="report-dialog" data-report-dialog aria-labelledby="report-dialog-title">
   <div class="report-dialog-toolbar"><h2 id="report-dialog-title">{ko ? '보고서 예시 · 1쪽' : 'Example report · Page 1'}</h2><div><button class="button button-outline button-small" type="button" data-report-zoom aria-pressed="false">{ko ? '크게 보기' : 'Zoom in'}</button><button class="report-close" type="button" data-report-close autofocus aria-label={ko ? '보고서 닫기' : 'Close report'}><Icon name="close"/></button></div></div>
-  <div class="report-dialog-scroll" data-report-scroll tabindex="0" aria-label={ko ? '확대 보고서. 스크롤해서 내용을 확인하세요.' : 'Enlarged report. Scroll to read the full page.'}><img src={src} width="1588" height="2246" alt={ko ? '시험 무선 신호 보고서 예시 첫 쪽 원본' : 'Original first-page exam signal report example in Korean'} loading="lazy"/></div>
+  <div class="report-dialog-scroll" data-report-scroll tabindex="0" aria-label={ko ? '확대 보고서. 스크롤해서 내용을 확인하세요.' : 'Enlarged report. Scroll to read the full page.'}><img src={src} width="1588" height="2246" alt={ko ? '시험 무선 신호 보고서 예시 첫 쪽 원본' : 'First page of the exam signal report'} loading="lazy"/></div>
 </dialog>

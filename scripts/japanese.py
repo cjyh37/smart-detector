@@ -82,7 +82,7 @@ def render(write=True):
         if write:
             target=DIST/'ja'/source.relative_to(DIST/'en')
             target.parent.mkdir(parents=True,exist_ok=True)
-            result=''.join(page.parts)
+            result=''.join(page.parts).replace('/assets/localized/en/', '/assets/localized/ja/').replace('/assets/social-en.png', '/assets/social-ja.png')
             target.write_text(result,encoding='utf8')
 
 if __name__=='__main__':

@@ -16,19 +16,19 @@ const screens = [
     id: 'overview', image: compact ? workspace : overview,
     title: ko ? '시험장 현황' : 'Venue overview',
     description: ko ? '시험장별 연결 상태와 새 신호를 확인합니다' : 'Check connections and new signals by venue',
-    alt: ko ? '시험장 목록, 시험실별 수신 상태, 선택한 시험실의 무선신호를 함께 보여주는 스마트 디텍터 관제 화면' : 'Smart Detector console with venues, room connection status and wireless signals in the selected room. Korean interface.',
+    alt: ko ? '시험장 목록, 시험실별 수신 상태, 선택한 시험실의 무선신호를 함께 보여주는 스마트 디텍터 관제 화면' : 'Smart Detector console with venues, room connection status and wireless signals in the selected room.',
   },
   {
     id: 'review', image: review,
     title: ko ? '현장 확인 기록' : 'On-site records',
     description: ko ? '확인한 기기와 조치 내용을 기록합니다' : 'Record device checks and actions taken',
-    alt: ko ? '스마트안경 신호의 확인 결과와 현장 조치 내용을 입력하는 관제 화면' : 'On-site record form for a smart-glasses signal, with a check result and proctor’s note. Korean interface.',
+    alt: ko ? '스마트안경 신호의 확인 결과와 현장 조치 내용을 입력하는 관제 화면' : 'On-site record form for a smart-glasses signal, with a check result and proctor’s note.',
   },
   {
     id: 'connection', image: connection,
     title: ko ? '기기 연결 상태' : 'Device status',
     description: ko ? '배터리와 마지막 수신 시각을 확인합니다' : 'Check battery level and last reception time',
-    alt: ko ? '연결이 끊긴 경기 제1시험장 제7시험실과 해당 기기의 배터리, 마지막 수신 시각을 표시한 관제 화면' : 'Connection status for Room 7 at Gyeonggi Venue 1, showing the disconnected device and its battery and last reception time. Korean interface.',
+    alt: ko ? '연결이 끊긴 경기 제1시험장 제7시험실과 해당 기기의 배터리, 마지막 수신 시각을 표시한 관제 화면' : 'Connection status for Room 7 at Gyeonggi Venue 1, showing the disconnected device and its battery and last reception time.',
   },
 ];
 const visibleScreens = compact ? screens.slice(0, 1) : screens;
@@ -36,13 +36,13 @@ const visibleScreens = compact ? screens.slice(0, 1) : screens;
 <div class:list={['console-showcase', compact && 'console-showcase-home']} data-console-showcase>
   <div class="console-panels" role={compact ? undefined : 'group'} aria-label={compact ? undefined : ko ? '기관용 관제 화면 3장' : 'Three institution console screens'} tabindex={compact ? undefined : 0}>
     {visibleScreens.map(screen => <figure id={`${prefix}-${screen.id}`} class="console-panel" data-console-panel>
-      <a class="console-image-link" href={screen.image.src} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대 보기' : 'Enlarge screen'}`}>
-        <Image src={screen.image} width={compact ? 800 : 400} widths={[400, 640, 960, 1440]} sizes={compact ? '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 58vw, 760px' : '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 30vw, 400px'} format="webp" quality={88} alt={screen.alt} loading="lazy" decoding="async"/>
+      <a class="console-image-link" href={ko ? screen.image.src : `/assets/localized/en/${compact ? 'workspace' : screen.id === 'review' ? 'room-review' : screen.id}.webp`} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대 보기' : 'Enlarge screen'}`}>
+        {ko ? <Image src={screen.image} width={compact ? 800 : 400} widths={[400, 640, 960, 1440]} sizes={compact ? '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 58vw, 760px' : '(max-width: 680px) calc(100vw - 40px), (max-width: 1336px) 30vw, 400px'} format="webp" quality={88} alt={screen.alt} loading="lazy" decoding="async"/> : <img src={`/assets/localized/en/${compact ? 'workspace' : screen.id === 'review' ? 'room-review' : screen.id}.webp`} width={screen.image.width} height={screen.image.height} alt={screen.alt} loading="lazy" decoding="async"/>}
       </a>
       <figcaption class="console-caption">
         <div class="console-caption-heading">
           {compact ? <span>{ko ? '시험장 중앙 관제' : 'Central monitoring'}</span> : <h3>{screen.title}</h3>}
-          <a class="text-link console-enlarge" href={screen.image.src} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대' : 'Enlarge screen'}`}><Icon name="expand"/>{ko ? '확대' : 'Enlarge'}</a>
+          <a class="text-link console-enlarge" href={ko ? screen.image.src : `/assets/localized/en/${compact ? 'workspace' : screen.id === 'review' ? 'room-review' : screen.id}.webp`} target="_blank" rel="noopener" data-console-open data-title={screen.title} data-alt={screen.alt} data-width={screen.image.width} data-height={screen.image.height} aria-label={`${screen.title} · ${ko ? '화면 확대' : 'Enlarge screen'}`}><Icon name="expand"/>{ko ? '확대' : 'Enlarge'}</a>
         </div>
         {!compact && <p>{screen.description}</p>}
       </figcaption>
