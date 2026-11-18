@@ -14,7 +14,7 @@ SITE = 'https://smartdetector.fwth.ai'
 PLAY = 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector'
 CORES = ['', 'app/', 'research/', 'institutions/', 'journal/', 'about/', 'contact/']
 SLUGS = sorted(p.stem for p in (ROOT / 'src/content/journal/ko').glob('*.md'))
-ROUTES = ['/' + locale + route for locale in ['', 'en/']
+ROUTES = ['/' + locale + route for locale in ['', 'en/', 'ja/']
           for route in CORES + ['journal/' + slug + '/' for slug in SLUGS]]
 
 
@@ -49,7 +49,7 @@ class StaticSiteTest(unittest.TestCase):
             with self.subTest(route=route):
                 self.assertTrue(path_for(route).is_file(), route)
                 page = Page(path_for(route))
-                lang = 'en' if route.startswith('/en/') else 'ko'
+                lang = route.split('/')[1] if route.startswith(('/en/', '/ja/')) else 'ko'
                 self.assertEqual(page.find('html')[0]['lang'], lang)
                 self.assertEqual(len(page.find('h1')), 1)
                 self.assertEqual(page.find('link', rel='canonical')[0]['href'], SITE + route)
@@ -62,9 +62,9 @@ class StaticSiteTest(unittest.TestCase):
                                  'ABUjBZu12KW5HPL2hmBqH1joQ2i3LJen_rjr-b9VvVk')
                 self.assertEqual(page.find('meta', property='og:url')[0]['content'], SITE + route)
                 self.assertTrue(page.find('meta', property='og:image')[0]['content'].startswith(SITE + '/assets/'))
-                base = route[3:] if lang == 'en' else route
+                base = route[3:] if lang != 'ko' else route
                 alts = {a['hreflang']: a['href'] for a in page.find('link', rel='alternate') if 'hreflang' in a}
-                self.assertEqual(alts, {'ko': SITE + base, 'en': SITE + '/en' + base, 'x-default': SITE + base})
+                self.assertEqual(alts, {'ko': SITE + base, 'en': SITE + '/en' + base, 'ja': SITE + '/ja' + base, 'x-default': SITE + base})
                 title = page.text.split('<title>', 1)[1].split('</title>', 1)[0]
                 self.assertNotIn(title, titles)
                 titles.add(title)
@@ -110,7 +110,7 @@ class StaticSiteTest(unittest.TestCase):
         urls = root.findall('s:url', ns)
         self.assertEqual({u.find('s:loc', ns).text for u in urls}, {SITE + p for p in ROUTES})
         for node in urls:
-            self.assertEqual(len(node.findall('x:link', ns)), 3)
+            self.assertEqual(len(node.findall('x:link', ns)), 4)
             date.fromisoformat(node.find('s:lastmod', ns).text)
         self.assertIn('Sitemap: ' + SITE + '/sitemap.xml', (DIST / 'robots.txt').read_text())
 
