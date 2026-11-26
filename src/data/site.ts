@@ -2,13 +2,13 @@ export type Lang = 'ko' | 'en';
 export type PageKey = 'home' | 'app' | 'research' | 'institutions' | 'journal' | 'about' | 'contact';
 export const SITE = 'https://smartdetector.fwth.ai';
 export const PLAY = 'https://play.google.com/store/apps/details?id=ai.fwth.smartdetector';
-export const EMAIL = 'smartdetector@fwth.ai';
+export const EMAIL = 'help@fwth.ai';
 export const PRIVACY = 'https://cjyh37.github.io/privacy-policy/smart-detector/';
 export const pageKeys: PageKey[] = ['home', 'app', 'research', 'institutions', 'journal', 'about', 'contact'];
 // Update only when the page's content, links or structured data materially change.
 export const pageUpdatedAt: Record<PageKey, string> = {
   home: '2026-11-18', app: '2026-11-17', research: '2026-11-18',
-  institutions: '2026-11-18', journal: '2026-11-17', about: '2026-11-17', contact: '2026-11-17',
+  institutions: '2026-11-18', journal: '2026-11-17', about: '2026-11-17', contact: '2026-11-26',
 };
 export function path(lang: Lang, page = '', slug = '') {
   const parts = [lang === 'en' ? 'en' : '', page === 'home' ? '' : page, slug].filter(Boolean);
@@ -26,7 +26,7 @@ export const metadata: Record<Lang, Record<PageKey, { title: string; description
     institutions: { title: '학교·자격시험 부정행위 예방과 감독 지원 — 스마트 디텍터', description: '학교 시험, 국가자격시험, 채용·면접 운영팀을 위한 무선신호 확인과 현장 기록 안내. 감독 절차에 맞는 무료 앱 활용과 기관 도입, 전용 디바이스 연구 협력을 상담합니다.' },
     journal: { title: '시험 부정행위 예방 가이드·연구노트 — 스마트 디텍터', description: '수능 전자기기 반입 유의사항, 세무사 시험 AI 부정행위 대응, 스마트안경·이어폰 무선신호 확인을 다룹니다. 공식 자료를 바탕으로 시험감독에 필요한 내용을 정리합니다.' },
     about: { title: '공정한 평가를 위한 기술을 만듭니다 — 스마트 디텍터 소개', description: '스마트 디텍터는 시험 감독과 학습 평가를 돕는 도구를 만듭니다. 무료 앱을 제공하는 이유와 학교·기관용 제품을 준비하는 계획을 소개합니다.' },
-    contact: { title: '기관 도입·기술 제휴·투자 문의 — 스마트 디텍터', description: '기관 활용, 기술·연구·사업 제휴, 투자, 앱 사용에 관한 문의를 smartdetector@fwth.ai로 보내주세요.' },
+    contact: { title: '기관 도입·기술 제휴·투자 문의 — 스마트 디텍터', description: '기관 활용, 기술·연구·사업 제휴, 투자, 앱 사용에 관한 문의를 help@fwth.ai로 보내주세요.' },
   },
   en: {
     home: { title: 'Smart Detector — Free wireless signal app for exam proctors', description: 'Support exam integrity with a free Android app for checking receivable wireless signals and recording on-site findings. Explore the workflow and proctoring guides.' },
@@ -35,7 +35,7 @@ export const metadata: Record<Lang, Record<PageKey, { title: string; description
     institutions: { title: 'Exam integrity support for schools & institutions — Smart Detector', description: 'Wireless signal checks and record keeping for school exams, qualification tests and interviews. Discuss institutional app use and dedicated hardware research.' },
     journal: { title: 'Exam cheating prevention guides & research — Smart Detector', description: 'Guides to Suneung device rules, Korea’s tax accountant exam response and wireless signal checks, with official sources and practical notes for exam teams.' },
     about: { title: 'Our purpose & approach — Smart Detector', description: 'Smart Detector builds tools for exam proctors and instructors. Learn why the app is free and how we plan to develop hardware and learning assessment software.' },
-    contact: { title: 'Institution, partnership & investment inquiries — Smart Detector', description: 'Contact smartdetector@fwth.ai about institutional use, technical and research partnerships, investment or app support.' },
+    contact: { title: 'Institution, partnership & investment inquiries — Smart Detector', description: 'Contact help@fwth.ai about institutional use, technical and research partnerships, investment or app support.' },
   },
 };
 export const contactTypes = [

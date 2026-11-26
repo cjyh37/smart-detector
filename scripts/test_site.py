@@ -60,6 +60,8 @@ class StaticSiteTest(unittest.TestCase):
                 self.assertNotIn('noindex', page.find('meta', name='robots')[0]['content'])
                 self.assertEqual(page.find('meta', name='google-site-verification')[0]['content'],
                                  'ABUjBZu12KW5HPL2hmBqH1joQ2i3LJen_rjr-b9VvVk')
+                self.assertEqual(page.find('meta', name='naver-site-verification')[0]['content'],
+                                 '7f64338a37dfa1ff7829980a5ccbac3a8c45981b')
                 self.assertEqual(page.find('meta', property='og:url')[0]['content'], SITE + route)
                 self.assertTrue(page.find('meta', property='og:image')[0]['content'].startswith(SITE + '/assets/'))
                 base = route[3:] if lang != 'ko' else route
@@ -100,7 +102,7 @@ class StaticSiteTest(unittest.TestCase):
                 page = Page(path_for(route))
                 self.assertTrue(page.find('a', href=PLAY))
                 if '/contact/' in route:
-                    mail = [a['href'] for a in page.find('a') if a.get('href', '').startswith('mailto:smartdetector@fwth.ai?subject=')]
+                    mail = [a['href'] for a in page.find('a') if a.get('href', '').startswith('mailto:help@fwth.ai?subject=')]
                     self.assertGreaterEqual(len(mail), 4)
                     self.assertNotIn('generate_lead', page.text)
 

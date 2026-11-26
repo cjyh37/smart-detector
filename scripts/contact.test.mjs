@@ -5,7 +5,7 @@ import { buildInquiry } from '../src/scripts/contact.ts';
 test('contact topics are allowlisted and message characters stay in the body', () => {
   const result = buildInquiry({ type: 'investment', organization: 'A & B', message: 'Question? a=1&bcc=other@example.com\nNext line' }, 'en');
   const url = new URL(result.url);
-  assert.equal(url.pathname, 'smartdetector@fwth.ai');
+  assert.equal(url.pathname, 'help@fwth.ai');
   assert.equal(url.searchParams.get('subject'), '[Investment] Smart Detector inquiry');
   assert.equal(url.searchParams.get('bcc'), null);
   assert.match(url.searchParams.get('body'), /A & B/);

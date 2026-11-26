@@ -14,8 +14,8 @@ missing = set()
 
 def translate(value):
     key = value.strip()
-    if key.startswith('Contact smartdetector@fwth.ai about'):
-        return '導入、共同研究、出資、アプリに関するお問い合わせは smartdetector@fwth.ai までお寄せください。'
+    if key.startswith('Contact help@fwth.ai about'):
+        return '導入、共同研究、出資、アプリに関するお問い合わせは help@fwth.ai までお寄せください。'
     if not re.search('[a-zA-Z]', key) or '@' in key or '://' in key:
         return value
     if key not in phrases:

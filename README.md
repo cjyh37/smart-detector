@@ -4,7 +4,7 @@
 
 - 홈페이지: https://smartdetector.fwth.ai/
 - Google Play: https://play.google.com/store/apps/details?id=ai.fwth.smartdetector
-- 문의: smartdetector@fwth.ai
+- 문의: help@fwth.ai
 
 ## 로컬 실행
 
