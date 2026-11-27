@@ -2,40 +2,40 @@
 lang: en
 slug: what-the-app-can-observe
 title: "Smart glasses and earphones: how to read wireless signals"
-description: "What a phone app can observe when checking for smart glasses, Bluetooth earphones and miniature cameras. Learn how to read new signals, received strength and on-site findings."
+description: "What a phone app can and cannot observe when checking for smart glasses, Bluetooth earphones and miniature cameras, and how to log findings accurately."
 category: guide
 date: "2026-11-17"
-readTime: "4 min read"
+updated: "2026-11-27"
+readTime: "3 min read"
 order: 2
 ---
 
-A signal on the Smart Detector screen means your phone received that signal. It does not mean the app has identified the device’s location or owner.
+A signal on the Smart Detector screen means your phone received that wireless signal. It does not tell you where the device is or who owns it.
 
-The app separates signals received before an exam from those first received after it starts. You can check a selected signal’s strength and record your own findings and notes.
+The app separates pre-exam baseline signals from new signals received after the exam starts. You can check a signal’s strength history and log your own on-site findings and notes.
 
-## Will all smart glasses, earphones and miniature cameras appear?
+## Will all smart glasses, earphones and cameras show up?
 
-A device category does not determine whether the app will observe it. Smart glasses, Bluetooth earphones and miniature cameras must transmit signals that the phone can observe to appear on screen. Treat a displayed name as a clue for an on-site check.
-
-Even when a signal is received, the device type, owner and purpose need separate confirmation. A name that looks like a pair of earphones does not establish that a candidate is receiving answers.
+Smart glasses, Bluetooth earphones and miniature cameras appear on screen only while transmitting Wi-Fi or Bluetooth signals your phone can read. Displayed device names are clues for an on-site check—even if a name looks like earphones, you still need to confirm the actual device, owner and purpose in person.
 
 ## When a new signal appears
 
-Check it in the context of the room and your institution’s proctoring procedures. Signal strength alone cannot tell you an exact distance or seat. A signal also cannot establish who owns a device, whether it is recording audio or video, or whether cheating has occurred.
+Check the room according to your institution’s proctoring rules. Signal strength cannot pinpoint an exact distance or seat, and a signal alone cannot establish ownership, audio/video recording or cheating.
 
-Keep the received signal separate from what you confirmed yourself. For example, if a signal appears but you cannot find the device, record that outcome so it is clear to anyone reviewing the report later.
+Log received signals separately from what you confirmed yourself. If a signal appeared but no device was found, record “not found” as is so later reviewers do not misread the report.
 
 ## When no signal appears
 
-A device can be powered on without sending a signal your phone can receive. Results depend on its communication method and connection state, as well as the phone’s wireless capabilities and operating system. No visible signal does not necessarily mean no device is present.
+Even a powered-on device may emit no receivable signal or stay silent once paired. Phone hardware and operating-system rules also affect what appears.
 
-Standard Android Wi-Fi scanning returns information about access points visible to the phone. Permission and scan frequency restrictions apply. A scan may fail or return older results, so it does not show every nearby wireless communication. See the [official Android Wi-Fi scanning documentation](https://developer.android.com/develop/connectivity/wifi/wifi-scan) for the conditions that apply.
+In particular, standard Android Wi-Fi scanning looks for nearby access points, throttles scan frequency, and can miss transmissions or return cached results. It does not capture all nearby wireless traffic. See the [Android Wi-Fi scanning documentation](https://developer.android.com/develop/connectivity/wifi/wifi-scan).
 
-## Before the exam
+Because of these limits, an empty screen never proves that no device is in the room.
 
-- Follow the app’s permission instructions and check that signals are received.
-- Try the steps from measuring an empty room to checking new signals and recording notes.
-- Follow the instructions and reception status shown in the released app.
-- Record received signals separately from findings you confirmed yourself.
+## Pre-exam checklist
 
-See the [app screens and usage steps](/en/app/#how-it-works) for a walkthrough. For exam-specific context, read the [Suneung device guide](/en/journal/suneung-device-checks-2027/) and [operational review following the tax accountant exam case](/en/journal/tax-accountant-exam-ai-cheating/).
+- Grant nearby-devices and location permissions as prompted and verify that signals appear.
+- Practice the full flow once: 90-second empty-room baseline, monitoring vibration alert and PDF report.
+- Share a clear rule with staff to log received signals separately from confirmed facts.
+
+Walk through each screen in the [app workflow](/en/app/#how-it-works). For exam-specific preparation, see the [2027 Suneung device guide](/en/journal/suneung-device-checks-2027/) and [qualification exam review guide](/en/journal/tax-accountant-exam-ai-cheating/).

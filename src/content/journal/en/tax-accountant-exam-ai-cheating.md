@@ -2,54 +2,55 @@
 lang: en
 slug: tax-accountant-exam-ai-cheating
 title: "AI cheating in Korea’s tax accountant exam: what exam teams should review"
-description: "Official responses to the 2026 tax accountant exam case, followed by practical notes on device checks, proctoring records and wireless observation in qualification exams."
+description: "Government responses to the 2026 tax accountant exam AI cheating case, plus practical steps for device rules, proctoring logs and wireless checks in qualification exams."
 category: guide
 date: "2026-11-17"
-readTime: "5 min read"
+updated: "2026-11-27"
+readTime: "4 min read"
 order: 1
 ---
 
-The AI cheating case involving Korea’s tax accountant examination raises practical questions for exam teams. How should device restrictions be explained? What should a proctor check? What should be recorded when a concern cannot be resolved on the spot?
+Following the 2026 tax accountant exam AI cheating case, qualification exam organizers have been reviewing how they announce device bans, run room checks and hand over incident logs. Here is a practical breakdown of what to review.
 
-This article separates **official announcements checked through 17 November 2026** from Smart Detector’s suggestions for exam operations. For conclusions about ongoing investigations, consult subsequent announcements from investigators and the organizer. Official sources linked here are in Korean.
+This article separates **official announcements checked through 17 November 2026** from Smart Detector’s operational suggestions. Follow subsequent updates from investigators and exam organizers for final outcomes. Linked official sources are in Korean.
 
-## What authorities have announced
+## Official responses announced so far
 
-On 16 November, the Human Resources Development Service of Korea announced an investigation across the national qualification examinations it administered in 2026, following the 63rd tax accountant exam case. It described screening suspected cases, expert review of answers and referral to investigators where needed. [HRD Korea announcement](https://webzine.hrdkorea.or.kr/section/press/view?id=13805)
+On 16 November, HRD Korea announced a full review of the national qualification exams it administered in 2026 after the 63rd tax accountant exam case, screening flagged cases for expert review and police referral where warranted. [HRD Korea announcement](https://webzine.hrdkorea.or.kr/section/press/view?id=13805)
 
-A joint-agency release posted by the National Tax Service on 17 November describes the previous day’s task-force meeting and the start of proceedings to invalidate the examination result and suspend eligibility. Starting those proceedings is distinct from a final decision. [Tax accountant examination task-force release](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2201&nttSn=1356171)
+A joint-agency notice posted by the National Tax Service on 17 November reported a task-force meeting and the start of proceedings to void the exam result and suspend eligibility. Opening administrative proceedings is distinct from a final ruling. [Tax accountant exam task-force notice](https://www.nts.go.kr/nts/na/ntt/selectNttInfo.do?mi=2201&nttSn=1356171)
 
-The labor ministry also announced measures covering device notices, proctor training, specialist supervision and radio detection equipment. These are government exam-management measures, not an announcement about adopting or validating Smart Detector. [Ministry of Employment and Labor response](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20256)
+The Ministry of Employment and Labor also announced clearer smart-device warnings, stronger proctor training, more dedicated supervisors and radio detectors. These are government exam-management measures and are unrelated to adopting or validating Smart Detector. [Ministry of Employment and Labor notice](https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20256)
 
-## Before the exam: agree on checks and escalation
+## Before the exam: align notices and escalation
 
-The following suggestions can help a school or qualification body review its own procedures. They are not the official tax accountant examination manual.
+These suggestions are for schools and qualification bodies reviewing their own procedures, not an official manual for the tax accountant exam.
 
-Prepare consistent instructions about electronic devices, including smart glasses, wireless earphones and miniature cameras. Knowing who to notify when something needs checking is as important as recognizing device names.
+Every proctor should deliver consistent rules on smart glasses, wireless earphones and miniature cameras. Knowing who to notify and how to escalate an issue matters more than memorizing device model names.
 
-Training can include a simple scenario: a new wireless signal appears, but the device cannot be located. Agree who checks it, what gets recorded and what happens next. Make the reporting steps clear so that an equipment reading does not become a disciplinary conclusion on its own.
+During training, walk through a concrete scenario such as “a new wireless signal appeared, but no device was found.” Agree on who checks the room, what gets logged and what happens next so a screen reading never turns into an automatic disciplinary conclusion.
 
-## During the exam: separate signals from confirmed findings
+## During the exam: separate signals from confirmed facts
 
-If wireless observations form part of the authorized procedure, useful record fields include:
+When authorized procedures include wireless signal logs, separate these four items clearly:
 
-- **Reception time and intervals:** First and last observation, plus any gaps in reception.
-- **Displayed information:** Signal type, displayed name or identifier, and received strength.
-- **Direct findings:** What staff observed, whether a device was confirmed and the proctor’s notes.
-- **Action and handover:** Action taken, the person notified and unresolved questions.
+- **Reception intervals:** First and last timestamps, plus any paused or unrecorded periods.
+- **Displayed details:** Signal type, displayed name or signal ID, and signal strength.
+- **On-site check:** What staff observed directly, whether a device was located and proctor notes.
+- **Action and handover:** Steps taken, staff notified and anything still unresolved.
 
-Keep records within the permitted scope and follow the institution’s retention and access procedures. An unresolved device owner or seat should remain unresolved in the record. Filling the gap with a guess makes later review harder.
+Store records under your institution’s privacy and retention rules. If an owner or seat could not be confirmed, leave it marked unconfirmed rather than guessing.
 
-## How do a radio detector and a phone app differ?
+## Radio detectors vs. a phone app
 
-Products described as radio detectors can vary in the frequencies and communication methods they observe, their antennas and their analysis capabilities. Evaluate what a tool can observe under the conditions of your exam, rather than relying on its category name.
+Tools labeled “radio detectors” vary widely in frequency range, protocols, antennas and analysis features. Judge any tool by what it actually observes under exam-room conditions rather than its category label.
 
-The current Smart Detector Android app is a supporting tool for signals a phone can receive. It does not analyze every nearby radio transmission or establish AI use, recording or misconduct from a signal. Read the [app’s observation scope](/en/journal/what-the-app-can-observe/) before evaluating it.
+The Smart Detector Android app is a supporting tool for Wi-Fi and Bluetooth signals a phone can receive. It cannot scan all radio frequencies or prove AI use, recording or cheating from a signal alone. Review the [app’s observation scope](/en/journal/what-the-app-can-observe/) before evaluating it.
 
-## After the exam: review how the process worked
+## After the exam: improve operations from the logs
 
-Review new signals together with the results of on-site checks. Look for gaps in reception, missing information at staff handovers and instructions that should be clarified before the next exam.
+Compare new-signal counts against actual on-site check results. Check whether reception dropped at any point, whether shift handovers had enough context and whether candidate notices need clearer wording next time.
 
-The [example exam signal report](/en/app/#report) shows reception intervals, new signals and the proctor’s check status separately. It uses fictional example data, not records from the tax accountant examination.
+The [example signal report](/en/app/#report) illustrates how reception intervals, new signals and check statuses are separated. It uses fictional sample data, not records from the tax accountant exam.
 
-Smart Detector is planning a dedicated device for this kind of exam-room observation. It remains in research preparation. Explore the [hardware plans](/en/research/#hardware) or share operational requirements through [institutional use and research cooperation](/en/institutions/).
+We are also planning a [dedicated exam-room device](/en/research/#hardware), currently in concept and research preparation. To suggest features or discuss institutional use, visit [institutions](/en/institutions/).

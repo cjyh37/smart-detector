@@ -21,7 +21,7 @@ const breadcrumbs = [
 ];
 const schema = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'Organization', '@id': SITE + '/#organization', name: '스마트 디텍터', alternateName: 'Smart Detector', url: SITE + '/', email: EMAIL },
-  { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: '스마트 디텍터', alternateName: 'Smart Detector', inLanguage: ['ko', 'en'], publisher: { '@id': SITE + '/#organization' } },
+  { '@type': 'WebSite', '@id': SITE + '/#website', url: SITE + '/', name: '스마트 디텍터', alternateName: 'Smart Detector', inLanguage: ['ko', 'en', 'ja'], publisher: { '@id': SITE + '/#organization' } },
   { '@type': 'WebPage', '@id': canonical + '#page', url: canonical, name: title, description, inLanguage: lang, isPartOf: { '@id': SITE + '/#website' }, ...(page !== 'home' ? { breadcrumb: { '@id': canonical + '#breadcrumb' } } : {}), ...(article ? { mainEntity: { '@id': canonical + '#article' } } : {}) },
   ...(page !== 'home' ? [{ '@type': 'BreadcrumbList', '@id': canonical + '#breadcrumb', itemListElement: breadcrumbs.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.url })) }] : []),
   ...(article ? [{ '@type': 'BlogPosting', '@id': canonical + '#article', url: canonical, headline: article.title, description, inLanguage: lang, image: ogImage, datePublished: article.date, dateModified: article.updated || article.date, mainEntityOfPage: { '@id': canonical + '#page' }, author: { '@type': 'Organization', '@id': SITE + '/#organization', name: t.brand, url: SITE + path(lang, 'about') }, publisher: { '@id': SITE + '/#organization' } }] : []),

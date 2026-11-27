@@ -26,3 +26,10 @@ test('long messages request the copy path instead of an oversized mail URI', () 
   assert.equal(result.canOpen, false);
   assert.equal(result.body, message);
 });
+
+test('Japanese inquiries use Japanese subjects and organization labels', () => {
+  const result = buildInquiry({ type: 'partnership', organization: '〇〇大学', message: '共同研究の相談' }, 'ja');
+  const url = new URL(result.url);
+  assert.equal(url.searchParams.get('subject'), '[提携・共同研究] Smart Detector お問い合わせ');
+  assert.match(url.searchParams.get('body'), /お名前・機関名: 〇〇大学/);
+});

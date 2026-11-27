@@ -4,15 +4,15 @@ const { lang } = Astro.props as { lang: Lang };
 const ko = lang === 'ko';
 const tabs = ko ? ['과정 기록', '기여와 점수', '구술 확인'] : ['Process record', 'Contribution & scoring', 'Oral check'];
 const events = ko ? [
-  ['학생 · 문제 정의', '컵을 쉽게 반납할 수 있게 하자.', '학생은 컵을 반납하러 가는 동선과 참여에 드는 수고를 문제로 짚었습니다.'],
-  ['AI · 대안 제안', '보증금, 리워드 앱, 반납함 배치', 'AI가 제안한 방법을 기록하고 비교합니다.'],
-  ['학생 · 비판과 수정', '앱 설치도 새로운 장벽 아닐까?', '앱을 따로 설치해야 하는 불편을 지적하고, 기존 학생증과 반납 동선을 활용하는 방법으로 고쳤습니다.'],
-  ['학생 · 검증 계획', '반납함 위치를 바꿔 비교한다.', '반납함 위치에 따른 반납률을 비교하자고 제안하고, 성공 여부를 판단할 기준을 정했습니다.'],
+  ['학생 · 문제 정의', '컵을 쉽게 반납할 수 있게 하자.', '반납 동선이 멀고 번거로운 점을 핵심 문제로 짚었습니다.'],
+  ['AI · 대안 제안', '보증금, 리워드 앱, 반납함 배치', 'AI가 제시한 세 가지 대안을 기록하고 장단점을 비교합니다.'],
+  ['학생 · 비판과 수정', '앱 설치도 새로운 장벽 아닐까?', '별도 앱 설치 부담을 지적하고 기존 학생증과 이동 동선을 활용하는 방식으로 고쳤습니다.'],
+  ['학생 · 검증 계획', '반납함 위치를 바꿔 비교한다.', '위치별 반납률 비교 실험을 제안하고 성공 판단 기준을 세웠습니다.'],
 ] : [
-  ['Student · Framing', 'Make returning a cup easy.', 'The student identified the effort and detour involved in returning a cup as problems to address.'],
-  ['AI · Alternatives', 'Deposits, a rewards app, collection points', 'The AI’s suggestions are kept in the record for comparison.'],
-  ['Student · Critique & revision', 'Could installing an app create another barrier?', 'The student questioned the need to install another app and revised the proposal to use existing student IDs and easier return routes.'],
-  ['Student · Validation plan', 'Compare collection-point locations.', 'The student proposed comparing return rates at different locations and defined how to judge the result.'],
+  ['Student · Framing', 'Make returning a cup easy.', 'Pinpointed long return detours and participation effort as the core problem.'],
+  ['AI · Alternatives', 'Deposits, a rewards app, collection points', 'Logs three AI-suggested options and compares trade-offs.'],
+  ['Student · Critique & revision', 'Could installing an app create another barrier?', 'Flagged app-install friction and revised the plan around existing student IDs and walking routes.'],
+  ['Student · Validation plan', 'Compare collection-point locations.', 'Proposed comparing return rates across bin locations and defined clear success criteria.'],
 ];
 const scores = ko ? [
   ['문제 정의', '4 / 5', '참여 부담과 반납 동선을 핵심 조건으로 정리'],
@@ -38,17 +38,17 @@ const questions = ko ? [
   <div class="assessment-assignment"><h3>{ko ? '교내 일회용 컵을 줄이는 방법' : 'Reducing single-use cups on campus'}</h3><p>{ko ? '예시 과제 · AI와 협업하는 문제해결 프로젝트' : 'Example assignment · A problem-solving project with AI'}</p></div>
   <div class="assessment-tabs" aria-label={ko ? '플랫폼 예시 화면' : 'Platform example views'}>{tabs.map((title, index) => <a href={`#assessment-panel-${index}`} id={`assessment-tab-${index}`} data-assessment-tab>{title}</a>)}</div>
   <div class="assessment-panel" id="assessment-panel-0" data-assessment-panel>
-    <div class="assessment-record"><ol class="evidence-timeline">{events.map(([actor, title, body]) => <li><span class="evidence-actor">{actor}</span><h4>{title}</h4><p>{body}</p></li>)}</ol><aside class="contribution-note"><h4>{ko ? '이 학생이 더한 생각' : 'What this student contributed'}</h4><p>{ko ? '학생은 반납에 드는 수고를 줄이는 방법을 제안했습니다. AI의 리워드 앱 제안을 수정하고, 반납함 위치에 따라 결과가 달라지는지 확인할 실험도 설계했습니다.' : 'The student proposed making returns easier, revised the AI’s rewards-app suggestion and designed an experiment to compare collection-point locations.'}</p><div class="evidence-link"><span>{ko ? '확인할 기록' : 'Supporting records'}</span><strong>{ko ? '수정 이유 · 대안 비교 · 검증 계획' : 'Revision rationale · Alternatives · Validation plan'}</strong></div></aside></div>
+    <div class="assessment-record"><ol class="evidence-timeline">{events.map(([actor, title, body]) => <li><span class="evidence-actor">{actor}</span><h4>{title}</h4><p>{body}</p></li>)}</ol><aside class="contribution-note"><h4>{ko ? '이 학생이 더한 생각' : 'What this student contributed'}</h4><p>{ko ? 'AI가 제안한 리워드 앱 대신 반납 동선을 줄이는 방안을 택하고, 위치별 반납률을 비교하는 실험을 직접 설계했습니다.' : 'The student proposed making returns easier, revised the AI’s rewards-app suggestion and designed an experiment to compare collection-point locations.'}</p><div class="evidence-link"><span>{ko ? '확인할 기록' : 'Supporting records'}</span><strong>{ko ? '수정 이유 · 대안 비교 · 검증 계획' : 'Revision rationale · Alternatives · Validation plan'}</strong></div></aside></div>
   </div>
   <div class="assessment-panel" id="assessment-panel-1" data-assessment-panel>
-    <div class="score-intro"><h4>{ko ? '평가 항목별 점수와 근거' : 'Suggested scores and their evidence'}</h4><p>{ko ? '교수자가 정한 평가 기준으로 점수 초안을 만들고, 각 점수의 근거가 된 작업 기록을 보여줍니다.' : 'The planned platform would use the instructor’s rubric to suggest scores and show the work supporting each one.'}</p></div>
+    <div class="score-intro"><h4>{ko ? '평가 항목별 점수와 근거' : 'Suggested scores and their evidence'}</h4><p>{ko ? '교수자가 정한 평가 기준으로 점수 초안을 만들고, 각 점수의 근거가 된 작업 기록을 함께 보여줍니다.' : 'The planned platform would use the instructor’s rubric to suggest scores and show the work supporting each one.'}</p></div>
     <table class="rubric-table"><caption class="sr-only">{ko ? '가상 과제의 루브릭 점수 예시' : 'Illustrative rubric scores for a fictional assignment'}</caption><thead><tr><th scope="col">{ko ? '평가 항목' : 'Criterion'}</th><th scope="col">{ko ? '초안' : 'Draft'}</th><th scope="col">{ko ? '기록에 남은 근거' : 'Evidence in the record'}</th></tr></thead><tbody>{scores.map(([criterion, score, evidence]) => <tr><th scope="row">{criterion}</th><td>{score}</td><td>{evidence}</td></tr>)}</tbody></table>
-    <p class="assessment-panel-note">{ko ? '예시 점수입니다. 구술 확인 후 교수자가 검토해 최종 평가를 확정합니다.' : 'Illustrative scores. In the planned workflow, an oral check and instructor review come before the final assessment.'}</p>
+    <p class="assessment-panel-note">{ko ? '예시 점수입니다. 구술 확인 뒤 교수자가 검토해 최종 성적을 확정합니다.' : 'Illustrative scores. In the planned workflow, an oral check and instructor review come before the final assessment.'}</p>
   </div>
   <div class="assessment-panel" id="assessment-panel-2" data-assessment-panel>
-    <div class="score-intro"><h4>{ko ? '왜 그렇게 고쳤는지 묻습니다.' : 'Ask the student to explain a revision'}</h4><p>{ko ? '학생이 수정한 내용을 바탕으로 질문합니다. 짧게 답하는 동안 자신의 판단을 설명할 수 있는지 확인합니다.' : 'A short oral check asks about the student’s revisions, testing whether they can explain the reasoning behind their own work.'}</p></div>
+    <div class="score-intro"><h4>{ko ? '왜 그렇게 고쳤는지 묻습니다.' : 'Ask the student to explain a revision'}</h4><p>{ko ? '학생의 수정 이력에서 질문을 뽑아 스스로 판단한 근거를 설명할 수 있는지 확인합니다.' : 'A short oral check asks about the student’s revisions, testing whether they can explain the reasoning behind their own work.'}</p></div>
     <ol class="oral-questions">{questions.map(([label, question], index) => <li><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{label}</strong><p>{question}</p></div></li>)}</ol>
-    <p class="assessment-panel-note">{ko ? '구술 답변을 작업 기록과 함께 요약하고, 교수자가 추가로 확인할 부분을 표시하도록 설계할 계획입니다.' : 'We plan to summarize oral responses alongside the work record and flag points that need an instructor’s review.'}</p>
+    <p class="assessment-panel-note">{ko ? '구술 답변을 작업 기록과 함께 요약하고, 교수자가 추가로 살펴볼 지점을 표시할 계획입니다.' : 'We plan to summarize oral responses alongside the work record and flag points that need an instructor’s review.'}</p>
   </div>
-  <p class="assessment-example-note">{ko ? '플랫폼 시안입니다. 과제와 기록, 점수는 설명을 위해 만든 가상 예시입니다.' : 'Platform concept. The assignment, records and scores are fictional examples.'}</p>
+  <p class="assessment-example-note">{ko ? '플랫폼 시안입니다. 과제와 기록, 점수는 설명을 위한 가상 예시입니다.' : 'Platform concept. The assignment, records and scores are fictional examples.'}</p>
 </div>

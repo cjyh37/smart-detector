@@ -1,8 +1,11 @@
 import { buildInquiry } from './contact';
 import { EMAIL, contactTypes, type Lang } from '../data/site';
 
-const lang: Lang = document.documentElement.lang === 'en' ? 'en' : 'ko';
-const ko = lang === 'ko';
+const docLang = document.documentElement.lang;
+const inquiryLang: Lang | 'ja' = docLang === 'ja' ? 'ja' : docLang === 'en' ? 'en' : 'ko';
+const ja = docLang === 'ja';
+const ko = docLang === 'ko';
+const pick = (koText: string, enText: string, jaText: string) => (ja ? jaText : ko ? koText : enText);
 document.querySelectorAll<HTMLElement>('[data-assessment-demo]').forEach(demo => {
   const tabs = [...demo.querySelectorAll<HTMLAnchorElement>('[data-assessment-tab]')];
   const panels = [...demo.querySelectorAll<HTMLElement>('[data-assessment-panel]')];
@@ -50,7 +53,7 @@ if (reportDialog && typeof reportDialog.showModal === 'function') {
       reportOpener = link;
       delete scroll.dataset.zoomed;
       zoom.setAttribute('aria-pressed', 'false');
-      zoom.textContent = ko ? '크게 보기' : 'Zoom in';
+      zoom.textContent = pick('크게 보기', 'Zoom in', '拡大表示');
       reportDialog.showModal();
       scroll.scrollTo(0, 0);
     });
@@ -59,7 +62,7 @@ if (reportDialog && typeof reportDialog.showModal === 'function') {
     const enlarged = zoom.getAttribute('aria-pressed') !== 'true';
     if (enlarged) scroll.dataset.zoomed = ''; else delete scroll.dataset.zoomed;
     zoom.setAttribute('aria-pressed', String(enlarged));
-    zoom.textContent = enlarged ? (ko ? '화면에 맞추기' : 'Fit to screen') : (ko ? '크게 보기' : 'Zoom in');
+    zoom.textContent = enlarged ? pick('화면에 맞추기', 'Fit to screen', '画面に合わせる') : pick('크게 보기', 'Zoom in', '拡大表示');
     scroll.scrollTo(0, 0);
   });
   reportDialog.querySelector('[data-report-close]')?.addEventListener('click', () => reportDialog.close());
@@ -75,7 +78,7 @@ document.querySelectorAll<HTMLElement>('[data-tutorial]').forEach(player => {
   const cover = player.querySelector<HTMLAnchorElement>('[data-video-play]');
   if (!cover || !player.dataset.embedSrc) return;
   cover.setAttribute('role', 'button');
-  cover.setAttribute('aria-label', ko ? '이 페이지에서 영상 재생' : 'Play tutorial on this page');
+  cover.setAttribute('aria-label', pick('이 페이지에서 영상 재생', 'Play tutorial on this page', 'このページで動画を再生'));
   const start = () => {
     const iframe = document.createElement('iframe');
     iframe.src = player.dataset.embedSrc!;
@@ -192,7 +195,7 @@ if (filters) {
     let count = 0;
     rows.forEach(row => { row.hidden = button.dataset.filter !== 'all' && row.dataset.articleCategory !== button.dataset.filter; if (!row.hidden) count++; });
     const status = document.querySelector('.journal-filter-status');
-    if (status) status.textContent = ko ? `${count}개의 글을 표시합니다.` : `${count} ${count === 1 ? 'article' : 'articles'} shown.`;
+    if (status) status.textContent = pick(`${count}개의 글을 표시합니다.`, `${count} ${count === 1 ? 'article' : 'articles'} shown.`, `${count}件の記事を表示しています。`);
   }));
 }
 
@@ -204,14 +207,14 @@ document.querySelectorAll<HTMLButtonElement>('[data-share]').forEach(button => {
       try { await navigator.share(data); document.dispatchEvent(new CustomEvent('smart-detector:share')); return; }
       catch (error) { if (error instanceof Error && error.name === 'AbortError') return; }
     }
-    try { await copyText(url); toast(ko ? '공유할 링크를 복사했습니다.' : 'Link copied.'); document.dispatchEvent(new CustomEvent('smart-detector:share')); }
-    catch { toast(ko ? '링크를 복사하지 못했습니다. 주소창에서 직접 복사해 주세요.' : 'Could not copy the link. Copy it from your address bar.'); }
+    try { await copyText(url); toast(pick('공유할 링크를 복사했습니다.', 'Link copied.', '共有リンクをコピーしました。')); document.dispatchEvent(new CustomEvent('smart-detector:share')); }
+    catch { toast(pick('링크를 복사하지 못했습니다. 주소창에서 직접 복사해 주세요.', 'Could not copy the link. Copy it from your address bar.', 'リンクをコピーできませんでした。アドレスバーから直接コピーしてください。')); }
   });
 });
 
 document.querySelector<HTMLButtonElement>('[data-copy-email]')?.addEventListener('click', async () => {
-  try { await copyText(EMAIL); toast(ko ? '이메일 주소를 복사했습니다.' : 'Email address copied.'); }
-  catch { toast(ko ? '화면의 이메일 주소를 선택해 직접 복사해 주세요.' : 'Select and copy the email address displayed on this page.'); }
+  try { await copyText(EMAIL); toast(pick('이메일 주소를 복사했습니다.', 'Email address copied.', 'メールアドレスをコピーしました。')); }
+  catch { toast(pick('화면의 이메일 주소를 선택해 직접 복사해 주세요.', 'Select and copy the email address displayed on this page.', '画面上のメールアドレスを選択してコピーしてください。')); }
 });
 
 const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
@@ -227,28 +230,28 @@ if (form) {
     next.searchParams.set('type', type.value);
     history.replaceState(null, '', next);
   });
-  const current = () => buildInquiry({ type: type.value, organization: organization.value, message: message.value }, lang);
+  const current = () => buildInquiry({ type: type.value, organization: organization.value, message: message.value }, inquiryLang);
   form.addEventListener('submit', event => {
     event.preventDefault();
-    if (!message.value.trim()) { message.setCustomValidity(ko ? '문의 내용을 입력해 주세요.' : 'Please enter your message.'); message.reportValidity(); return; }
+    if (!message.value.trim()) { message.setCustomValidity(pick('문의 내용을 입력해 주세요.', 'Please enter your message.', 'お問い合わせ内容を入力してください。')); message.reportValidity(); return; }
     const inquiry = current();
     if (!inquiry.canOpen) {
-      status.textContent = ko ? '내용이 길어 메일 앱으로 바로 옮길 수 없습니다. ‘내용 복사’를 눌러 이메일에 붙여넣어 주세요. 작성한 내용은 이 화면에 남아 있습니다.' : 'This message is too long to open directly in an email app. Use Copy message, then paste it into an email. Your text is still here.';
+      status.textContent = pick('내용이 길어 메일 앱으로 바로 옮길 수 없습니다. ‘내용 복사’를 눌러 이메일에 붙여넣어 주세요. 작성한 내용은 이 화면에 남아 있습니다.', 'This message is too long to open directly in an email app. Use Copy message, then paste it into an email. Your text is still here.', '文字数が多いためメールアプリで直接開けません。「本文をコピー」を押してメールに貼り付けてください。入力内容はこの画面に残っています。');
       return;
     }
-    status.textContent = ko ? '메일 앱이 열리면 내용을 확인한 뒤 직접 발송해 주세요. 열리지 않으면 ‘내용 복사’를 이용해 주세요.' : 'If your email app opens, review and send the message there. If it does not open, use Copy message.';
+    status.textContent = pick('메일 앱이 열리면 내용을 확인한 뒤 직접 발송해 주세요. 열리지 않으면 ‘내용 복사’를 이용해 주세요.', 'If your email app opens, review and send the message there. If it does not open, use Copy message.', 'メールアプリが開いたら内容をご確認のうえ送信してください。開かない場合は「本文をコピー」をご利用ください。');
     window.location.href = inquiry.url;
   });
   message.addEventListener('input', () => { message.setCustomValidity(''); status.textContent = ''; });
   form.querySelector<HTMLButtonElement>('[data-copy-message]')?.addEventListener('click', async () => {
     const inquiry = current();
-    if (!message.value.trim()) { message.focus(); status.textContent = ko ? '복사할 문의 내용을 먼저 입력해 주세요.' : 'Enter a message before copying it.'; return; }
+    if (!message.value.trim()) { message.focus(); status.textContent = pick('복사할 문의 내용을 먼저 입력해 주세요.', 'Enter a message before copying it.', 'コピーするお問い合わせ内容を先に入力してください。'); return; }
     try {
       await copyText(`${inquiry.subject}\n\n${inquiry.body}`);
-      status.textContent = ko ? '제목과 내용을 복사했습니다. 이메일에 붙여넣은 뒤 보내주세요.' : 'Subject and message copied. Paste them into an email, then send it.';
+      status.textContent = pick('제목과 내용을 복사했습니다. 이메일에 붙여넣은 뒤 보내주세요.', 'Subject and message copied. Paste them into an email, then send it.', '件名と本文をコピーしました。メールに貼り付けて送信してください。');
     } catch {
       message.focus(); message.select();
-      status.textContent = ko ? '복사하지 못했습니다. 선택된 내용을 직접 복사해 주세요.' : 'Could not copy the message. Copy the selected text manually.';
+      status.textContent = pick('복사하지 못했습니다. 선택된 내용을 직접 복사해 주세요.', 'Could not copy the message. Copy the selected text manually.', 'コピーできませんでした。選択されたテキストを手動でコピーしてください。');
     }
   });
   form.hidden = false;
