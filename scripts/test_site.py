@@ -42,6 +42,13 @@ class StaticSiteTest(unittest.TestCase):
         missing = [route for route in ROUTES if not path_for(route).is_file()]
         self.assertEqual(missing, [], 'Missing real page routes')
 
+    def test_pages_do_not_redirect_by_browser_language(self):
+        # Googlebot renders with an English browser; a guess-based redirect makes
+        # every Korean URL serve its English twin and both drop out of the index.
+        for route in ROUTES:
+            with self.subTest(route=route):
+                self.assertNotIn('navigator.language', path_for(route).read_text(encoding='utf-8'))
+
     def test_search_metadata_and_reciprocal_languages(self):
         titles = set()
         descriptions = set()

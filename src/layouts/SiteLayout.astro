@@ -73,11 +73,8 @@ const schema = { '@context': 'https://schema.org', '@graph': [
         }
         let saved;
         try { saved = localStorage.getItem(storageKey); } catch {}
-        if (current === 'ko') {
-          const browser = (navigator.languages || [navigator.language])
-            .map(tag => tag.toLowerCase().split('-')[0]).find(tag => supported.includes(tag));
-          const language = supported.includes(saved) ? saved : browser || 'en';
-          if (language !== current) { location.replace(localizedUrl(language)); return; }
+        if (current === 'ko' && saved !== current && supported.includes(saved)) {
+          location.replace(localizedUrl(saved)); return;
         }
         document.addEventListener('DOMContentLoaded', () => {
           const select = document.getElementById('site-language');
